@@ -1,0 +1,14 @@
+# Ignore all build folders
+**/build/
+**/dist/
+
+# Ignore all node_modules folders
+**/node_modules/
+
+# IDE / Editor folders
+.vscode/
+.idea/
+
+# Etc
+**/.DS_Store
+**/logs/
