@@ -15,7 +15,7 @@ export const fetchMostRecentResume = createAsyncThunk("resumeBlobUrl/fetchMostRe
 
 export const fetchResume = createAsyncThunk("resumeBlobUrl/fetch", async (id: string) => {
   try {
-    const response = await api.get(`/api/resume/${id}`, { responseType: "blob" });
+    const response = await api.get(`/resume/${id}`, { responseType: "blob" });
     const pdf = response.data as Blob;
     return URL.createObjectURL(pdf);
   } catch (error: unknown) {

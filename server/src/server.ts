@@ -9,6 +9,19 @@ import { httpLogger, log } from "./config/log4jsConfig";
 import fileUpload from "express-fileupload";
 
 const env = process.env.NODE_ENV;
+const port = process.env.PORT || 3001;
+let host: string;
+switch (env) {
+  case "development":
+    host = `http://localhost:${port}`;
+    break;
+  case "staging":
+    host = "https://kylexrich-staging-d5a9dbd6a715.herokuapp.com";
+    break;
+  case "production":
+    host = "https://kylexrich-402391673bb6.herokuapp.com";
+    break;
+}
 
 class Server {
   private readonly app: Express;
@@ -18,9 +31,9 @@ class Server {
 
   constructor() {
     this.app = express();
-    this.port = process.env.PORT || 3001;
-    this.host = env === "production" ? `https://my.herokuapp.com/` : `http://localhost`;
-    this.origin = env === "production" ? `${this.host}:${this.port}` : `http://localhost:${3000}`;
+    this.port = port;
+    this.host = host;
+    this.origin = this.host.endsWith(String(this.port)) ? `http://localhost:${3000}` : this.host;
     this.setupExpress();
     this.setupRoutes();
     this.serveBuild();
@@ -56,15 +69,13 @@ class Server {
     connectToDB()
       .then(() => {
         this.app.listen(this.port, () => {
-          log.info(
-            `[[${env}] Running on port ${this.port}! Server URL: ${this.host}:${this.port}, Frontend Origin: ${this.origin}`,
-          );
+          log.info(`[[${env}] Running on port ${this.port}! Server URL: ${this.host}, Frontend Origin: ${this.origin}`);
         });
       })
       .catch(() => {
         this.app.listen(this.port, () => {
           log.warn(
-            `[${env}] Running on port ${this.port} without DB Connection. Server URL: ${this.host}:${this.port}, Frontend Origin: ${this.origin}`,
+            `[${env}] Running on port ${this.port} without DB Connection. Server URL: ${this.host}, Frontend Origin: ${this.origin}`,
           );
         });
       });

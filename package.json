@@ -5,7 +5,7 @@
     "server:dev": "cd server && npm run start:dev",
     "start:dev": "npm run lint:fix && concurrently \"npm run server:dev\" \"npm run client:dev\"",
     "postinstall": "cd server && npm install && cd ../client && npm install",
-    "heroku-postbuild": "cd server && npm run build && cd ../client && npm run build",
+    "heroku-postbuild": "chmod +x ./heroku-build.sh && ./heroku-build.sh",
     "start": "cd server && npm run start:prod",
     "lint:fix": "cd server && npm run lint:fix && cd ../client && npm run lint:fix",
     "lint": "cd server && npm run lint && cd ../client && npm run lint"
