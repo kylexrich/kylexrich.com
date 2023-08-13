@@ -1,25 +1,21 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { ResumeState } from "./models/uiModel";
-import { handleLoading, handlePending, handleRejected, throwRequestError } from "./asyncThunkHelpers";
+import { ResumeModels } from "../interfaces/resumeModels";
+import {
+  getErrorMessage,
+  getRequestBlobError,
+  handleLoading,
+  handlePending,
+  handleRejected,
+} from "./asyncThunkHelpers";
 import api from "../api/axiosInstance";
 
-export const fetchMostRecentResume = createAsyncThunk("resumeBlobUrl/fetchMostRecent", async () => {
+export const fetchLatestResume = createAsyncThunk<string>("recentResumeBlobUrl/fetchLatestResume", async () => {
   try {
-    const response = await api.get(`/resume/most-recent`, { responseType: "blob" });
+    const response = await api.get(`/resume/latest`, { responseType: "blob" });
     const pdf = response.data as Blob;
     return URL.createObjectURL(pdf);
-  } catch (error: unknown) {
-    throwRequestError(error);
-  }
-});
-
-export const fetchResume = createAsyncThunk("resumeBlobUrl/fetch", async (id: string) => {
-  try {
-    const response = await api.get(`/resume/${id}`, { responseType: "blob" });
-    const pdf = response.data as Blob;
-    return URL.createObjectURL(pdf);
-  } catch (error: unknown) {
-    throwRequestError(error);
+  } catch (error) {
+    throw getErrorMessage(await getRequestBlobError(error));
   }
 });
 
@@ -28,18 +24,20 @@ export const uploadResume = createAsyncThunk<string, File>("uploadResume", async
   formData.append("resume", file);
   try {
     const response = await api.post("/resume", formData, {
+      responseType: "blob",
       headers: {
         "Content-Type": "multipart/form-data",
       },
     });
-    return response.data;
-  } catch (error: unknown) {
-    throwRequestError(error);
+    const pdf = response.data as Blob;
+    return URL.createObjectURL(pdf);
+  } catch (error) {
+    throw getErrorMessage(await getRequestBlobError(error));
   }
 });
 
-const initialState: ResumeState = {
-  resumeBlobUrl: null,
+const initialState: ResumeModels = {
+  recentResumeBlobUrl: null,
   loading: false,
   error: null,
 };
@@ -47,29 +45,31 @@ const initialState: ResumeState = {
 const uiSlice = createSlice({
   name: "ui",
   initialState,
-  reducers: {},
+  reducers: {
+    resetError: (state) => {
+      state.error = null;
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(uploadResume.pending, (state) => handlePending(state));
     builder.addCase(uploadResume.rejected, (state, action) => handleRejected(state, action));
-    builder.addCase(uploadResume.fulfilled, (state) => handleLoading(state, false));
-    builder.addCase(fetchResume.pending, (state) => handlePending(state));
-    builder.addCase(fetchResume.rejected, (state, action) => handleRejected(state, action));
-    builder.addCase(fetchResume.fulfilled, (state, action) => {
+    builder.addCase(uploadResume.fulfilled, (state, action) => {
       if (state && action.payload) {
-        state.resumeBlobUrl = action.payload;
+        state.recentResumeBlobUrl = action.payload;
       }
       handleLoading(state, false);
     });
-    builder.addCase(fetchMostRecentResume.pending, (state) => handlePending(state));
-    builder.addCase(fetchMostRecentResume.rejected, (state, action) => handleRejected(state, action));
-    builder.addCase(fetchMostRecentResume.fulfilled, (state, action) => {
+    builder.addCase(fetchLatestResume.pending, (state) => handlePending(state));
+    builder.addCase(fetchLatestResume.rejected, (state, action) => handleRejected(state, action));
+    builder.addCase(fetchLatestResume.fulfilled, (state, action) => {
       if (state && action.payload) {
-        state.resumeBlobUrl = action.payload;
+        state.recentResumeBlobUrl = action.payload;
       }
       handleLoading(state, false);
     });
   },
 });
 
-//export const {} = uiSlice.actions;
+export const { resetError } = uiSlice.actions;
+
 export default uiSlice.reducer;

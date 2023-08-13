@@ -1,6 +1,6 @@
 import axios, { AxiosInstance } from "axios";
 
-const env = process.env.REACT_APP_NODE_ENV === "staging" ? "staging" : process.env.NODE_ENV;
+const env = process.env.REACT_APP_ENV === "staging" ? "staging" : process.env.NODE_ENV;
 let host: string;
 
 switch (env) {
@@ -20,6 +20,9 @@ switch (env) {
 
 const api: AxiosInstance = axios.create({
   baseURL: host,
+  withCredentials: true,
 });
+
+export type RequestMethod = "get" | "post" | "put" | "delete" | "patch";
 
 export default api;

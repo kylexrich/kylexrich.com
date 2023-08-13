@@ -1,21 +1,20 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import "./styles/index.css";
 import App from "./App";
 import { Provider } from "react-redux";
-import { ChakraProvider } from "@chakra-ui/react";
-import theme from "./styles/theme";
-import { BrowserRouter } from "react-router-dom";
+import { ChakraProvider, ColorModeScript } from "@chakra-ui/react";
 import store from "./redux/store";
+import { theme } from "./theme/theme";
 
 const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);
 
 root.render(
-  <Provider store={store}>
-    <ChakraProvider theme={theme}>
-      <BrowserRouter>
+  <React.StrictMode>
+    <Provider store={store}>
+      <ColorModeScript />
+      <ChakraProvider theme={theme}>
         <App />
-      </BrowserRouter>
-    </ChakraProvider>
-  </Provider>,
+      </ChakraProvider>
+    </Provider>
+  </React.StrictMode>,
 );

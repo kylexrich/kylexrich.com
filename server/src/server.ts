@@ -3,10 +3,12 @@ import express, { Express } from "express";
 import cors from "cors";
 import connectToDB from "./config/connectToDB";
 import * as path from "path";
-import resumeRoutes from "./routes/resumeRoutes";
 import * as log4js from "log4js";
 import { httpLogger, log } from "./config/log4jsConfig";
 import fileUpload from "express-fileupload";
+import cookieParser from "cookie-parser";
+import resumeRoutes from "./api/resume/resumeRoutes";
+import authRoutes from "./api/auth/authRoutes";
 
 const env = process.env.NODE_ENV;
 const port = process.env.PORT || 3001;
@@ -21,6 +23,8 @@ switch (env) {
   case "production":
     host = "https://kylexrich-402391673bb6.herokuapp.com";
     break;
+  default:
+    host = `http://localhost:${port}`;
 }
 
 class Server {
@@ -41,18 +45,22 @@ class Server {
   }
 
   private setupExpress(): void {
+    log.debug(this.origin);
     const corsOptions = {
       origin: this.origin,
+      credentials: true,
     };
     this.app.use(log4js.connectLogger(httpLogger, { level: "auto" }));
     this.app.use(cors(corsOptions));
     this.app.use(express.json());
     this.app.use(express.urlencoded({ extended: false }));
     this.app.use(fileUpload());
+    this.app.use(cookieParser());
   }
 
   private setupRoutes(): void {
     this.app.use("/api/resume", resumeRoutes);
+    this.app.use("/api/auth", authRoutes);
   }
 
   private serveBuild(): void {

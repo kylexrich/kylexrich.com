@@ -7,7 +7,7 @@ export interface IResume extends Document {
   updatedAt: Date;
 }
 
-const Resume: Schema = new Schema(
+const ResumeSchema: Schema = new Schema(
   {
     name: { type: String, required: true },
     file: { type: Buffer, required: true },
@@ -18,6 +18,6 @@ const Resume: Schema = new Schema(
   },
 );
 
-const ResumeSchema = mongoose.model<IResume>("Resume", Resume);
+const Resume = mongoose.model<IResume>("Resume", ResumeSchema);
 
-export default ResumeSchema;
+export default Resume;
