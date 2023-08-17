@@ -22,7 +22,7 @@ export const logout = createAsyncThunk<string>("auth/logout", async () => {
   }
 });
 
-export const me = createAsyncThunk<User>("auth/me", async () => {
+export const me = createAsyncThunk<User>("auth/myIcon", async () => {
   try {
     const response = await api.get("/auth/me");
     return response.data.user;

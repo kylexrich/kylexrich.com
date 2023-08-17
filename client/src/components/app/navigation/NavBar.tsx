@@ -3,13 +3,13 @@ import { Avatar, Box, Flex, HStack, IconButton, useColorModeValue, useDisclosure
 import { AiOutlineClose } from "react-icons/ai";
 import { NavLink as RouterNavLink } from "react-router-dom";
 import { GiHamburgerMenu } from "react-icons/gi";
-import UserIcon from "../../../assets/images/me.png";
 import { DesktopNavLinks, MobileNavLinks } from "./NavBarLink";
 import ColorModeSwitcher from "../layout/ColorModeSwitcher";
 import { homeRoute, routes } from "../../../config/routes";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../redux/store";
 import { MotionBox } from "../../atoms/MotionComponents";
+import { myIcon } from "../../../assets/images/myIcon";
 
 const NavBar: React.FC = () => {
   const { colors } = useTheme();
@@ -37,7 +37,7 @@ const NavBar: React.FC = () => {
         />
         <HStack spacing={8} alignItems={"center"}>
           <MotionBox whileHover={{ scale: 1.2 }} shadow="md" rounded="full">
-            <Avatar as={RouterNavLink} size={"sm"} to={homeRoute.path} src={UserIcon} />
+            <Avatar as={RouterNavLink} size={"sm"} to={homeRoute.path} src={myIcon} />
           </MotionBox>
           <DesktopNavLinks routes={filteredRoutes} />
         </HStack>
