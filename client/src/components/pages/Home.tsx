@@ -1,7 +1,8 @@
 import React from "react";
 import { Avatar, Box, Flex, Text } from "@chakra-ui/react";
-import UserIcon from "../../assets/images/me.png";
 import { MotionBox, MotionFlex } from "../atoms/MotionComponents";
+import { myIcon } from "../../assets/images/myIcon";
+import UnderlinedEmojiHeader from "../atoms/UnderlinedEmojiHeader";
 
 type HomeProps = {};
 
@@ -28,7 +29,7 @@ const Home: React.FC<HomeProps> = () => {
           mb={{ base: 16, md: "auto" }}
         >
           <MotionBox whileHover={{ scale: 1.2 }} rounded="full" shadow="lg">
-            <Avatar size={"2xl"} showBorder={true} src={UserIcon} />
+            <Avatar size={"2xl"} showBorder={true} src={myIcon} />
           </MotionBox>
         </MotionBox>
         <MotionFlex
@@ -54,12 +55,7 @@ const Home: React.FC<HomeProps> = () => {
         >
           <Box position="relative">
             <MotionBox whileHover={{ translateY: -5 }} width="max-content">
-              <Box as="h1" mt={0} mb={6} fontSize="3xl" lineHeight="shorter" fontWeight="bold" textAlign="left">
-                <Box as="span" display="inline-block" position="relative">
-                  Hey! 👋
-                  <Box as="span" display="block" position="absolute" bg={"gray.200"} w={"100%"} h={"1px"} bottom={-2} />
-                </Box>
-              </Box>
+              <UnderlinedEmojiHeader text={"Hey!"} emoji={"👋"} />
             </MotionBox>
           </Box>
           <Box as="h2" fontSize="2xl" fontWeight="400" textAlign="left">

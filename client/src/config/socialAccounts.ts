@@ -2,14 +2,14 @@ import { FaFacebook, FaGithub, FaInstagram, FaLinkedin } from "react-icons/fa";
 import { FiMail } from "react-icons/fi";
 import React from "react";
 
-type Account = {
+type SocialAccount = {
   url: string;
   label: string;
   type: string;
   icon: React.ElementType;
 };
 
-export const accounts: Account[] = [
+export const socialAccounts: SocialAccount[] = [
   {
     url: "https://github.com/kylexrich",
     label: "Github Account",
@@ -36,7 +36,7 @@ export const accounts: Account[] = [
   },
   {
     url: "mailto:kylexrich@gmail.com",
-    label: "Mail ahmad",
+    label: "Mail Kyle",
     type: "gray",
     icon: FiMail,
   },

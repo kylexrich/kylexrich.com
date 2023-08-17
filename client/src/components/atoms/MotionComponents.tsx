@@ -1,5 +1,5 @@
 import React from "react";
-import { Flex, Box, forwardRef } from "@chakra-ui/react";
+import { Flex, Box, Text, Image, List, forwardRef } from "@chakra-ui/react";
 import { motion, isValidMotionProp } from "framer-motion";
 
 function createMotionComponent(Component: React.ElementType) {
@@ -13,3 +13,6 @@ function createMotionComponent(Component: React.ElementType) {
 
 export const MotionFlex = createMotionComponent(Flex);
 export const MotionBox = createMotionComponent(Box);
+export const MotionText = createMotionComponent(Text);
+export const MotionList = createMotionComponent(List);
+export const MotionImage = createMotionComponent(Image);

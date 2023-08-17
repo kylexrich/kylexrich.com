@@ -1,5 +1,5 @@
 import React from "react";
-import { accounts } from "../../../config/accounts";
+import { socialAccounts } from "../../../config/socialAccounts";
 import { Box, Flex, IconButton, Link, Stack, Text, useColorModeValue, useDisclosure, useTheme } from "@chakra-ui/react";
 import { author } from "../../../config/name";
 import LoginModal from "./LoginModal";
@@ -19,7 +19,7 @@ const Footer: React.FC = () => {
   };
 
   const renderSocialMediaIcons = () =>
-    accounts.map((acc, index) => (
+    socialAccounts.map((acc, index) => (
       <IconButton
         key={index}
         as={Link}
