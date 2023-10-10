@@ -1,5 +1,5 @@
 import React from "react";
-import ResumeSection from "../../organisms/ResumeSection";
+import ResumeSection from "../about/organisms/ResumeSection";
 
 type SecretProps = {};
 

@@ -1,7 +1,7 @@
 import React from "react";
 import { useColorMode, useColorModeValue } from "@chakra-ui/react";
 import { AnimatePresence } from "framer-motion";
-import { MotionBox } from "../../atoms/MotionComponents";
+import { MotionBox } from "../../shared/MotionComponents";
 
 type ColorModeSwitcherProps = {};
 

@@ -1,7 +1,7 @@
 import React from "react";
-import { GenericAboutCardDetail } from "./GenericAboutDetail";
+import { IGenericAboutCardDetail } from "./IGenericAboutDetail";
 
-export type CareerDetail = GenericAboutCardDetail;
+export type CareerDetail = IGenericAboutCardDetail;
 
 export const careerDetails: CareerDetail[] = [
   {
@@ -20,7 +20,7 @@ export const careerDetails: CareerDetail[] = [
       "Load Testing",
       "SQS Failure Handling",
     ],
-    logoRef: "/assets/images/amazonlogo.png",
+    logoRef: "/assets/images/about/amazonlogo.png",
     dateText: "May 2023 – Current",
   },
   {
@@ -40,7 +40,7 @@ export const careerDetails: CareerDetail[] = [
       "TypeScript",
       "Recursive Descent Parsers",
     ],
-    logoRef: "/assets/images/amazonlogo.png",
+    logoRef: "/assets/images/about/amazonlogo.png",
     dateText: "Jun 2022 - Sep 2022",
   },
   {
@@ -60,7 +60,7 @@ export const careerDetails: CareerDetail[] = [
       "Salesforce Flow",
       "Salesforce.com Development",
     ],
-    logoRef: "/assets/images/salesforcelogo.png",
+    logoRef: "/assets/images/about/salesforcelogo.png",
     dateText: "May 2021 - Dec 2021",
   },
   {
@@ -73,7 +73,7 @@ export const careerDetails: CareerDetail[] = [
       "\nMy commitment to student success was reflected in a 100% satisfaction rate on teaching feedback, notably exceeding the 77% average for other TAs. " +
       "\nStudents frequently commented on my approachability, thoroughness, and preparation. Written feedback such as 'Kyle was an absolute joy...definitely one of the best TAs I have ever had.' stand testament to the impact I had on their learning.",
     skills: ["Instructional Techniques", "Technical Mentoring", "Interactive Feedback", "Student Engagement"],
-    logoRef: "/assets/images/ubclogo.jpeg",
+    logoRef: "/assets/images/about/ubclogo.jpeg",
     dateText: "Jan 2021 - May 2021",
   },
   {
@@ -87,7 +87,7 @@ export const careerDetails: CareerDetail[] = [
       "Client Relationship Management",
       "Operational Efficiency",
     ],
-    logoRef: "/assets/images/bestbuilders_logo.png",
+    logoRef: "/assets/images/about/bestbuilders_logo.png",
     dateText: "Jun 2016 - Aug 2019",
   },
   {
@@ -101,7 +101,7 @@ export const careerDetails: CareerDetail[] = [
       "Operational Layouts",
       "Customer Experience Improvement",
     ],
-    logoRef: "/assets/images/linkslogo.png",
+    logoRef: "/assets/images/about/linkslogo.png",
     dateText: "Apr 2018 - Jul 2019",
   },
   {
@@ -110,7 +110,7 @@ export const careerDetails: CareerDetail[] = [
     shortDescription:
       "Promoted to Head Cook within six months due to outstanding leadership. Implemented a revamped kitchen layout, labeling systems, and cooking timers that accelerated order preparation times and reduced food waste. Further decreased employee turnover by fostering a positive work environment.",
     skills: ["Leadership", "Operational Layouts", "Training", "Employee Relations"],
-    logoRef: "/assets/images/speedslogo.jpeg",
+    logoRef: "/assets/images/about/speedslogo.jpeg",
     dateText: "Jun 2013 - Jun 2016",
   },
 ];

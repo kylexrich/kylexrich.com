@@ -8,8 +8,8 @@ import ColorModeSwitcher from "../layout/ColorModeSwitcher";
 import { homeRoute, routes } from "../../../config/routes";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../redux/store";
-import { MotionBox } from "../../atoms/MotionComponents";
-import { myIcon } from "../../../assets/images/myIcon";
+import { MotionBox } from "../../shared/MotionComponents";
+import { myIcon } from "../../../assets/myIcon";
 
 const NavBar: React.FC = () => {
   const { colors } = useTheme();
