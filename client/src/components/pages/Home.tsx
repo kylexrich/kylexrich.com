@@ -1,8 +1,8 @@
 import React from "react";
 import { Avatar, Box, Flex, Text } from "@chakra-ui/react";
-import { MotionBox, MotionFlex } from "../atoms/MotionComponents";
-import { myIcon } from "../../assets/images/myIcon";
-import UnderlinedEmojiHeader from "../atoms/UnderlinedEmojiHeader";
+import { MotionBox, MotionFlex } from "../shared/MotionComponents";
+import { myIcon } from "../../assets/myIcon";
+import UnderlinedEmojiHeader from "./about/atoms/UnderlinedEmojiHeader";
 
 type HomeProps = {};
 

@@ -1,8 +1,8 @@
 import React from "react";
 import Home from "../components/pages/Home";
-import TechStack from "../components/pages/TechStack";
-import Projects from "../components/pages/Projects";
-import About from "../components/pages/About";
+import TechStack from "../components/pages/techstack/TechStack";
+import Projects from "../components/pages/projects/Projects";
+import About from "../components/pages/about/About";
 import Secret from "../components/pages/private/Secret";
 
 export type RouteItem = {
