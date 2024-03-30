@@ -9,6 +9,8 @@ import { useErrorNotification } from "../../../hooks/userErrorNotifcation";
 import { AppDispatch } from "../../../redux/store";
 import { useDispatch } from "react-redux";
 import { me } from "../../../redux/authSlice";
+import UnderConstructionBanner from "./UnderConstructionBanner";
+import { UNDER_CONSTRUCTION } from "../../../config/constants";
 
 type MainLayoutProps = {};
 
@@ -29,6 +31,7 @@ const AppLayout: React.FC<MainLayoutProps> = (props) => {
         </Box>
       </Box>
       <Footer />
+      {UNDER_CONSTRUCTION && <UnderConstructionBanner />}
     </BrowserRouter>
   );
 };
