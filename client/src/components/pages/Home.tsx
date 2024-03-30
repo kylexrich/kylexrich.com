@@ -28,7 +28,7 @@ const Home: React.FC<HomeProps> = () => {
           m="auto"
           mb={{ base: 16, md: "auto" }}
         >
-          <MotionBox whileHover={{ scale: 1.2 }} rounded="full" shadow="lg">
+          <MotionBox whileHover={{ scale: 1.5 }} rounded="full" shadow="lg">
             <Avatar size={"2xl"} showBorder={true} src={myIcon} />
           </MotionBox>
         </MotionBox>
