@@ -1,71 +1,71 @@
-import React from "react";
-import { Box, useDisclosure } from "@chakra-ui/react";
+import React from 'react';
+import { Box, useDisclosure } from '@chakra-ui/react';
 
-import AboutCardContent from "./AboutCardContent";
-import AboutCardBox from "../atoms/AboutCardBox";
-import { IGenericAboutCardDetail } from "../../../../config/about/IGenericAboutDetail";
-import AboutCardModal from "./AboutCardModal";
+import AboutCardContent from './AboutCardContent';
+import AboutCardBox from '../atoms/AboutCardBox';
+import { IGenericAboutCardDetail } from '../../../../config/about/IGenericAboutDetail';
+import AboutCardModal from './AboutCardModal';
 
 export type ThemeProps = {
-  textColor: string;
-  subTextColor: string;
-  skillColor: string;
+    textColor: string;
+    subTextColor: string;
+    skillColor: string;
 };
 
 type GenericAboutCardProps = IGenericAboutCardDetail & ThemeProps;
 
 const AboutCard: React.FC<GenericAboutCardProps> = ({
-  hasModal,
-  logoRef,
-  title,
-  textColor,
-  subtitle,
-  subTextColor,
-  shortDescription,
-  type,
-  skillColor,
-  dateText,
-  skills,
-  additionalContent,
-  longDescription,
+    hasModal,
+    logoRef,
+    title,
+    textColor,
+    subtitle,
+    subTextColor,
+    shortDescription,
+    type,
+    skillColor,
+    dateText,
+    skills,
+    additionalContent,
+    longDescription
 }) => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
+    const { isOpen, onOpen, onClose } = useDisclosure();
 
-  return (
-    <Box onClick={hasModal ? onOpen : undefined} cursor={hasModal ? "pointer" : "default"}>
-      <AboutCardBox>
-        <AboutCardContent
-          logoRef={logoRef}
-          title={title}
-          textColor={textColor}
-          subtitle={subtitle}
-          subTextColor={subTextColor}
-          shortDescription={shortDescription}
-          type={type}
-          skillColor={skillColor}
-          dateText={dateText}
-          skills={skills}
-          additionalContent={additionalContent}
-        />
-      </AboutCardBox>
+    return (
+        <Box onClick={hasModal ? onOpen : undefined} cursor={hasModal ? 'pointer' : 'default'}>
+            <AboutCardBox>
+                <AboutCardContent
+                    logoRef={logoRef}
+                    title={title}
+                    textColor={textColor}
+                    subtitle={subtitle}
+                    subTextColor={subTextColor}
+                    shortDescription={shortDescription}
+                    type={type}
+                    skillColor={skillColor}
+                    dateText={dateText}
+                    skills={skills}
+                    additionalContent={additionalContent}
+                />
+            </AboutCardBox>
 
-      {hasModal && (
-        <AboutCardModal
-          logoRef={logoRef}
-          title={title}
-          textColor={textColor}
-          subtitle={subtitle}
-          subTextColor={subTextColor}
-          longDescription={longDescription}
-          skills={skills}
-          skillColor={skillColor}
-          isOpen={isOpen}
-          onClose={onClose}
-          dateText={dateText}
-        />
-      )}
-    </Box>
-  );
+            {hasModal && (
+                <AboutCardModal
+                    logoRef={logoRef}
+                    title={title}
+                    textColor={textColor}
+                    subtitle={subtitle}
+                    subTextColor={subTextColor}
+                    longDescription={longDescription}
+                    skills={skills}
+                    skillColor={skillColor}
+                    isOpen={isOpen}
+                    onClose={onClose}
+                    dateText={dateText}
+                />
+            )}
+        </Box>
+    );
 };
 
 export default AboutCard;

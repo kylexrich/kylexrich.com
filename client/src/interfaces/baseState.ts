@@ -1,4 +1,4 @@
 export type BaseState = {
-  loading: boolean;
-  error: string | null;
+    loading: boolean;
+    error: string | null;
 };

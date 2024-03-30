@@ -1,3 +1,3 @@
 export const author = {
-  name: "Kyle Rich",
+    name: 'Kyle Rich'
 };
