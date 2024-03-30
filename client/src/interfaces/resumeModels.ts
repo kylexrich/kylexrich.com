@@ -1,5 +1,5 @@
-import { BaseState } from "./baseState";
+import { BaseState } from './baseState';
 
 export type ResumeModels = {
-  recentResumeBlobUrl: string | null;
+    recentResumeBlobUrl: string | null;
 } & BaseState;

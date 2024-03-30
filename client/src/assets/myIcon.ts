@@ -1,1 +1,1 @@
-export const myIcon = "/assets/images/me2cut.jpg";
+export const myIcon = '/assets/images/me2cut.jpg';
