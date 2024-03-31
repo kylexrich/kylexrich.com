@@ -8,6 +8,14 @@ const DottedBackground: React.FC<DottedBackgroundProps> = (props) => {
     const leftTransform = 'translateX(0%) translateY(52%)';
     const color = 'rgba(55,65,81, 1)';
 
+    const renderPattern = () => (
+        <defs>
+            <pattern id="pattern" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+                <rect x="0" y="0" width="4" height="4" fill="currentColor"></rect>
+            </pattern>
+        </defs>
+    );
+
     return (
         <Box
             position="absolute"
@@ -46,13 +54,5 @@ const DottedBackground: React.FC<DottedBackgroundProps> = (props) => {
         </Box>
     );
 };
-
-const renderPattern = () => (
-    <defs>
-        <pattern id="pattern" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
-            <rect x="0" y="0" width="4" height="4" fill="currentColor"></rect>
-        </pattern>
-    </defs>
-);
 
 export default DottedBackground;

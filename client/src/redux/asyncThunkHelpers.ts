@@ -1,5 +1,5 @@
-import { ErrorResponse, isErrorAction, isErrorResponse, isResponse } from '../interfaces/errorModels';
-import { BaseState } from '../interfaces/baseState';
+import { ErrorResponse, isErrorAction, isErrorResponse, isResponse } from './interfaces/errorModels';
+import { BaseState } from './interfaces/baseState';
 
 export async function getRequestBlobError(error: unknown) {
     if (isResponse(error) && error.response.data instanceof Blob) {
@@ -29,9 +29,11 @@ export const handleLoading = (state: BaseState, loadingStatus: boolean) => {
     state.loading = loadingStatus;
     state.error = null;
 };
+
 export const handlePending = (state: BaseState) => {
     handleLoading(state, true);
 };
+
 export const handleRejected = (state: BaseState, action: unknown) => {
     if (isErrorAction(action)) {
         state.error = action.error.message;

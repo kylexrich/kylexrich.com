@@ -1,38 +1,40 @@
 import { Response } from 'express';
-import { uploadResume, getRecentResume } from './resumeService';
-import { log } from '../../config/log4jsConfig';
-import { AuthenticatedRequest } from '../../interfaces/AuthenticatedRequest';
+import { getRecentResume, uploadResume } from './resumeService';
+import { AuthenticatedRequest } from '../../types/AuthenticatedRequest';
+import { BadRequestError } from '../../errors/BadRequestError';
+import { NotFoundError } from '../../errors/NotFoundError';
+import { ServiceResponse } from '../../types/ServiceResponse';
+import { sendErrorResponse, sendSuccessResponse } from '../../util/responseHelpers';
 
 export async function addResume(req: AuthenticatedRequest, res: Response): Promise<void> {
     try {
         if (!req.files || !req.files.resume) {
-            res.status(400).send({ error: 'No file uploaded' });
-            return;
+            throw new BadRequestError('No file uploaded');
         }
 
         const resumeFile = req.files.resume as { data: Buffer; mimetype: string };
-        const result = await uploadResume(req.body.name, resumeFile.data, resumeFile.mimetype);
+        const result: ServiceResponse = await uploadResume(req.body.name, resumeFile.data, resumeFile.mimetype);
 
-        res.set('Content-Type', resumeFile.mimetype);
-        res.status(result.status).send(result.data);
+        sendSuccessResponse(res, 201, result);
     } catch (error) {
-        log.error(error);
-        res.status(500).send({ error: 'Error uploading resume' });
+        if (error instanceof BadRequestError) {
+            sendErrorResponse(res, 400, error.message, error);
+        } else {
+            sendErrorResponse(res, 500, 'Error uploading resume', error);
+        }
     }
 }
 
 export async function getLatestResume(req: AuthenticatedRequest, res: Response): Promise<void> {
     try {
-        const result = await getRecentResume();
-        if (result.status === 404) {
-            res.status(404).send(result.data);
-            return;
-        }
+        const result: ServiceResponse = await getRecentResume();
 
-        res.set('Content-Type', result.contentType);
-        res.send(result.file);
+        sendSuccessResponse(res, 200, result);
     } catch (error) {
-        log.error(error);
-        res.status(500).send({ error: 'Error retrieving resume' });
+        if (error instanceof NotFoundError) {
+            sendErrorResponse(res, 404, error.message, error);
+        } else {
+            sendErrorResponse(res, 500, 'Error retrieving resume', error);
+        }
     }
 }

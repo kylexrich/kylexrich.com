@@ -18,11 +18,9 @@ switch (env) {
         break;
 }
 
-const api: AxiosInstance = axios.create({
+const kylexrichApi: AxiosInstance = axios.create({
     baseURL: host,
     withCredentials: true
 });
 
-export type RequestMethod = 'get' | 'post' | 'put' | 'delete' | 'patch';
-
-export default api;
+export default kylexrichApi;

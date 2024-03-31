@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken';
-import { NextFunction, Response, Request } from 'express';
-import { AuthenticatedRequest, isAuthenticatedRequest } from '../../interfaces/AuthenticatedRequest';
+import { NextFunction, Request, Response } from 'express';
+import { AuthenticatedRequest, isAuthenticatedRequest } from '../../types/AuthenticatedRequest';
 
 export function signToken(userId: string | null) {
     if (!userId) {
@@ -44,6 +44,15 @@ export function setTokenCookie(res: Response, token: string): void {
     res.cookie('token', token, {
         httpOnly: true,
         maxAge: expireInMs,
+        secure: isProduction,
+        sameSite: isProduction ? 'strict' : 'lax'
+    });
+}
+
+export function clearToken(res: Response): void {
+    const isProduction = process.env.NODE_ENV === 'production';
+    res.clearCookie('token', {
+        httpOnly: true,
         secure: isProduction,
         sameSite: isProduction ? 'strict' : 'lax'
     });
