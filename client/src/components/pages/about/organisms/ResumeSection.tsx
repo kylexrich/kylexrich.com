@@ -1,8 +1,8 @@
 import React, { useState, useCallback } from 'react';
 import { AppDispatch, RootState } from '../../../../redux/store';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchLatestResume, uploadResume } from '../../../../redux/uiSlice';
 import { Button, Box, Input, useToast } from '@chakra-ui/react';
+import { fetchLatestResume, uploadResume } from '../../../../redux/resumeSlice';
 
 const FileInput: React.FC<{ onFileChange: (file: File) => void }> = ({ onFileChange }) => {
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -17,7 +17,7 @@ const FileInput: React.FC<{ onFileChange: (file: File) => void }> = ({ onFileCha
 const ResumeSection: React.FC = () => {
     const [selectedFile, setSelectedFile] = useState<File | null>(null);
     const dispatch: AppDispatch = useDispatch();
-    const recentResumeBlobUrl = useSelector((state: RootState) => state.ui.recentResumeBlobUrl);
+    const recentResumeBlobUrl = useSelector((state: RootState) => state.resume.recentResumeBlobUrl);
     const toast = useToast();
 
     const handleOpenMostRecentResume = useCallback(async () => {

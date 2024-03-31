@@ -1,5 +1,6 @@
-import mongoose, { Schema, Document } from 'mongoose';
-export interface IResume extends Document {
+import mongoose, { Document, Schema } from 'mongoose';
+
+export interface ResumeDocument extends Document {
     name: string;
     file: Buffer;
     contentType: string;
@@ -18,6 +19,6 @@ const ResumeSchema: Schema = new Schema(
     }
 );
 
-const Resume = mongoose.model<IResume>('Resume', ResumeSchema);
+const Resume = mongoose.model<ResumeDocument>('Resume', ResumeSchema);
 
 export default Resume;

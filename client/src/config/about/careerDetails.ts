@@ -1,4 +1,3 @@
-import React from 'react';
 import { IGenericAboutCardDetail } from './IGenericAboutDetail';
 
 export type CareerDetail = IGenericAboutCardDetail;
@@ -70,7 +69,7 @@ export const careerDetails: CareerDetail[] = [
             'Led 3-hour tutorials for ~30 students three times weekly, focusing on advanced programming topics. Attained an exceptional 100% satisfaction rate, surpassing the 77% average.',
         longDescription:
             'At UBC, I led in-depth 3-hour tutorials for around 30 students, three times per week. These sessions centered around helping students navigate complex programming challenges, from mutual recursion to system design. ' +
-            '\nMy commitment to student success was reflected in a 100% satisfaction rate on teaching feedback, notably exceeding the 77% average for other TAs. ' +
+            '\nMy commitment to student success was reflected in a 100% satisfaction rate on teaching feedback, notably exceeding the 77% average for ME_CUT TAs. ' +
             "\nStudents frequently commented on my approachability, thoroughness, and preparation. Written feedback such as 'Kyle was an absolute joy...definitely one of the best TAs I have ever had.' stand testament to the impact I had on their learning.",
         skills: ['Instructional Techniques', 'Technical Mentoring', 'Interactive Feedback', 'Student Engagement'],
         logoRef: '/assets/images/about/ubclogo.jpeg',

@@ -2,8 +2,8 @@ import { useToast } from '@chakra-ui/react';
 import { useEffect } from 'react';
 import { siteErrorSelector } from '../redux/selectors/siteErrorSelector';
 import { useDispatch, useSelector } from 'react-redux';
-import { resetError } from '../redux/uiSlice';
 import { AppDispatch } from '../redux/store';
+import { RESET_ALL_ERRORS } from '../redux/globalActions';
 
 export function useErrorNotification() {
     const toast = useToast();
@@ -19,7 +19,7 @@ export function useErrorNotification() {
                 duration: 5000,
                 isClosable: true
             });
-            dispatch(resetError());
+            dispatch({ type: RESET_ALL_ERRORS });
         }
     }, [dispatch, error, toast]);
 }

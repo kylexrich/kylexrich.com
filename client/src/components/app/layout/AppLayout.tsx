@@ -21,6 +21,8 @@ const AppLayout: React.FC<MainLayoutProps> = (props) => {
         dispatch(me());
     }, [dispatch]);
 
+    const bannerPadding = '50px';
+
     return (
         <BrowserRouter>
             <NavBar />
@@ -30,7 +32,9 @@ const AppLayout: React.FC<MainLayoutProps> = (props) => {
                     <Navigation />
                 </Box>
             </Box>
-            <Footer />
+            <Box w="full" pb={UNDER_CONSTRUCTION ? bannerPadding : '0'}>
+                <Footer />
+            </Box>
             {UNDER_CONSTRUCTION && <UnderConstructionBanner />}
         </BrowserRouter>
     );

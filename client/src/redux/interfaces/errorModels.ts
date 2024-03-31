@@ -1,4 +1,4 @@
-import { isObject } from '../util/isObject';
+import { isObject } from '../../util/isObject';
 
 export type ErrorAction = {
     error: {
@@ -27,5 +27,3 @@ export const isErrorResponse = (value: unknown): value is ErrorResponse =>
 
 export const isResponse = (value: unknown): value is Response =>
     isObject(value) && 'response' in value && isObject(value.response) && 'data' in value.response;
-
-export const hasMessage = (value: unknown): value is { message: string } => isObject(value) && 'message' in value;

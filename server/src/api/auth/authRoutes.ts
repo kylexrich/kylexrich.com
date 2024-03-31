@@ -1,7 +1,7 @@
 import express, { Router } from 'express';
 import { verifyToken } from '../token/tokenService';
 import { login, logout, me } from './authController';
-import { AuthenticatedRequest } from '../../interfaces/AuthenticatedRequest';
+import { AuthenticatedRequest } from '../../types/AuthenticatedRequest';
 
 const router: Router = express.Router({ mergeParams: true });
 

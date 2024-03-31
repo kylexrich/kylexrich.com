@@ -1,0 +1,14 @@
+export const AMAZON_LOGO = '/assets/about/amazonlogo.png';
+export const BESTBUILDERS__LOGO = '/assets/about/bestbuilders_logo.png';
+export const BIZHACKS_LOGO = '/assets/about/bizhackslogo.png';
+export const CPA_LOGO = '/assets/about/cpalogo.jpeg';
+export const LANGARABA_LOGO = '/assets/about/langarabalogo.jpeg';
+export const LINKS_LOGO = '/assets/about/linkslogo.png';
+export const MICROSOFTS_LOGO = '/assets/about/microsoftslogo.png';
+export const OWL_LOGO = '/assets/about/owllogo.png';
+export const SALESFORCE_LOGO = '/assets/about/salesforcelogo.png';
+export const SPEEDS_LOGO = '/assets/about/speedslogo.jpeg';
+export const THINKTECH_LOGO = '/assets/about/thinktechlogo.png';
+export const TOASTMASTERS_LOGO = '/assets/about/toastmasterslogo.jpeg';
+export const UBC_LOGO = '/assets/about/ubclogo.jpeg';
+export const WHITESPOT_LOGO = '/assets/about/whitespotlogo.png';
