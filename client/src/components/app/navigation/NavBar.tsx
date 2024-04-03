@@ -9,10 +9,17 @@ import { homeRoute, routes } from '../../../config/routes';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../redux/store';
 import { MotionBox } from '../../shared/MotionComponents';
-import { ME_CUT } from '../../../assets/other';
+import { ME_CUT_REMOVE_BG } from '../../../assets/other';
+import { AccentPicker } from '../../../theme/AccentSwitcher';
+import { ColourWeight, useAccentColour } from '../../../theme/accentColour';
 
 const NavBar: React.FC = () => {
     const { colors } = useTheme();
+    const avatarColor = useAccentColour();
+    const avatarBorderColor = useAccentColour({
+        lightModeWeight: ColourWeight.W800,
+        darkModeWeight: ColourWeight.W700
+    });
     const { isOpen, onOpen, onClose } = useDisclosure();
     const userId = useSelector((state: RootState) => state.auth.userId);
 
@@ -37,11 +44,20 @@ const NavBar: React.FC = () => {
                 />
                 <HStack spacing={8} alignItems={'center'}>
                     <MotionBox whileHover={{ scale: 1.2 }} shadow="md" rounded="full">
-                        <Avatar as={RouterNavLink} size={'sm'} to={homeRoute.path} src={ME_CUT} />
+                        <Avatar
+                            as={RouterNavLink}
+                            size={'sm'}
+                            bg={avatarColor}
+                            showBorder={true}
+                            borderColor={avatarBorderColor}
+                            to={homeRoute.path}
+                            src={ME_CUT_REMOVE_BG}
+                        />
                     </MotionBox>
                     <DesktopNavLinks routes={filteredRoutes} />
                 </HStack>
                 <Flex alignItems={'center'}>
+                    <AccentPicker aria-label="Accent Color Picker" variant="ghost" zIndex={1} mr={2} />
                     <ColorModeSwitcher />
                 </Flex>
             </Flex>

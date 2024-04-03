@@ -1,5 +1,6 @@
-import { extendTheme, ThemeConfig } from '@chakra-ui/react';
-import { mode } from '@chakra-ui/theme-tools';
+import { extendTheme, ThemeConfig, theme as defaultTheme } from '@chakra-ui/react';
+import { ACCENT_THEME_DEF } from './accentColour';
+import ExtracurricularCard from '../components/pages/about/organisms/ExtracurricularCard';
 
 const config: ThemeConfig = {
     initialColorMode: 'light',
@@ -12,34 +13,80 @@ export const theme = extendTheme({
         body: `Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol"`
     },
     colors: {
+        ...defaultTheme.colors,
         navBar: {
             bg: {
                 light: 'white',
                 dark: 'gray.700'
             }
         },
-        footer: {
-            text: {
-                light: 'gray.500',
-                dark: 'gray.200'
+        about: {
+            aboutCard: {
+                bg: {
+                    light: 'white',
+                    dark: 'gray.800'
+                }
+            },
+            extracurricularCard: {
+                textColour: {
+                    light: 'gray.700',
+                    dark: 'gray.300'
+                },
+                subTextColour: {
+                    light: 'gray.500',
+                    dark: 'gray.400'
+                },
+                skillColour: {
+                    light: 'gray.200',
+                    dark: 'gray.700'
+                }
+            },
+            educationCard: {
+                textColour: {
+                    light: 'gray.700',
+                    dark: 'gray.300'
+                },
+                subTextColour: {
+                    light: 'gray.500',
+                    dark: 'gray.400'
+                },
+                skillColour: {
+                    light: 'gray.200',
+                    dark: 'gray.700'
+                }
+            },
+            careerCard: {
+                textColour: {
+                    light: 'gray.700',
+                    dark: 'gray.300'
+                },
+                subTextColour: {
+                    light: 'gray.500',
+                    dark: 'gray.400'
+                },
+                skillColour: {
+                    light: 'gray.200',
+                    dark: 'gray.700'
+                }
             }
-        }
+        },
+        ...ACCENT_THEME_DEF
     },
     styles: {
         global: (props: Record<string, any>) => ({
             body: {
-                color: mode('gray.700', 'whiteAlpha.900')(props),
-                bg: mode('gray.50', 'gray.900')(props),
+                color: props.colorMode === 'dark' ? 'whiteAlpha.900' : 'gray.700',
+                bg: props.colorMode === 'dark' ? 'gray.900' : 'gray.50',
                 lineHeight: 'base',
                 fontSize: '1.2em'
             },
             a: {
-                color: mode('blue.500', 'blue.200')(props),
+                color: props.colorMode === 'dark' ? 'blue.200' : 'blue.500',
                 transition: 'color 0.15s',
                 transitionTimingFunction: 'ease-out',
                 fontWeight: '500',
                 _hover: {
-                    color: mode('blue.600', 'blue.300')(props)
+                    color: props.colorMode === 'dark' ? 'blue.300' : 'blue.600'
                 }
             },
             h1: {
