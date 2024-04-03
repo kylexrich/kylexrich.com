@@ -52,11 +52,7 @@ const Footer: React.FC = () => {
                 alignItems="center"
                 w="100%"
             >
-                <Text
-                    textAlign="center"
-                    fontSize="sm"
-                    color={useColorModeValue(colors.footer.text.light, colors.footer.text.dark)}
-                >
+                <Text textAlign="center" fontSize="sm">
                     © {new Date().getFullYear()} {author.name}
                 </Text>
                 <Box textAlign="center">

@@ -1,14 +1,20 @@
 import React from 'react';
 import { Avatar, Box, Flex, Text } from '@chakra-ui/react';
 import { MotionBox, MotionFlex } from '../shared/MotionComponents';
-import { ME_CUT } from '../../assets/other';
-import UnderlinedEmojiHeader from './about/atoms/UnderlinedEmojiHeader';
+import { ME_CUT_REMOVE_BG } from '../../assets/other';
+import UnderlinedEmojiHeader from '../shared/UnderlinedEmojiHeader';
 import PageLayout from '../app/layout/PageLayout';
+import { ColourWeight, useAccentColour } from '../../theme/accentColour';
 
 type HomeProps = {};
 
 const Home: React.FC<HomeProps> = () => {
     const ANIMATION_DURATION = 0.5;
+    const avatarColor = useAccentColour();
+    const avatarBorderColor = useAccentColour({
+        lightModeWeight: ColourWeight.W800,
+        darkModeWeight: ColourWeight.W700
+    });
 
     return (
         <PageLayout>
@@ -31,7 +37,13 @@ const Home: React.FC<HomeProps> = () => {
                         mb={{ base: 16, md: 'auto' }}
                     >
                         <MotionBox whileHover={{ scale: 1.5 }} rounded="full" shadow="lg">
-                            <Avatar size={'2xl'} showBorder={true} src={ME_CUT} />
+                            <Avatar
+                                size={'2xl'}
+                                bg={avatarColor}
+                                showBorder={true}
+                                borderColor={avatarBorderColor}
+                                src={ME_CUT_REMOVE_BG}
+                            />
                         </MotionBox>
                     </MotionBox>
                     <MotionFlex

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import UnderlinedEmojiHeader from '../atoms/UnderlinedEmojiHeader';
+import UnderlinedEmojiHeader from '../../../shared/UnderlinedEmojiHeader';
 import { Flex, VStack, Button } from '@chakra-ui/react';
 import { ChevronDownIcon, ChevronUpIcon } from '@chakra-ui/icons';
 import { MotionBox } from '../../../shared/MotionComponents';
