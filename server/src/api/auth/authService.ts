@@ -3,32 +3,55 @@ import { ServiceResponse } from '../../types/ServiceResponse';
 import { UserExistsError } from '../../errors/UserExistsError';
 import { AuthenticationError } from '../../errors/AuthenticationError';
 import { ContentType } from '../../types/ContentType';
+import { UserDocument } from '../../models/User';
+import { log } from '../../config/log4jsConfig';
 
-export async function registerUser(email: string, password: string): Promise<ServiceResponse> {
-    const existingUser = await findUserByEmail(email);
+export type UserData = Omit<UserDocument, 'password'>;
+
+export async function registerUser(providedEmail: string, providedPassword: string): Promise<ServiceResponse<UserData>> {
+    const existingUser: UserDocument | null = await findUserByEmail(providedEmail);
+
     if (existingUser) {
         throw new UserExistsError('User already exists');
     }
-    const user = await createUser(email, password);
-    return { data: { user }, contentType: ContentType.JSON };
+
+    const userDocument: UserDocument = await createUser(providedEmail, providedPassword);
+    const user = userDocument.toObject();
+    delete user.password;
+
+    return { data: user, contentType: ContentType.JSON };
 }
 
-export async function loginUser(email: string, password: string): Promise<ServiceResponse> {
-    const user = await findUserByEmail(email);
-    if (!user || !(await checkPassword(password, user.password))) {
+export async function loginUser(providedEmail: string, providedPassword: string): Promise<ServiceResponse<UserData>> {
+    const userDocument: UserDocument | null = await findUserByEmail(providedEmail);
+
+    if (!userDocument || !(await checkPassword(providedPassword, userDocument.password))) {
         throw new AuthenticationError('Invalid email or password');
     }
-    return { data: { user }, contentType: ContentType.JSON };
+
+    const user = userDocument.toObject();
+    delete user.password;
+
+    return { data: user, contentType: ContentType.JSON };
 }
 
-export async function getUser(id: string): Promise<ServiceResponse> {
-    const user = await findUserById(id);
-    if (!user) {
+export async function getUser(id: string): Promise<ServiceResponse<UserData>> {
+    const userDocument: UserDocument | null = await findUserById(id);
+
+    if (!userDocument) {
         throw new AuthenticationError('User not found');
     }
-    return { data: { user }, contentType: ContentType.JSON };
+
+    const user = userDocument.toObject();
+    delete user.password;
+
+    return { data: user, contentType: ContentType.JSON };
 }
 
-export async function logOutUser(): Promise<ServiceResponse> {
+export interface LogoutMessage {
+    message: string;
+}
+
+export async function logOutUser(): Promise<ServiceResponse<LogoutMessage>> {
     return { data: { message: 'Successfully logged out' }, contentType: ContentType.JSON };
 }

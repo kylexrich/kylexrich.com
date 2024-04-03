@@ -2,23 +2,23 @@ import React from 'react';
 import { IconButton } from '@chakra-ui/react';
 import { FaSignOutAlt, FaSignInAlt } from 'react-icons/fa';
 
-type AuthIconProps = {
+export interface AuthIconProps {
     userId: string | null;
     onLogout: () => void;
     onOpen: () => void;
-};
+}
 
 const AuthIcon: React.FC<AuthIconProps> = ({ userId, onLogout, onOpen }) => {
-    const isLogin = !userId;
+    const loggedIn = !userId;
 
     return (
         <IconButton
-            aria-label={isLogin ? 'Login' : 'Logout'}
+            aria-label={loggedIn ? 'Login' : 'Logout'}
             size="lg"
-            icon={isLogin ? <FaSignInAlt /> : <FaSignOutAlt />}
+            icon={loggedIn ? <FaSignInAlt /> : <FaSignOutAlt />}
             variant="ghost"
             isRound={true}
-            onClick={isLogin ? onOpen : onLogout}
+            onClick={loggedIn ? onOpen : onLogout}
         />
     );
 };

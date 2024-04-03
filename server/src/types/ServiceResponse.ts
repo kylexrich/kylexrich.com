@@ -1,6 +1,6 @@
 import { ContentType } from './ContentType';
 
-export interface ServiceResponse {
-    data: any;
+export interface ServiceResponse<T> {
+    data: T;
     contentType: ContentType | string;
 }

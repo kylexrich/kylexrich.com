@@ -1,5 +1,5 @@
 import { Response } from 'express';
-import { getRecentResume, uploadResume } from './resumeService';
+import { getRecentResume, ResumeData, uploadResume } from './resumeService';
 import { AuthenticatedRequest } from '../../types/AuthenticatedRequest';
 import { BadRequestError } from '../../errors/BadRequestError';
 import { NotFoundError } from '../../errors/NotFoundError';
@@ -13,7 +13,7 @@ export async function addResume(req: AuthenticatedRequest, res: Response): Promi
         }
 
         const resumeFile = req.files.resume as { data: Buffer; mimetype: string };
-        const result: ServiceResponse = await uploadResume(req.body.name, resumeFile.data, resumeFile.mimetype);
+        const result: ServiceResponse<ResumeData> = await uploadResume(req.body.name, resumeFile.data, resumeFile.mimetype);
 
         sendSuccessResponse(res, 201, result);
     } catch (error) {
@@ -27,7 +27,7 @@ export async function addResume(req: AuthenticatedRequest, res: Response): Promi
 
 export async function getLatestResume(req: AuthenticatedRequest, res: Response): Promise<void> {
     try {
-        const result: ServiceResponse = await getRecentResume();
+        const result: ServiceResponse<ResumeData> = await getRecentResume();
 
         sendSuccessResponse(res, 200, result);
     } catch (error) {

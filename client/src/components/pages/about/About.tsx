@@ -1,21 +1,19 @@
 import React from 'react';
 import { VStack } from '@chakra-ui/react';
-import EducationSection from './organisms/EducationSection';
-import CareerSection from './organisms/CareerSection';
-import ExtracurricularSection from './organisms/ExtracurricularSection';
-import PageLayout from '../../app/layout/PageLayout';
+import { educationDetails } from '../../../config/about/educationDetails';
+import AboutSection from './organisms/AboutSection';
+import { careerDetails } from '../../../config/about/careerDetails';
+import { extracurricularDetails } from '../../../config/about/extracurricularDetails';
 
-type AboutProps = {};
+export interface AboutProps {}
 
 const About: React.FC<AboutProps> = () => {
     return (
-        <PageLayout>
-            <VStack spacing={8} align="start">
-                <CareerSection />
-                <EducationSection />
-                <ExtracurricularSection />
-            </VStack>
-        </PageLayout>
+        <VStack spacing={8} align="start">
+            <AboutSection headerText="Career" emoji="🛠️" details={careerDetails} />
+            <AboutSection headerText="Education" emoji="🎓" details={educationDetails} />
+            <AboutSection headerText="Extracurriculars" emoji="🎭" details={extracurricularDetails} />
+        </VStack>
     );
 };
 

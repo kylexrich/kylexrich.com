@@ -1,13 +1,15 @@
 import React from 'react';
-import PageLayout from '../../app/layout/PageLayout';
+import { LayoutTransition } from '../../shared/MotionComponents';
 
-type ProjectsProps = {};
+export interface ProjectsProps {
+    // empty
+}
 
 const Projects: React.FC<ProjectsProps> = () => {
     return (
-        <PageLayout>
+        <LayoutTransition>
             <h1>Projects</h1>
-        </PageLayout>
+        </LayoutTransition>
     );
 };
 

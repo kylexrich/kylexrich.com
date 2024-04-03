@@ -1,6 +1,6 @@
 import React from 'react';
 import { socialAccounts } from '../../../config/socialAccounts';
-import { Box, Flex, IconButton, Link, Stack, Text, useColorModeValue, useDisclosure, useTheme } from '@chakra-ui/react';
+import { Box, Flex, IconButton, Link, Stack, Text, useDisclosure } from '@chakra-ui/react';
 import { author } from '../../../config/name';
 import LoginModal from '../auth/LoginModal';
 import AuthIcon from '../auth/AuthIcon';
@@ -9,7 +9,6 @@ import { AppDispatch, RootState } from '../../../redux/store';
 import { logout } from '../../../redux/authSlice';
 
 const Footer: React.FC = () => {
-    const { colors } = useTheme();
     const { isOpen, onOpen, onClose } = useDisclosure();
     const dispatch: AppDispatch = useDispatch();
     const userId = useSelector((state: RootState) => state.auth.userId);
@@ -27,7 +26,7 @@ const Footer: React.FC = () => {
                 href={acc.url}
                 aria-label={acc.label}
                 size="lg"
-                colorScheme={acc.type}
+                colorScheme={acc.colorScheme}
                 icon={<acc.icon />}
                 variant="ghost"
                 isRound={true}

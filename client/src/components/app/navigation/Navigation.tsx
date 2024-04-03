@@ -3,7 +3,9 @@ import { Route, Routes } from 'react-router-dom';
 import { routes } from '../../../config/routes';
 import ProtectedRoute from './ProtectedRoute';
 
-type NavigationProps = {};
+export interface NavigationProps {
+    // empty
+}
 
 const Navigation: React.FC<NavigationProps> = () => {
     return (

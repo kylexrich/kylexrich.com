@@ -1,14 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Box, HStack, Image, Link, Text, useColorModeValue, VStack } from '@chakra-ui/react';
-import { ISkillDetail } from '../../../../config/techstack/ISkillDetail';
+import { SkillDetail } from '../../../../config/techstack/SkillDetail';
 import { MotionBox } from '../../../shared/MotionComponents';
+import { useAccentColor } from '../../../../theme/accentColor';
 
-type SkillCardProps = ISkillDetail;
+export interface SkillCardProps extends SkillDetail {
+    // empty
+}
 
-const SkillCard: React.FC<SkillCardProps> = ({ name, description, link, categories, image, bg }) => {
+const TechCard: React.FC<SkillCardProps> = ({ title, description, link, categories, imageRefs, bgColor }) => {
+    const [isHovered, setIsHovered] = useState(false);
     const cardBackground = useColorModeValue('white', 'gray.800');
-    const borderColor = useColorModeValue('gray.100', 'gray.700');
+    const borderColor = useColorModeValue('gray.900', 'gray.700');
     const descriptionColor = useColorModeValue('gray.500', 'gray.200');
+    const descriptionHoverColor = useColorModeValue('inherit', 'accent.500');
+    const titleColor = useAccentColor();
 
     return (
         <MotionBox>
@@ -18,16 +24,22 @@ const SkillCard: React.FC<SkillCardProps> = ({ name, description, link, categori
                         p={4}
                         bg={cardBackground}
                         rounded="xl"
-                        borderWidth="1px"
+                        borderWidth="0.5px"
                         borderColor={borderColor}
                         w="100%"
                         textAlign="left"
                         align="start"
                         spacing={4}
-                        _hover={{ shadow: 'md' }}
+                        _hover={{
+                            shadow: 'md',
+                            bg: bgColor,
+                            color: descriptionHoverColor
+                        }}
+                        onMouseEnter={() => setIsHovered(true)}
+                        onMouseLeave={() => setIsHovered(false)}
                     >
                         <Box
-                            bgColor={bg}
+                            bgColor={bgColor}
                             rounded="lg"
                             p={2}
                             position="relative"
@@ -36,14 +48,14 @@ const SkillCard: React.FC<SkillCardProps> = ({ name, description, link, categori
                             boxShadow="inset 0 0 1px 1px rgba(0, 0, 0, 0.015)"
                         >
                             <Box position="absolute" top={0} bottom={0} left={0} right={0} opacity={0.25}></Box>
-                            <Image src={image} height={26} width={26} rounded="md" />
+                            <Image src={imageRefs} height={26} width={26} rounded="md" />
                         </Box>
                         <VStack align="start" justify="flex-start" spacing={1} maxW="lg" h="100%">
                             <VStack spacing={0} align="start" flexGrow={1}>
-                                <Text fontWeight="bold" fontSize="md" noOfLines={2}>
-                                    {name}
+                                <Text fontWeight="bold" fontSize="md" noOfLines={2} color={titleColor}>
+                                    {title}
                                 </Text>
-                                <Text fontSize="sm" color={descriptionColor}>
+                                <Text fontSize="sm" color={isHovered ? descriptionHoverColor : descriptionColor}>
                                     {description}
                                 </Text>
                             </VStack>
@@ -55,4 +67,4 @@ const SkillCard: React.FC<SkillCardProps> = ({ name, description, link, categori
     );
 };
 
-export default SkillCard;
+export default TechCard;

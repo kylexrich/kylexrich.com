@@ -1,17 +1,18 @@
 import React, { useState } from 'react';
 import UnderlinedEmojiHeader from '../../../shared/UnderlinedEmojiHeader';
-import { Flex, VStack, Button } from '@chakra-ui/react';
+import { Button, Flex, VStack } from '@chakra-ui/react';
 import { ChevronDownIcon, ChevronUpIcon } from '@chakra-ui/icons';
 import { MotionBox } from '../../../shared/MotionComponents';
+import { AboutCardDetail } from '../../../../config/about/AboutCardDetail';
+import AboutCard from './AboutCard';
 
-type AboutSectionProps = {
+export interface AboutSectionProps {
     headerText: string;
     emoji: string;
-    details: Array<any>;
-    cardComponent: React.FC<any>;
-};
+    details: AboutCardDetail[];
+}
 
-const AboutSection: React.FC<AboutSectionProps> = ({ headerText, emoji, details, cardComponent: CardComponent }) => {
+const AboutSection: React.FC<AboutSectionProps> = ({ headerText, emoji, details }) => {
     const [showAll, setShowAll] = useState(false);
     const displayDetails = showAll ? details : details.slice(0, 3);
 
@@ -21,7 +22,7 @@ const AboutSection: React.FC<AboutSectionProps> = ({ headerText, emoji, details,
             <VStack spacing={4} marginBottom={6} align="left" mx={{ base: 0, md: 6 }} w={'100%'}>
                 {displayDetails.map((detail, index) => (
                     <MotionBox whileHover={{ y: -5 }} key={index}>
-                        <CardComponent {...detail} />
+                        <AboutCard {...detail} />
                     </MotionBox>
                 ))}
             </VStack>

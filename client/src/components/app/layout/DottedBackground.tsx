@@ -1,12 +1,14 @@
 import React from 'react';
-import { Box } from '@chakra-ui/react';
+import { Box, useColorModeValue } from '@chakra-ui/react';
 
-type DottedBackgroundProps = {};
+export interface DottedBackgroundProps {}
 
 const DottedBackground: React.FC<DottedBackgroundProps> = (props) => {
     const rightTransform = 'translateX(0%) translateY(-45%)';
     const leftTransform = 'translateX(0%) translateY(52%)';
-    const color = 'rgba(55,65,81, 1)';
+    // Using the variables directly, rather than using `useAccentColor(...)`. Using theme variables was not working.
+    // (keeping old color here for easy reference) const color = 'rgba(55,65,81, 1)';
+    const color = useColorModeValue(`var(--colors-accent-700)`, `var(--colors-accent-900)`);
 
     const renderPattern = () => (
         <defs>
@@ -17,35 +19,16 @@ const DottedBackground: React.FC<DottedBackgroundProps> = (props) => {
     );
 
     return (
-        <Box
-            position="absolute"
-            height="50rem"
-            width="100%"
-            overflow="hidden"
-            display={['none', 'none', 'block']}
-            zIndex={-1}
-        >
+        <Box position="absolute" height="50rem" width="100%" overflow="hidden" display={['none', 'none', 'block']} zIndex={-1}>
             <Box position="relative" height="full" mx="auto" maxW="940px">
                 <Box position="absolute" left="100%">
-                    <svg
-                        style={{ transform: rightTransform, color: color }}
-                        width="404"
-                        height="784"
-                        fill="none"
-                        viewBox="0 0 404 784"
-                    >
+                    <svg style={{ transform: rightTransform, color: color }} width="404" height="784" fill="none" viewBox="0 0 404 784">
                         {renderPattern()}
                         <rect width="404" height="784" fill="url(#pattern)"></rect>
                     </svg>
                 </Box>
                 <Box position="absolute" right="100%">
-                    <svg
-                        style={{ transform: leftTransform, color: color }}
-                        width="404"
-                        height="784"
-                        fill="none"
-                        viewBox="0 0 404 784"
-                    >
+                    <svg style={{ transform: leftTransform, color: color }} width="404" height="784" fill="none" viewBox="0 0 404 784">
                         {renderPattern()}
                         <rect width="404" height="784" fill="url(#pattern)"></rect>
                     </svg>

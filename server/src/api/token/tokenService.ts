@@ -1,8 +1,8 @@
-import jwt from 'jsonwebtoken';
+import jwt, { JwtPayload } from 'jsonwebtoken';
 import { NextFunction, Request, Response } from 'express';
 import { AuthenticatedRequest, isAuthenticatedRequest } from '../../types/AuthenticatedRequest';
 
-export function signToken(userId: string | null) {
+export function signToken(userId: string | null): string {
     if (!userId) {
         throw 'No user id provided';
     }
@@ -27,7 +27,7 @@ export async function verifyToken(req: Request, res: Response, next: NextFunctio
             res.status(403).send({ error: 'Invalid token' });
             return;
         }
-        (req as AuthenticatedRequest).user = { id: (decodedToken as any).user.id };
+        (req as AuthenticatedRequest).user = { id: (decodedToken as JwtPayload).user.id };
         if (isAuthenticatedRequest(req)) {
             next();
         } else {

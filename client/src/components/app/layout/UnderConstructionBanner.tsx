@@ -1,5 +1,6 @@
 import React from 'react';
 import { Box } from '@chakra-ui/react';
+import { ColorWeight, useAccentColor } from '../../../theme/accentColor';
 
 const UnderConstructionBanner: React.FC = () => {
     return (
@@ -8,9 +9,13 @@ const UnderConstructionBanner: React.FC = () => {
             left={0}
             bottom={0}
             w="full"
-            bg="red.500"
+            bg={useAccentColor({
+                lightModeWeight: ColorWeight.W500,
+                darkModeWeight: ColorWeight.W400
+            })}
             color="white"
             textAlign="center"
+            fontWeight="bold"
             p={2}
             zIndex="banner"
         >

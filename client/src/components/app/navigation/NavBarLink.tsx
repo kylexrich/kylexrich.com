@@ -2,22 +2,28 @@ import React from 'react';
 import { NavLink as RouterNavLink } from 'react-router-dom';
 import { Box, HStack, Link, Stack } from '@chakra-ui/react';
 import { RouteItem } from '../../../config/routes';
-
-type NavBarLinkProps = {
+import { ColorWeight, useAccentColor } from '../../../theme/accentColor';
+export interface NavBarLinkProps {
     index?: string;
     name: string;
     path: string;
     onClose?: () => void;
-};
+}
 
 const NavBarLink: React.FC<NavBarLinkProps> = (props) => {
     return (
         <Link
             as={RouterNavLink}
-            onClick={() => {
-                if (props.onClose) {
-                    props.onClose();
-                }
+            px={2}
+            py={1}
+            rounded={'md'}
+            _hover={{
+                bg: useAccentColor({ lightModeWeight: ColorWeight.W100, darkModeWeight: ColorWeight.W900 }),
+                color: useAccentColor({ lightModeWeight: ColorWeight.W900, darkModeWeight: ColorWeight.W50 })
+            }}
+            _activeLink={{
+                bg: useAccentColor({ lightModeWeight: ColorWeight.W100, darkModeWeight: ColorWeight.W900 }),
+                color: useAccentColor({ lightModeWeight: ColorWeight.W900, darkModeWeight: ColorWeight.W50 })
             }}
             to={props.path}
         >

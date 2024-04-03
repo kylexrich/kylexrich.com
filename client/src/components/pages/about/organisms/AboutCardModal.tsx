@@ -8,21 +8,22 @@ import {
     ModalContent,
     ModalHeader,
     ModalOverlay,
-    Text
+    Text,
+    useColorModeValue
 } from '@chakra-ui/react';
-import AboutCardImage from '../atoms/AboutCardImage';
-import { IGenericAboutCardDetail } from '../../../../config/about/IGenericAboutDetail';
-import { ThemeProps } from './AboutCard';
+import AboutCardImage from './AboutCardImage';
+import { AboutCardDetail } from '../../../../config/about/AboutCardDetail';
+import { AboutCardThemeProps } from './AboutCard';
 import SkillTags from './SkillTags';
 
-type CardModalProps = IGenericAboutCardDetail &
-    ThemeProps & {
-        isOpen: boolean;
-        onClose: () => void;
-    };
+export interface CardModalProps extends AboutCardDetail, AboutCardThemeProps {
+    isOpen: boolean;
+    onClose: () => void;
+}
 
 const ModalContentComponent: React.FC<CardModalProps> = (props) => {
-    const paragraphs = props.longDescription?.split('\n');
+    const paragraphs = props.longDescriptionParagraphs;
+
     return (
         <ModalContent borderRadius={{ base: '0', md: '2xl' }} boxShadow="xl" m={{ base: 0, md: 4 }}>
             <ModalHeader fontSize={{ base: 'xl', md: '2xl' }} fontWeight="bold" borderBottomWidth="1px" pb={2}>
@@ -33,7 +34,7 @@ const ModalContentComponent: React.FC<CardModalProps> = (props) => {
                 <Flex direction="column" justifyContent="center" alignItems="center">
                     <Box boxShadow="lg" p={2} bg={props.textColor} borderRadius="full">
                         <AboutCardImage
-                            logoRef={props.logoRef}
+                            logoRef={useColorModeValue(props.imageRefs.light, props.imageRefs.dark)}
                             title={props.title}
                             size={{ height: { base: '24', md: '32' }, width: { base: '24', md: '32' } }}
                         />

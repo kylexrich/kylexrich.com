@@ -11,14 +11,15 @@ import { RootState } from '../../../redux/store';
 import { MotionBox } from '../../shared/MotionComponents';
 import { ME_CUT_REMOVE_BG } from '../../../assets/other';
 import { AccentPicker } from '../../../theme/AccentSwitcher';
-import { ColourWeight, useAccentColour } from '../../../theme/accentColour';
+import { ColorWeight, useAccentColor } from '../../../theme/accentColor';
 
 const NavBar: React.FC = () => {
     const { colors } = useTheme();
-    const avatarColor = useAccentColour();
-    const avatarBorderColor = useAccentColour({
-        lightModeWeight: ColourWeight.W800,
-        darkModeWeight: ColourWeight.W700
+
+    const avatarColor = useAccentColor();
+    const avatarBorderColor = useAccentColor({
+        lightModeWeight: ColorWeight.W800,
+        darkModeWeight: ColorWeight.W700
     });
     const { isOpen, onOpen, onClose } = useDisclosure();
     const userId = useSelector((state: RootState) => state.auth.userId);
@@ -27,14 +28,7 @@ const NavBar: React.FC = () => {
 
     return (
         <Box bg={useColorModeValue(colors.navBar.bg.light, colors.navBar.bg.dark)} px={4} boxShadow={'lg'}>
-            <Flex
-                h={16}
-                alignItems={'center'}
-                justifyContent={'space-between'}
-                w={['90%', '85%', '80%']}
-                maxW={800}
-                mx="auto"
-            >
+            <Flex h={16} alignItems={'center'} justifyContent={'space-between'} w={['90%', '85%', '80%']} maxW={800} mx="auto">
                 <IconButton
                     size={'md'}
                     icon={isOpen ? <AiOutlineClose /> : <GiHamburgerMenu />}
@@ -43,7 +37,7 @@ const NavBar: React.FC = () => {
                     onClick={isOpen ? onClose : onOpen}
                 />
                 <HStack spacing={8} alignItems={'center'}>
-                    <MotionBox whileHover={{ scale: 1.2 }} shadow="md" rounded="full">
+                    <MotionBox whileHover={{ scale: 1.5 }} shadow="md" rounded="full">
                         <Avatar
                             as={RouterNavLink}
                             size={'sm'}

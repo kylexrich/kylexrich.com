@@ -1,15 +1,17 @@
 import React from 'react';
-import ResumeSection from '../about/organisms/ResumeSection';
-import PageLayout from '../../app/layout/PageLayout';
+import ResumeSection from './ResumeSection';
+import { LayoutTransition } from '../../shared/MotionComponents';
 
-type SecretProps = {};
+export interface SecretProps {
+    // empty
+}
 
 const Secret: React.FC<SecretProps> = (props) => {
     return (
-        <PageLayout>
+        <LayoutTransition>
             <h1>Secret</h1>
             <ResumeSection />
-        </PageLayout>
+        </LayoutTransition>
     );
 };
 

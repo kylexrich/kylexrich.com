@@ -1,9 +1,10 @@
 import * as log4js from 'log4js';
 import colors from 'colors';
+import { LoggingEvent } from 'log4js';
 
 const env = process.env.NODE_ENV || 'development';
 
-const getFormattedTime = (date: Date) => {
+const getFormattedTime = (date: Date): string => {
     const hours = String(date.getHours()).padStart(2, '0');
     const minutes = String(date.getMinutes()).padStart(2, '0');
     const seconds = String(date.getSeconds()).padStart(2, '0');
@@ -12,7 +13,7 @@ const getFormattedTime = (date: Date) => {
 };
 
 log4js.addLayout('custom', function () {
-    return function (logEvent) {
+    return function (logEvent: LoggingEvent): string {
         const date = new Date(logEvent.startTime);
         const timestamp = getFormattedTime(new Date(date));
         const level = logEvent.level.levelStr;

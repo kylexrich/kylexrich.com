@@ -1,40 +1,35 @@
 // resumeSlice.ts
 
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import {
-    getErrorMessage,
-    getRequestBlobError,
-    handleLoading,
-    handlePending,
-    handleRejected
-} from './asyncThunkHelpers';
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { getRejectedValue, handleLoading, handleRejected } from './asyncThunkHelpers';
 import kylexrichApi from '../api/kylexrichAxios';
 import { RESET_ALL_ERRORS } from './globalActions';
-import { BaseState } from './interfaces/baseState';
+import { BaseState } from './interfaces/BaseState';
+import { AxiosResponse } from 'axios';
 
 // =================== Types ===================
-export type ResumeState = {
+export interface ResumeState extends BaseState {
     recentResumeBlobUrl: string | null;
-} & BaseState;
+}
 
 // =================== Async thunks ===================
-export const fetchLatestResume = createAsyncThunk<string>('resume/fetchLatestResume', async () => {
+export const fetchLatestResume = createAsyncThunk<string>('resume/fetchLatestResume', async (_, { rejectWithValue }) => {
     try {
-        const response = await kylexrichApi.get(`/resume/latest`, { responseType: 'blob' });
-        return URL.createObjectURL(response.data as Blob);
-    } catch (error) {
-        throw getErrorMessage(await getRequestBlobError(error));
+        const response: AxiosResponse<Blob> = await kylexrichApi.get<Blob>(`/resume/latest`, { responseType: 'blob' });
+        return URL.createObjectURL(response.data);
+    } catch (error: unknown) {
+        return rejectWithValue(getRejectedValue(error));
     }
 });
 
-export const uploadResume = createAsyncThunk<string, File>('resume/uploadResume', async (file: File) => {
+export const uploadResume = createAsyncThunk<string, File>('resume/uploadResume', async (file: File, { rejectWithValue }) => {
     const formData = new FormData();
     formData.append('resume', file);
     try {
-        const response = await kylexrichApi.post('/resume', formData, { responseType: 'blob' });
-        return URL.createObjectURL(response.data as Blob);
-    } catch (error) {
-        throw getErrorMessage(await getRequestBlobError(error));
+        const response: AxiosResponse<Blob> = await kylexrichApi.post<Blob>('/resume', formData, { responseType: 'blob' });
+        return URL.createObjectURL(response.data);
+    } catch (error: unknown) {
+        return rejectWithValue(getRejectedValue(error));
     }
 });
 
@@ -51,15 +46,15 @@ const resumeSlice = createSlice({
     initialState,
     reducers: {},
     extraReducers: (builder) => {
-        builder.addCase(uploadResume.pending, handlePending);
-        builder.addCase(uploadResume.rejected, handleRejected);
-        builder.addCase(uploadResume.fulfilled, (state, action) => {
+        builder.addCase(uploadResume.pending, (state: ResumeState) => handleLoading(state, true));
+        builder.addCase(uploadResume.rejected, (state: ResumeState, action: PayloadAction<unknown>) => handleRejected(state, action));
+        builder.addCase(uploadResume.fulfilled, (state: ResumeState, action: PayloadAction<string>) => {
             state.recentResumeBlobUrl = action.payload;
             handleLoading(state, false);
         });
-        builder.addCase(fetchLatestResume.pending, handlePending);
-        builder.addCase(fetchLatestResume.rejected, handleRejected);
-        builder.addCase(fetchLatestResume.fulfilled, (state, action) => {
+        builder.addCase(fetchLatestResume.pending, (state: ResumeState) => handleLoading(state, true));
+        builder.addCase(fetchLatestResume.rejected, (state: ResumeState, action: PayloadAction<unknown>) => handleRejected(state, action));
+        builder.addCase(fetchLatestResume.fulfilled, (state: ResumeState, action: PayloadAction<string>) => {
             state.recentResumeBlobUrl = action.payload;
             handleLoading(state, false);
         });

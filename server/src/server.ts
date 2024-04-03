@@ -77,9 +77,7 @@ class Server {
         connectToDB()
             .then(() => {
                 this.app.listen(this.port, () => {
-                    log.info(
-                        `[[${env}] Running on port ${this.port}! Server URL: ${this.host}, Frontend Origin: ${this.origin}`
-                    );
+                    log.info(`[[${env}] Running on port ${this.port}! Server URL: ${this.host}, Frontend Origin: ${this.origin}`);
                 });
             })
             .catch(() => {

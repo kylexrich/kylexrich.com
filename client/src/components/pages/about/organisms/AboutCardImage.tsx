@@ -1,13 +1,20 @@
 import React from 'react';
 import { Image } from '@chakra-ui/react';
 
-type SizeType = { base?: string; sm?: string; md?: string; lg?: string; xl?: string; [key: string]: any };
+export interface SizeType {
+    base?: string;
+    sm?: string;
+    md?: string;
+    lg?: string;
+    xl?: string;
+    [key: string]: any;
+}
 
-type AboutCardImageProps = {
+export interface AboutCardImageProps {
     logoRef: string;
     title: string;
     size?: { width: SizeType; height: SizeType };
-};
+}
 
 const AboutCardImage: React.FC<AboutCardImageProps> = ({ logoRef, title, size }) => {
     return (
