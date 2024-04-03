@@ -2,10 +2,10 @@ import { Icon, IconButton, IconButtonProps } from '@chakra-ui/react';
 import React, { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '../redux/store';
-import { changeAccentColour } from '../redux/uiSlice';
+import { changeAccentColor } from '../redux/uiSlice';
 import { theme } from './theme';
 import { css, Global } from '@emotion/react';
-import { buildAccentColourVariables, useAccentColour } from './accentColour';
+import { buildAccentColorVariables, useAccentColor } from './accentColor';
 
 export const AccentPickerIcon = ({ ...props }) => {
     return (
@@ -17,33 +17,25 @@ export const AccentPickerIcon = ({ ...props }) => {
 
 export const AccentPicker: React.FC<IconButtonProps> = ({ ...props }) => {
     const dispatch: AppDispatch = useDispatch();
-    const color = useAccentColour();
+    const color = useAccentColor();
 
     const updateAccent = useCallback(() => {
-        dispatch(changeAccentColour());
+        dispatch(changeAccentColor());
     }, [dispatch]);
 
-    return (
-        <IconButton
-            icon={<AccentPickerIcon color={color} />}
-            isRound={true}
-            onMouseDown={updateAccent}
-            color={color}
-            {...props}
-        />
-    );
+    return <IconButton icon={<AccentPickerIcon color={color} />} isRound={true} onMouseDown={updateAccent} color={color} {...props} />;
 };
 
 export const GlobalAccent: React.FC = () => {
-    const accentColour = useSelector((state: RootState) => state.ui.accentColour);
-    const accent = theme.colors[accentColour];
+    const accentColor = useSelector((state: RootState) => state.ui.accentColor);
+    const accent = theme.colors[accentColor];
 
     const styles = React.useMemo(
         () => css`
-          :root${buildAccentColourVariables(accent)}
+          :root${buildAccentColorVariables(accent)}
         }
         `,
-        [accentColour]
+        [accentColor]
     );
     return <Global styles={styles} />;
 };

@@ -1,42 +1,29 @@
-import { ErrorResponse, isErrorAction, isErrorResponse, isResponse } from './interfaces/errorModels';
-import { BaseState } from './interfaces/baseState';
+import { PayloadAction } from '@reduxjs/toolkit';
+import { BaseState } from './interfaces/BaseState';
+import { RejectedValue, isBackendErrorResponse, isRejectedPayloadAction } from './interfaces/BackendErrorResponse';
 
-export async function getRequestBlobError(error: unknown) {
-    if (isResponse(error) && error.response.data instanceof Blob) {
-        const errorText = await new Response(error.response.data).text();
-        const errorJson = JSON.parse(errorText);
-        console.log({ response: { data: errorJson } });
-        return { response: { data: errorJson } };
-    } else {
-        return error;
+export function getRejectedValue(error: unknown): RejectedValue {
+    let errorMessage = 'An unexpected error occurred';
+
+    if (isBackendErrorResponse(error)) {
+        errorMessage = error.response.data.errorMessage;
+    } else if (error instanceof Error) {
+        errorMessage = error.message;
     }
+
+    return { errorMessage };
 }
-
-export const throwRequestError = (error: ErrorResponse | unknown) => {
-    throw getErrorMessage(error);
-};
-
-export const getErrorMessage = (error: unknown): string => {
-    if (error instanceof Error && !(isErrorResponse(error) && error.response?.data?.error)) {
-        return error.message;
-    } else if (isErrorResponse(error) && error.response?.data?.error) {
-        return error.response.data.error;
-    }
-    return 'An unexpected error occurred';
-};
 
 export const handleLoading = (state: BaseState, loadingStatus: boolean) => {
     state.loading = loadingStatus;
     state.error = null;
 };
 
-export const handlePending = (state: BaseState) => {
-    handleLoading(state, true);
-};
-
-export const handleRejected = (state: BaseState, action: unknown) => {
-    if (isErrorAction(action)) {
-        state.error = action.error.message;
-        state.loading = false;
+export const handleRejected = (state: BaseState, action: PayloadAction<unknown>) => {
+    if (isRejectedPayloadAction(action)) {
+        state.error = action.payload.errorMessage;
+    } else {
+        state.error = 'An unknown error occurred';
     }
+    state.loading = false;
 };

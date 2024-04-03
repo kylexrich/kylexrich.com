@@ -12,7 +12,9 @@ import { me } from '../../../redux/authSlice';
 import UnderConstructionBanner from './UnderConstructionBanner';
 import { UNDER_CONSTRUCTION } from '../../../config/constants';
 
-type MainLayoutProps = {};
+export interface MainLayoutProps {
+    // empty
+}
 
 const AppLayout: React.FC<MainLayoutProps> = (props) => {
     const dispatch: AppDispatch = useDispatch();

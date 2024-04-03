@@ -3,7 +3,9 @@ import { useColorMode, useColorModeValue } from '@chakra-ui/react';
 import { AnimatePresence } from 'framer-motion';
 import { MotionBox } from '../components/shared/MotionComponents';
 
-type ColorModeSwitcherProps = {};
+export interface ColorModeSwitcherProps {
+    // empty
+}
 
 const ColorModeSwitcher: React.FC<ColorModeSwitcherProps> = () => {
     const { toggleColorMode } = useColorMode();

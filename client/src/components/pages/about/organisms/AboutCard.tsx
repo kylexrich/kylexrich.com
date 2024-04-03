@@ -1,41 +1,46 @@
 import React from 'react';
-import { Box, useDisclosure } from '@chakra-ui/react';
+import { Box, useColorModeValue, useDisclosure, useTheme } from '@chakra-ui/react';
 
 import AboutCardContent from './AboutCardContent';
-import AboutCardBox from '../atoms/AboutCardBox';
-import { IGenericAboutCardDetail } from '../../../../config/about/IGenericAboutDetail';
+import { AboutCardDetail } from '../../../../config/about/AboutCardDetail';
 import AboutCardModal from './AboutCardModal';
+import { useAccentColor } from '../../../../theme/accentColor';
 
-export type ThemeProps = {
+export interface AboutCardThemeProps {
     textColor: string;
     subTextColor: string;
     skillColor: string;
-};
+}
 
-type GenericAboutCardProps = IGenericAboutCardDetail & ThemeProps;
+export interface GenericAboutCardProps extends AboutCardDetail {
+    // empty
+}
 
 const AboutCard: React.FC<GenericAboutCardProps> = ({
-    hasModal,
-    logoRef,
+    imageRefs,
     title,
-    textColor,
     subtitle,
-    subTextColor,
-    shortDescription,
     type,
-    skillColor,
+    shortDescription,
+    longDescriptionParagraphs,
     dateText,
-    skills,
-    additionalContent,
-    longDescription
+    skills
 }) => {
+    const hasModal = longDescriptionParagraphs && longDescriptionParagraphs.length > 0;
+
     const { isOpen, onOpen, onClose } = useDisclosure();
+    const { colors } = useTheme();
+
+    let textColor = useColorModeValue(colors.about.aboutCard.textColor.light, colors.about.aboutCard.textColor.dark);
+    let subTextColor = useColorModeValue(colors.about.aboutCard.textColor.light, colors.about.aboutCard.textColor.dark);
+    let skillColor = useAccentColor();
+    let bg = useColorModeValue(colors.about.aboutCard.bg.light, colors.about.aboutCard.bg.dark);
 
     return (
         <Box onClick={hasModal ? onOpen : undefined} cursor={hasModal ? 'pointer' : 'default'}>
-            <AboutCardBox>
+            <Box px={4} py={5} borderWidth="1px" _hover={{ shadow: 'lg' }} bg={bg} position="relative" rounded="md">
                 <AboutCardContent
-                    logoRef={logoRef}
+                    imageRefs={imageRefs}
                     title={title}
                     textColor={textColor}
                     subtitle={subtitle}
@@ -45,18 +50,17 @@ const AboutCard: React.FC<GenericAboutCardProps> = ({
                     skillColor={skillColor}
                     dateText={dateText}
                     skills={skills}
-                    additionalContent={additionalContent}
                 />
-            </AboutCardBox>
+            </Box>
 
             {hasModal && (
                 <AboutCardModal
-                    logoRef={logoRef}
+                    imageRefs={imageRefs}
                     title={title}
                     textColor={textColor}
                     subtitle={subtitle}
                     subTextColor={subTextColor}
-                    longDescription={longDescription}
+                    longDescriptionParagraphs={longDescriptionParagraphs}
                     skills={skills}
                     skillColor={skillColor}
                     isOpen={isOpen}

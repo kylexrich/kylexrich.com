@@ -1,6 +1,12 @@
-import { extendTheme, ThemeConfig, theme as defaultTheme } from '@chakra-ui/react';
-import { ACCENT_THEME_DEF } from './accentColour';
-import ExtracurricularCard from '../components/pages/about/organisms/ExtracurricularCard';
+import { extendTheme, theme as defaultTheme, ThemeConfig } from '@chakra-ui/react';
+import { ACCENT_THEME_DEF, ColorWeight, useAccentColor } from './accentColor';
+
+/* eslint-disable react-hooks/rules-of-hooks */
+
+export interface ColorMode {
+    light: string;
+    dark: string;
+}
 
 const config: ThemeConfig = {
     initialColorMode: 'light',
@@ -25,48 +31,14 @@ export const theme = extendTheme({
                 bg: {
                     light: 'white',
                     dark: 'gray.800'
-                }
-            },
-            extracurricularCard: {
-                textColour: {
+                },
+                textColor: {
                     light: 'gray.700',
                     dark: 'gray.300'
                 },
-                subTextColour: {
+                subTextColor: {
                     light: 'gray.500',
                     dark: 'gray.400'
-                },
-                skillColour: {
-                    light: 'gray.200',
-                    dark: 'gray.700'
-                }
-            },
-            educationCard: {
-                textColour: {
-                    light: 'gray.700',
-                    dark: 'gray.300'
-                },
-                subTextColour: {
-                    light: 'gray.500',
-                    dark: 'gray.400'
-                },
-                skillColour: {
-                    light: 'gray.200',
-                    dark: 'gray.700'
-                }
-            },
-            careerCard: {
-                textColour: {
-                    light: 'gray.700',
-                    dark: 'gray.300'
-                },
-                subTextColour: {
-                    light: 'gray.500',
-                    dark: 'gray.400'
-                },
-                skillColour: {
-                    light: 'gray.200',
-                    dark: 'gray.700'
                 }
             }
         },
@@ -86,7 +58,7 @@ export const theme = extendTheme({
                 transitionTimingFunction: 'ease-out',
                 fontWeight: '500',
                 _hover: {
-                    color: props.colorMode === 'dark' ? 'blue.300' : 'blue.600'
+                    color: useAccentColor({ lightModeWeight: ColorWeight.W600, darkModeWeight: ColorWeight.W200 })
                 }
             },
             h1: {

@@ -2,11 +2,13 @@ import * as React from 'react';
 import { useEffect, useState } from 'react';
 import { SimpleGrid, Text, useColorModeValue, VStack } from '@chakra-ui/react';
 import { skills } from '../../../config/techstack/skills';
-import SkillCard from './molecules/SkillCard';
-import Container from './atoms/Container';
-import PageLayout from '../../app/layout/PageLayout';
+import TechCard from './organisms/TechCard';
+import Container from './organisms/Container';
+import { LayoutTransition } from '../../shared/MotionComponents';
 
-type TechStackProps = {};
+export interface TechStackProps {
+    // empty
+}
 
 const TechStack: React.FC<TechStackProps> = () => {
     const [skillsList, setSkillsList] = useState(skills);
@@ -16,19 +18,14 @@ const TechStack: React.FC<TechStackProps> = () => {
     }, []);
 
     return (
-        <PageLayout>
+        <LayoutTransition>
             <VStack spacing={8}>
                 <Container>
                     <VStack>
                         <Text mt={0} mb={1} fontSize="2xl" fontWeight="bold">
                             Tech Stack
                         </Text>
-                        <Text
-                            fontSize={'xl'}
-                            color={useColorModeValue('gray.500', 'gray.200')}
-                            maxW="lg"
-                            textAlign="center"
-                        >
+                        <Text fontSize={'xl'} color={useColorModeValue('gray.500', 'gray.200')} maxW="lg" textAlign="center">
                             A list of my favorite tools and technologies that I use on a regular basis.
                         </Text>
                     </VStack>
@@ -36,20 +33,20 @@ const TechStack: React.FC<TechStackProps> = () => {
                 <Container zIndex={5}>
                     <SimpleGrid columns={[1, 1, 2]} spacing={4} mt={8}>
                         {skillsList.map((skill, index) => (
-                            <SkillCard
+                            <TechCard
                                 key={index}
-                                name={skill.name}
+                                title={skill.title}
                                 description={skill.description}
-                                image={skill.image}
+                                imageRefs={skill.imageRefs}
                                 link={skill.link}
                                 categories={skill.categories}
-                                bg={skill.bg}
+                                bgColor={skill.bgColor}
                             />
                         ))}
                     </SimpleGrid>
                 </Container>
             </VStack>
-        </PageLayout>
+        </LayoutTransition>
     );
 };
 

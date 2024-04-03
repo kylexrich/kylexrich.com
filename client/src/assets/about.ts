@@ -1,4 +1,5 @@
 export const AMAZON_LOGO = '/assets/about/amazonlogo.png';
+export const AMAZON_LOGO_WHITE = '/assets/about/amazonlogowhite.png';
 export const BESTBUILDERS__LOGO = '/assets/about/bestbuilders_logo.png';
 export const BIZHACKS_LOGO = '/assets/about/bizhackslogo.png';
 export const CPA_LOGO = '/assets/about/cpalogo.jpeg';

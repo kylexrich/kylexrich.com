@@ -1,8 +1,8 @@
 import React, { useState, useCallback } from 'react';
-import { AppDispatch, RootState } from '../../../../redux/store';
+import { AppDispatch, RootState } from '../../../redux/store';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button, Box, Input, useToast } from '@chakra-ui/react';
-import { fetchLatestResume, uploadResume } from '../../../../redux/resumeSlice';
+import { fetchLatestResume, uploadResume } from '../../../redux/resumeSlice';
 
 const FileInput: React.FC<{ onFileChange: (file: File) => void }> = ({ onFileChange }) => {
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {

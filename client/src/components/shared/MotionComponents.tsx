@@ -1,6 +1,6 @@
-import React from 'react';
-import { Flex, Box, Text, Image, List, forwardRef } from '@chakra-ui/react';
-import { motion, isValidMotionProp } from 'framer-motion';
+import React, { ReactNode } from 'react';
+import { Box, Flex, forwardRef, Image, List, SlideFade, Text } from '@chakra-ui/react';
+import { isValidMotionProp, motion } from 'framer-motion';
 
 function createMotionComponent(Component: React.ElementType) {
     return motion(
@@ -16,3 +16,110 @@ export const MotionBox = createMotionComponent(Box);
 export const MotionText = createMotionComponent(Text);
 export const MotionList = createMotionComponent(List);
 export const MotionImage = createMotionComponent(Image);
+
+export interface ReactChildrenProps {
+    children: ReactNode;
+    [key: string]: any;
+}
+
+export const LayoutTransition: React.FC<ReactChildrenProps> = ({ children, ...props }) => {
+    return (
+        <MotionBox
+            variants={{
+                initial: {
+                    opacity: 0,
+                    translateY: -20
+                },
+                enter: {
+                    y: 0,
+                    opacity: 1,
+                    transition: {
+                        y: { stiffness: 1000, velocity: -100 }
+                    }
+                },
+                exit: {
+                    y: 50,
+                    opacity: 0,
+                    transition: {
+                        y: { stiffness: 1000 }
+                    }
+                }
+            }}
+            {...props}
+        >
+            {children}
+        </MotionBox>
+    );
+};
+
+export const LayoutSlideFade: React.FC<ReactChildrenProps> = ({ children, ...props }) => {
+    return (
+        <SlideFade in {...props}>
+            {children}{' '}
+        </SlideFade>
+    );
+};
+
+export const MotionContainer: React.FC<ReactChildrenProps> = ({ children, ...props }) => {
+    return (
+        <MotionBox
+            variants={{
+                hidden: { opacity: 1, scale: 0 },
+                visible: {
+                    opacity: 1,
+                    scale: 1,
+                    transition: {
+                        delayChildren: 0.3,
+                        staggerChildren: 0.2
+                    }
+                }
+            }}
+            {...props}
+        >
+            {children}
+        </MotionBox>
+    );
+};
+
+export const MotionItem: React.FC<ReactChildrenProps> = ({ children, ...props }) => {
+    return (
+        <MotionBox
+            variants={{
+                hidden: { y: 20, opacity: 0 },
+                visible: {
+                    y: 0,
+                    opacity: 1
+                }
+            }}
+            {...props}
+        >
+            {children}
+        </MotionBox>
+    );
+};
+
+export const StaggerChildren: React.FC<ReactChildrenProps> = ({ children, ...props }) => {
+    return (
+        <MotionBox
+            animate={{
+                opacity: 1,
+                translateY: 0
+            }}
+            variants={{
+                initial: {
+                    opacity: 0,
+                    translateY: -20
+                },
+                enter: {
+                    transition: { staggerChildren: 0.15, delayChildren: 0.4 }
+                },
+                exit: {
+                    transition: { staggerChildren: 0.05, staggerDirection: -1 }
+                }
+            }}
+            {...props}
+        >
+            {children}
+        </MotionBox>
+    );
+};

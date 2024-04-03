@@ -1,18 +1,18 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { RESET_ALL_ERRORS } from './globalActions';
-import { BaseState } from './interfaces/baseState';
-import { ACCENT_COLOURS, AccentColour } from '../theme/accentColour';
+import { BaseState } from './interfaces/BaseState';
+import { ACCENT_COLOURS, AccentColor } from '../theme/accentColor';
 
 // =================== Types ===================
-export type UIState = {
-    accentColour: AccentColour;
-} & BaseState;
+export interface UIState extends BaseState {
+    accentColor: AccentColor;
+}
 
 // =================== Initial state ===================
 const initialState: UIState = {
     loading: false,
     error: null,
-    accentColour: AccentColour.Blue
+    accentColor: AccentColor.Blue
 };
 
 // =================== Slice ===================
@@ -20,10 +20,10 @@ const uiSlice = createSlice({
     name: 'ui',
     initialState,
     reducers: {
-        changeAccentColour: (state) => {
-            const currentIndex = ACCENT_COLOURS.indexOf(state.accentColour);
+        changeAccentColor: (state) => {
+            const currentIndex = ACCENT_COLOURS.indexOf(state.accentColor);
             const nextIndex = (currentIndex + 1) % ACCENT_COLOURS.length;
-            state.accentColour = ACCENT_COLOURS[nextIndex];
+            state.accentColor = ACCENT_COLOURS[nextIndex];
         }
     },
     extraReducers: (builder) => {
@@ -36,6 +36,6 @@ const uiSlice = createSlice({
     }
 });
 
-export const { changeAccentColour } = uiSlice.actions;
+export const { changeAccentColor } = uiSlice.actions;
 
 export default uiSlice.reducer;

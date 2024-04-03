@@ -5,12 +5,12 @@ import Projects from '../components/pages/projects/Projects';
 import About from '../components/pages/about/About';
 import Secret from '../components/pages/private/Secret';
 
-export type RouteItem = {
+export interface RouteItem {
     name: string;
     path: string;
     component: React.ComponentType<any>;
     secure: boolean;
-};
+}
 
 export const homeRoute: RouteItem = { name: 'Home', path: '/', component: Home, secure: false };
 

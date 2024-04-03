@@ -1,52 +1,52 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import kylexrichApi from '../api/kylexrichAxios';
-import { handleLoading, handlePending, handleRejected, throwRequestError } from './asyncThunkHelpers';
+import { getRejectedValue, handleLoading, handleRejected } from './asyncThunkHelpers';
 import { RESET_ALL_ERRORS } from './globalActions';
-import { BaseState } from './interfaces/baseState';
+import { AxiosResponse } from 'axios';
+import { BaseState } from './interfaces/BaseState';
 
 // =================== Types ===================
-type LoginInfo = {
+export interface LoginInfo {
     email: string;
     password: string;
-};
+}
 
-type User = {
+export interface User {
     _id: string;
     email: string;
-    password: string;
     createdAt: Date;
     updatedAt: Date;
-};
+}
 
-type AuthState = {
+export interface AuthState extends BaseState {
     userId: string | null;
-} & BaseState;
+}
 
 // =================== Async thunks ===================
-export const login = createAsyncThunk<User, LoginInfo>('auth/login', async (payload: LoginInfo) => {
+export const login = createAsyncThunk<User, LoginInfo>('auth/login', async (payload: LoginInfo, { rejectWithValue }) => {
     try {
-        const response = await kylexrichApi.post('/auth/login', payload);
-        return response.data.user;
-    } catch (error) {
-        throwRequestError(error);
+        const response: AxiosResponse<User> = await kylexrichApi.post<User>('/auth/login', payload);
+        return response.data;
+    } catch (error: unknown) {
+        return rejectWithValue(getRejectedValue(error));
     }
 });
 
-export const logout = createAsyncThunk<string>('auth/logout', async () => {
+export const logout = createAsyncThunk<string, void>('auth/logout', async (_, { rejectWithValue }) => {
     try {
-        const response = await kylexrichApi.post('/auth/logout');
-        return response.data.user;
-    } catch (error) {
-        throwRequestError(error);
+        const response: AxiosResponse<string> = await kylexrichApi.post<string>('/auth/logout');
+        return response.data;
+    } catch (error: unknown) {
+        return rejectWithValue(getRejectedValue(error));
     }
 });
 
-export const me = createAsyncThunk<User>('auth/me', async () => {
+export const me = createAsyncThunk<User, void>('auth/me', async (_, { rejectWithValue }) => {
     try {
-        const response = await kylexrichApi.get('/auth/me');
-        return response.data.user;
-    } catch (error) {
-        throwRequestError(error);
+        const response: AxiosResponse<User> = await kylexrichApi.get<User>('/auth/me');
+        return response.data;
+    } catch (error: unknown) {
+        return rejectWithValue(getRejectedValue(error));
     }
 });
 
@@ -63,21 +63,21 @@ const authSlice = createSlice({
     initialState: initialState,
     reducers: {},
     extraReducers: (builder) => {
-        builder.addCase(login.pending, (state) => handlePending(state));
-        builder.addCase(login.rejected, (state, action) => handleRejected(state, action));
-        builder.addCase(login.fulfilled, (state, action) => {
+        builder.addCase(login.pending, (state: AuthState) => handleLoading(state, true));
+        builder.addCase(login.rejected, (state: AuthState, action: PayloadAction<unknown>) => handleRejected(state, action));
+        builder.addCase(login.fulfilled, (state: AuthState, action: PayloadAction<User>) => {
             state.userId = action.payload._id;
             handleLoading(state, false);
         });
-        builder.addCase(me.pending, (state) => handlePending(state));
-        builder.addCase(me.rejected, (state, action) => handleLoading(state, false));
-        builder.addCase(me.fulfilled, (state, action) => {
+        builder.addCase(me.pending, (state: AuthState) => handleLoading(state, true));
+        builder.addCase(me.rejected, (state: AuthState, action: PayloadAction<unknown>) => handleLoading(state, false));
+        builder.addCase(me.fulfilled, (state: AuthState, action: PayloadAction<User>) => {
             state.userId = action.payload._id;
             handleLoading(state, false);
         });
-        builder.addCase(logout.pending, (state) => handlePending(state));
-        builder.addCase(logout.rejected, (state, action) => handleRejected(state, action));
-        builder.addCase(logout.fulfilled, (state, action) => {
+        builder.addCase(logout.pending, (state: AuthState) => handleLoading(state, true));
+        builder.addCase(logout.rejected, (state: AuthState, action: PayloadAction<unknown>) => handleRejected(state, action));
+        builder.addCase(logout.fulfilled, (state: AuthState, action: PayloadAction<string>) => {
             state.userId = null;
             handleLoading(state, false);
         });

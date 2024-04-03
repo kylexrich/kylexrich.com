@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 import { log } from './log4jsConfig';
 
-async function connectToDB() {
+async function connectToDB(): Promise<void> {
     try {
         await mongoose.connect(String(process.env.DB_CONNECTION_STRING));
         log.info('Connected to the database');

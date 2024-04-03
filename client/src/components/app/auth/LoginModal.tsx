@@ -1,23 +1,14 @@
 import React, { useState } from 'react';
-import {
-    Modal,
-    ModalOverlay,
-    ModalContent,
-    ModalHeader,
-    ModalBody,
-    ModalCloseButton,
-    Stack,
-    Input,
-    Button
-} from '@chakra-ui/react';
+import { Button, Input, Modal, ModalBody, ModalCloseButton, ModalContent, ModalHeader, ModalOverlay, Stack } from '@chakra-ui/react';
 import { AppDispatch } from '../../../redux/store';
 import { useDispatch } from 'react-redux';
 import { login } from '../../../redux/authSlice';
+import { ColorWeight, useAccentColor } from '../../../theme/accentColor';
 
-type LoginModalProps = {
+export interface LoginModalProps {
     isOpen: boolean;
     onClose: () => void;
-};
+}
 
 const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose }) => {
     const dispatch: AppDispatch = useDispatch();
@@ -65,7 +56,27 @@ const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose }) => {
                             value={loginInfo.password}
                             onChange={handleInputChange}
                         />
-                        <Button onClick={handleLogin} colorScheme="blue">
+                        <Button
+                            onClick={handleLogin}
+                            color={useAccentColor({
+                                lightModeWeight: ColorWeight.W900,
+                                darkModeWeight: ColorWeight.W50
+                            })}
+                            bg={useAccentColor({
+                                lightModeWeight: ColorWeight.W100,
+                                darkModeWeight: ColorWeight.W700
+                            })}
+                            _hover={{
+                                color: useAccentColor({
+                                    lightModeWeight: ColorWeight.W900,
+                                    darkModeWeight: ColorWeight.W50
+                                }),
+                                bg: useAccentColor({
+                                    lightModeWeight: ColorWeight.W300,
+                                    darkModeWeight: ColorWeight.W900
+                                })
+                            }}
+                        >
                             Login
                         </Button>
                     </Stack>

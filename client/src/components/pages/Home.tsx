@@ -1,23 +1,24 @@
 import React from 'react';
 import { Avatar, Box, Flex, Text } from '@chakra-ui/react';
-import { MotionBox, MotionFlex } from '../shared/MotionComponents';
+import { LayoutTransition, MotionBox, MotionFlex } from '../shared/MotionComponents';
 import { ME_CUT_REMOVE_BG } from '../../assets/other';
 import UnderlinedEmojiHeader from '../shared/UnderlinedEmojiHeader';
-import PageLayout from '../app/layout/PageLayout';
-import { ColourWeight, useAccentColour } from '../../theme/accentColour';
+import { ColorWeight, useAccentColor } from '../../theme/accentColor';
 
-type HomeProps = {};
+export interface HomeProps {
+    // empty
+}
 
 const Home: React.FC<HomeProps> = () => {
     const ANIMATION_DURATION = 0.5;
-    const avatarColor = useAccentColour();
-    const avatarBorderColor = useAccentColour({
-        lightModeWeight: ColourWeight.W800,
-        darkModeWeight: ColourWeight.W700
+    const avatarColor = useAccentColor();
+    const avatarBorderColor = useAccentColor({
+        lightModeWeight: ColorWeight.W800,
+        darkModeWeight: ColorWeight.W700
     });
 
     return (
-        <PageLayout>
+        <LayoutTransition>
             <Flex direction="column" align="center">
                 <Flex direction={{ base: 'column', md: 'row' }}>
                     <MotionBox
@@ -77,8 +78,7 @@ const Home: React.FC<HomeProps> = () => {
                             <Text as="strong" fontWeight="600" display="inline">
                                 Kyle
                             </Text>{' '}
-                            and I&apos;m a full stack developer{' '}
-                            <Text as="span" whiteSpace="nowrap" display="inline"></Text>
+                            and I&apos;m a full stack developer <Text as="span" whiteSpace="nowrap" display="inline"></Text>
                             from{' '}
                             <Text as="span" whiteSpace="nowrap" display="inline">
                                 Canada 🇨🇦
@@ -90,7 +90,7 @@ const Home: React.FC<HomeProps> = () => {
                     </MotionFlex>
                 </Flex>
             </Flex>
-        </PageLayout>
+        </LayoutTransition>
     );
 };
 
