@@ -1,15 +1,15 @@
-// store.ts
-
 import { configureStore } from '@reduxjs/toolkit';
 import uiReducer from './uiSlice';
 import authReducer from './authSlice';
 import resumeReducer from './resumeSlice';
+import githubReducer from './githubSlice';
 
 const store = configureStore({
     reducer: {
         ui: uiReducer,
         auth: authReducer,
-        resume: resumeReducer
+        resume: resumeReducer,
+        github: githubReducer
     }
 });
 
