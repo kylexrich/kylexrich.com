@@ -1,6 +1,7 @@
 import React, { ReactNode } from 'react';
 import { Box, Flex, forwardRef, Image, List, SlideFade, Text } from '@chakra-ui/react';
 import { isValidMotionProp, motion } from 'framer-motion';
+import { PassThroughProps } from '../../util/types/PassThroughProps';
 
 function createMotionComponent(Component: React.ElementType) {
     return motion(
@@ -17,12 +18,7 @@ export const MotionText = createMotionComponent(Text);
 export const MotionList = createMotionComponent(List);
 export const MotionImage = createMotionComponent(Image);
 
-export interface ReactChildrenProps {
-    children: ReactNode;
-    [key: string]: any;
-}
-
-export const LayoutTransition: React.FC<ReactChildrenProps> = ({ children, ...props }) => {
+export const LayoutTransition: React.FC<PassThroughProps> = ({ children, ...props }) => {
     return (
         <MotionBox
             variants={{
@@ -52,15 +48,15 @@ export const LayoutTransition: React.FC<ReactChildrenProps> = ({ children, ...pr
     );
 };
 
-export const LayoutSlideFade: React.FC<ReactChildrenProps> = ({ children, ...props }) => {
+export const LayoutSlideFade: React.FC<PassThroughProps> = ({ children, ...props }) => {
     return (
         <SlideFade in {...props}>
-            {children}{' '}
+            {children}
         </SlideFade>
     );
 };
 
-export const MotionContainer: React.FC<ReactChildrenProps> = ({ children, ...props }) => {
+export const MotionContainer: React.FC<PassThroughProps> = ({ children, ...props }) => {
     return (
         <MotionBox
             variants={{
@@ -81,7 +77,7 @@ export const MotionContainer: React.FC<ReactChildrenProps> = ({ children, ...pro
     );
 };
 
-export const MotionItem: React.FC<ReactChildrenProps> = ({ children, ...props }) => {
+export const MotionItem: React.FC<PassThroughProps> = ({ children, ...props }) => {
     return (
         <MotionBox
             variants={{
@@ -98,7 +94,7 @@ export const MotionItem: React.FC<ReactChildrenProps> = ({ children, ...props })
     );
 };
 
-export const StaggerChildren: React.FC<ReactChildrenProps> = ({ children, ...props }) => {
+export const StaggerChildren: React.FC<PassThroughProps> = ({ children, ...props }) => {
     return (
         <MotionBox
             animate={{

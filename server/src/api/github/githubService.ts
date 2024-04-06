@@ -32,7 +32,7 @@ export async function getWebsiteGitHubPullRequests(): Promise<ServiceResponse<Gi
                     return {
                         name: label.name,
                         description: label.description,
-                        color: label.color
+                        color: '#' + label.color
                     };
                 })
             };
