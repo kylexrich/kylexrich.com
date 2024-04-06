@@ -8,7 +8,7 @@ const DottedBackground: React.FC<DottedBackgroundProps> = (props) => {
     const leftTransform = 'translateX(0%) translateY(52%)';
     // Using the variables directly, rather than using `useAccentColor(...)`. Using theme variables was not working.
     // (keeping old color here for easy reference) const color = 'rgba(55,65,81, 1)';
-    const color = useColorModeValue(`var(--colors-accent-700)`, `var(--colors-accent-900)`);
+    const color = useColorModeValue(`var(--colors-accent-600)`, `var(--colors-accent-800)`);
 
     const renderPattern = () => (
         <defs>
