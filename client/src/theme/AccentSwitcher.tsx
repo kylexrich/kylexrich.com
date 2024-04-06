@@ -6,6 +6,7 @@ import { changeAccentColor } from '../redux/uiSlice';
 import { theme } from './theme';
 import { css, Global } from '@emotion/react';
 import { buildAccentColorVariables, useAccentColor } from './accentColor';
+import useSound from 'use-sound';
 
 export const AccentPickerIcon = ({ ...props }) => {
     return (
@@ -19,11 +20,31 @@ export const AccentPicker: React.FC<IconButtonProps> = ({ ...props }) => {
     const dispatch: AppDispatch = useDispatch();
     const color = useAccentColor();
 
+    const [play] = useSound('assets/audios/switch.mp3', {
+        volume: 0.05,
+        sprite: {
+            on: [0, 20]
+        }
+    });
+
     const updateAccent = useCallback(() => {
         dispatch(changeAccentColor());
     }, [dispatch]);
 
-    return <IconButton icon={<AccentPickerIcon color={color} />} isRound={true} onMouseDown={updateAccent} color={color} {...props} />;
+    const handleClick = () => {
+        play({ id: 'on' });
+    };
+
+    return (
+        <IconButton
+            icon={<AccentPickerIcon color={color} />}
+            isRound={true}
+            onMouseDown={updateAccent}
+            onClick={handleClick}
+            color={color}
+            {...props}
+        />
+    );
 };
 
 export const GlobalAccent: React.FC = () => {
