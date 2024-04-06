@@ -4,7 +4,6 @@ import { UserExistsError } from '../../errors/UserExistsError';
 import { AuthenticationError } from '../../errors/AuthenticationError';
 import { ContentType } from '../../types/ContentType';
 import { UserDocument } from '../../models/User';
-import { log } from '../../config/log4jsConfig';
 
 export type UserData = Omit<UserDocument, 'password'>;
 
