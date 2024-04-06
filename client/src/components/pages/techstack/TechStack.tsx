@@ -5,6 +5,7 @@ import { skills } from '../../../config/techstack/skills';
 import TechCard from './organisms/TechCard';
 import Container from './organisms/Container';
 import { LayoutTransition } from '../../shared/MotionComponents';
+import UnderlinedHeader from '../../shared/UnderlinedHeader';
 
 export interface TechStackProps {
     // empty
@@ -22,9 +23,9 @@ const TechStack: React.FC<TechStackProps> = () => {
             <VStack spacing={8}>
                 <Container>
                     <VStack>
-                        <Text mt={0} mb={1} fontSize="2xl" fontWeight="bold">
+                        <UnderlinedHeader mt={0} mb={2}>
                             Tech Stack
-                        </Text>
+                        </UnderlinedHeader>
                         <Text fontSize={'xl'} color={useColorModeValue('gray.500', 'gray.200')} maxW="lg" textAlign="center">
                             A list of my favorite tools and technologies that I use on a regular basis.
                         </Text>

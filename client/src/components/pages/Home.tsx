@@ -2,7 +2,7 @@ import React from 'react';
 import { Avatar, Box, Flex, Text } from '@chakra-ui/react';
 import { LayoutTransition, MotionBox, MotionFlex } from '../shared/MotionComponents';
 import { ME_CUT_REMOVE_BG } from '../../assets/other';
-import UnderlinedEmojiHeader from '../shared/UnderlinedEmojiHeader';
+import UnderlinedHeader from '../shared/UnderlinedHeader';
 import { ColorWeight, useAccentColor } from '../../theme/accentColor';
 
 export interface HomeProps {
@@ -70,7 +70,7 @@ const Home: React.FC<HomeProps> = () => {
                     >
                         <Box position="relative">
                             <MotionBox whileHover={{ translateY: -5 }} width="max-content">
-                                <UnderlinedEmojiHeader text={'Hey!'} emoji={'👋'} />
+                                <UnderlinedHeader>{'Hey! 👋'}</UnderlinedHeader>
                             </MotionBox>
                         </Box>
                         <Box as="h2" fontSize="2xl" fontWeight="400" textAlign="left">

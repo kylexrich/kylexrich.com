@@ -10,9 +10,9 @@ export interface AboutProps {}
 const About: React.FC<AboutProps> = () => {
     return (
         <VStack spacing={8} align="start">
-            <AboutSection headerText="Career" emoji="🛠️" details={careerDetails} />
-            <AboutSection headerText="Education" emoji="🎓" details={educationDetails} />
-            <AboutSection headerText="Extracurriculars" emoji="🎭" details={extracurricularDetails} />
+            <AboutSection headerText="Career 🛠️" details={careerDetails} />
+            <AboutSection headerText="Education 🎓" details={educationDetails} />
+            <AboutSection headerText="Extracurriculars 🎭" details={extracurricularDetails} />
         </VStack>
     );
 };
