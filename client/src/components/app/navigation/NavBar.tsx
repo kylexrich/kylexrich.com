@@ -40,8 +40,8 @@ const NavBar: React.FC = () => {
                     <MotionBox whileHover={{ scale: 1.5 }} shadow="md" rounded="full">
                         <Avatar
                             as={RouterNavLink}
-                            size={'sm'}
                             bg={avatarColor}
+                            boxSize="38px"
                             showBorder={true}
                             borderColor={avatarBorderColor}
                             to={homeRoute.path}
