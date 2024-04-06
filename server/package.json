@@ -29,7 +29,8 @@
     "express-fileupload": "^1.4.0",
     "jsonwebtoken": "^9.0.2",
     "log4js": "^6.9.1",
-    "mongoose": "^7.4.2"
+    "mongoose": "^7.4.2",
+    "octokit": "^3.2.0"
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.0",

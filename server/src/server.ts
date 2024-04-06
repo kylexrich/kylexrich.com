@@ -9,6 +9,7 @@ import fileUpload from 'express-fileupload';
 import cookieParser from 'cookie-parser';
 import resumeRoutes from './api/resume/resumeRoutes';
 import authRoutes from './api/auth/authRoutes';
+import githubRoutes from './api/github/githubRoutes';
 
 const env = process.env.NODE_ENV;
 const port = process.env.PORT || 3001;
@@ -59,8 +60,9 @@ class Server {
     }
 
     private setupRoutes(): void {
-        this.app.use('/api/resume', resumeRoutes);
         this.app.use('/api/auth', authRoutes);
+        this.app.use('/api/resume', resumeRoutes);
+        this.app.use('/api/github', githubRoutes);
     }
 
     private serveBuild(): void {
