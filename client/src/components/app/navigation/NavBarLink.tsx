@@ -26,6 +26,7 @@ const NavBarLink: React.FC<NavBarLinkProps> = (props) => {
                 color: useAccentColor({ lightModeWeight: ColorWeight.W900, darkModeWeight: ColorWeight.W50 })
             }}
             to={props.path}
+            onClick={props.onClose}
         >
             {props.name}
         </Link>

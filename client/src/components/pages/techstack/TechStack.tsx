@@ -4,8 +4,8 @@ import { SimpleGrid, Text, useColorModeValue, VStack } from '@chakra-ui/react';
 import { skills } from '../../../config/techstack/skills';
 import TechCard from './organisms/TechCard';
 import Container from './organisms/Container';
-import { LayoutTransition } from '../../shared/MotionComponents';
 import UnderlinedHeader from '../../shared/UnderlinedHeader';
+import MainLayout from '../../app/layout/MainLayout';
 
 export interface TechStackProps {
     // empty
@@ -19,7 +19,7 @@ const TechStack: React.FC<TechStackProps> = () => {
     }, []);
 
     return (
-        <LayoutTransition>
+        <MainLayout>
             <VStack spacing={8}>
                 <Container>
                     <VStack>
@@ -32,7 +32,7 @@ const TechStack: React.FC<TechStackProps> = () => {
                     </VStack>
                 </Container>
                 <Container zIndex={5}>
-                    <SimpleGrid columns={[1, 1, 2]} spacing={4} mt={8}>
+                    <SimpleGrid columns={{ base: 1, md: 2 }} spacing={4} mt={8}>
                         {skillsList.map((skill, index) => (
                             <TechCard
                                 key={index}
@@ -42,12 +42,13 @@ const TechStack: React.FC<TechStackProps> = () => {
                                 link={skill.link}
                                 categories={skill.categories}
                                 bgColor={skill.bgColor}
+                                index={index}
                             />
                         ))}
                     </SimpleGrid>
                 </Container>
             </VStack>
-        </LayoutTransition>
+        </MainLayout>
     );
 };
 

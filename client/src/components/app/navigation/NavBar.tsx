@@ -51,7 +51,9 @@ const NavBar: React.FC = () => {
                     <DesktopNavLinks routes={filteredRoutes} />
                 </HStack>
                 <Flex alignItems={'center'}>
-                    <AccentPicker aria-label="Accent Color Picker" variant="ghost" zIndex={1} mr={2} />
+                    <MotionBox whileHover="hover">
+                        <AccentPicker aria-label="Accent Color Picker" variant="ghost" zIndex={1} mr={2} />
+                    </MotionBox>
                     <ColorModeSwitcher />
                 </Flex>
             </Flex>

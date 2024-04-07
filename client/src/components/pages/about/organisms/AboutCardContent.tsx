@@ -1,10 +1,12 @@
 import React from 'react';
-import { Flex, Stack, Text, Box, Tag, Heading, useColorModeValue } from '@chakra-ui/react';
+import { Flex, Stack, Text, Box, Tag, Heading, useColorModeValue, useBoolean } from '@chakra-ui/react';
 import AboutCardImage from './AboutCardImage';
 import { AboutCardDetail } from '../../../../config/about/AboutCardDetail';
 import { AboutCardThemeProps } from './AboutCard';
 
 import SkillTags from './SkillTags';
+import { useAccentColor } from '../../../../theme/accentColor';
+import { hover } from '@testing-library/user-event/dist/hover';
 
 const CardTag: React.FC<{ color: string; borderColor: string; text: string }> = ({ color, borderColor, text }) => (
     <Tag size="sm" borderRadius="md" px={2} py={1} bg="transparent" border="1px solid" borderColor={borderColor} color={color}>
@@ -19,17 +21,21 @@ const DateText: React.FC<{ dateText: string; subTextColor: string }> = ({ dateTe
 );
 
 export interface CardContentProps extends AboutCardDetail, AboutCardThemeProps {
+    hasModal: boolean;
+    isHovered: boolean;
     // empty
 }
 
 const AboutCardContent: React.FC<CardContentProps> = (props) => {
+    const titleColor = useAccentColor();
+
     return (
         <>
             <Flex justifyContent="space-between" alignItems="flex-start">
                 <Flex>
                     <AboutCardImage logoRef={useColorModeValue(props.imageRefs.light, props.imageRefs.dark)} title={props.title} />
                     <Stack spacing={2} pl={3} align="left">
-                        <Heading textAlign="left" fontSize="xl" color={props.textColor}>
+                        <Heading textAlign="left" fontSize="xl" color={props.isHovered && props.hasModal ? titleColor : props.textColor}>
                             {props.title}
                         </Heading>
                         {props.subtitle && (

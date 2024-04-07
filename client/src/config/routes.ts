@@ -1,5 +1,5 @@
 import React from 'react';
-import Home from '../components/pages/Home';
+import Home from '../components/pages/home/Home';
 import TechStack from '../components/pages/techstack/TechStack';
 import Changelog from '../components/pages/changelog/Changelog';
 import About from '../components/pages/about/About';

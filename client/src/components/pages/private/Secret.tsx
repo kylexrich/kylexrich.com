@@ -1,6 +1,6 @@
 import React from 'react';
 import ResumeSection from './ResumeSection';
-import { LayoutTransition } from '../../shared/MotionComponents';
+import MainLayout from '../../app/layout/MainLayout';
 
 export interface SecretProps {
     // empty
@@ -8,10 +8,10 @@ export interface SecretProps {
 
 const Secret: React.FC<SecretProps> = (props) => {
     return (
-        <LayoutTransition>
+        <MainLayout>
             <h1>Secret</h1>
             <ResumeSection />
-        </LayoutTransition>
+        </MainLayout>
     );
 };
 
