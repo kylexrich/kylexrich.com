@@ -8,7 +8,7 @@ const UnderConstructionBanner: React.FC = () => {
             position="fixed"
             left={0}
             bottom={0}
-            w="full"
+            w="100%"
             bg={useAccentColor({
                 lightModeWeight: ColorWeight.W500,
                 darkModeWeight: ColorWeight.W400

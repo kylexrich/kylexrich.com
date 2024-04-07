@@ -3,6 +3,7 @@ import { useColorMode, useColorModeValue } from '@chakra-ui/react';
 import { AnimatePresence } from 'framer-motion';
 import { MotionBox } from '../components/shared/MotionComponents';
 import useSound from 'use-sound';
+import { MotionDuration } from '../components/shared/variants';
 
 export interface ColorModeSwitcherProps {
     // empty
@@ -36,8 +37,9 @@ const ColorModeSwitcher: React.FC<ColorModeSwitcherProps> = () => {
                 key={iconKey}
                 initial={{ y: -20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
+                whileHover={{ scale: 1.2 }}
                 exit={{ y: 20, opacity: 0 }}
-                transition={{ duration: 0.2 }}
+                transition={{ duration: MotionDuration.SHORT }}
                 cursor="pointer"
                 fontSize={{ base: '2xl', sm: '3xl', md: '3xl' }}
             >

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, useColorModeValue, useDisclosure, useTheme } from '@chakra-ui/react';
+import { Box, useBoolean, useColorModeValue, useDisclosure, useTheme } from '@chakra-ui/react';
 
 import AboutCardContent from './AboutCardContent';
 import { AboutCardDetail } from '../../../../config/about/AboutCardDetail';
@@ -26,6 +26,7 @@ const AboutCard: React.FC<GenericAboutCardProps> = ({
     dateText,
     skills
 }) => {
+    const [isHovered, { toggle, on, off }] = useBoolean(false);
     const hasModal = longDescriptionParagraphs && longDescriptionParagraphs.length > 0;
 
     const { isOpen, onOpen, onClose } = useDisclosure();
@@ -38,7 +39,17 @@ const AboutCard: React.FC<GenericAboutCardProps> = ({
 
     return (
         <Box onClick={hasModal ? onOpen : undefined} cursor={hasModal ? 'pointer' : 'default'}>
-            <Box px={4} py={5} borderWidth="1px" _hover={{ shadow: 'lg' }} bg={bg} position="relative" rounded="md">
+            <Box
+                px={4}
+                py={5}
+                borderWidth="1px"
+                _hover={{ shadow: 'lg' }}
+                bg={bg}
+                position="relative"
+                rounded="md"
+                onMouseEnter={on}
+                onMouseLeave={off}
+            >
                 <AboutCardContent
                     imageRefs={imageRefs}
                     title={title}
@@ -50,6 +61,8 @@ const AboutCard: React.FC<GenericAboutCardProps> = ({
                     skillColor={skillColor}
                     dateText={dateText}
                     skills={skills}
+                    hasModal={hasModal ?? false}
+                    isHovered={isHovered}
                 />
             </Box>
 

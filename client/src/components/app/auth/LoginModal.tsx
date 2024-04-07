@@ -56,27 +56,7 @@ const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose }) => {
                             value={loginInfo.password}
                             onChange={handleInputChange}
                         />
-                        <Button
-                            onClick={handleLogin}
-                            color={useAccentColor({
-                                lightModeWeight: ColorWeight.W900,
-                                darkModeWeight: ColorWeight.W50
-                            })}
-                            bg={useAccentColor({
-                                lightModeWeight: ColorWeight.W100,
-                                darkModeWeight: ColorWeight.W700
-                            })}
-                            _hover={{
-                                color: useAccentColor({
-                                    lightModeWeight: ColorWeight.W900,
-                                    darkModeWeight: ColorWeight.W50
-                                }),
-                                bg: useAccentColor({
-                                    lightModeWeight: ColorWeight.W300,
-                                    darkModeWeight: ColorWeight.W900
-                                })
-                            }}
-                        >
+                        <Button variant="primaryButton" onClick={handleLogin}>
                             Login
                         </Button>
                     </Stack>

@@ -68,3 +68,15 @@ export function useAccentColor(accentColorModeSettings?: AccentColorModeSettings
     };
     return useColorModeValue(`accent.${lightModeWeight}`, `accent.${darkModeWeight}`);
 }
+
+export function useAccentMode(mode: string, accentColorModeSettings?: AccentColorModeSettings) {
+    const { lightModeWeight, darkModeWeight } = accentColorModeSettings ?? {
+        lightModeWeight: ColorWeight.W500,
+        darkModeWeight: ColorWeight.W400
+    };
+    return useMode(mode, { lightMode: `accent.${lightModeWeight}`, darkMode: `accent.${darkModeWeight}` });
+}
+
+export function useMode(mode: string, { lightMode, darkMode }: { lightMode: string; darkMode: string }) {
+    return mode === 'light' ? lightMode : darkMode;
+}

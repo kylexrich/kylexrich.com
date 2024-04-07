@@ -1,5 +1,5 @@
 import { extendTheme, theme as defaultTheme, ThemeConfig } from '@chakra-ui/react';
-import { ACCENT_THEME_DEF, ColorWeight, useAccentColor } from './accentColor';
+import { ACCENT_THEME_DEF, ColorWeight, useAccentMode, useMode } from './accentColor';
 
 /* eslint-disable react-hooks/rules-of-hooks */
 
@@ -45,20 +45,20 @@ export const theme = extendTheme({
         ...ACCENT_THEME_DEF
     },
     styles: {
-        global: (props: Record<string, any>) => ({
+        global: ({ colorMode }: Record<string, any>) => ({
             body: {
-                color: props.colorMode === 'dark' ? 'whiteAlpha.900' : 'gray.700',
-                bg: props.colorMode === 'dark' ? 'gray.900' : 'gray.50',
+                color: useMode(colorMode, { lightMode: 'gray.700', darkMode: 'whiteAlpha.900' }),
+                bg: useMode(colorMode, { lightMode: 'gray.50', darkMode: 'gray.900' }),
                 lineHeight: 'base',
                 fontSize: '1.2em'
             },
             a: {
-                color: props.colorMode === 'dark' ? 'blue.200' : 'blue.500',
+                color: useMode(colorMode, { lightMode: 'blue.500', darkMode: 'blue.200' }),
                 transition: 'color 0.15s',
                 transitionTimingFunction: 'ease-out',
                 fontWeight: '500',
                 _hover: {
-                    color: useAccentColor({ lightModeWeight: ColorWeight.W600, darkModeWeight: ColorWeight.W200 })
+                    color: useAccentMode(colorMode, { lightModeWeight: ColorWeight.W600, darkModeWeight: ColorWeight.W200 })
                 }
             },
             h1: {
@@ -73,34 +73,39 @@ export const theme = extendTheme({
     },
     components: {
         Link: {
-            baseStyle: {
+            baseStyle: ({ colorMode }: Record<string, any>) => ({
                 fontWeight: 'inherit',
                 _hover: {
                     textDecoration: 'none'
                 },
                 _focus: {
                     boxShadow: 'none'
-                },
-                variants: {
-                    text: {
-                        color: 'blue.400',
-                        transition: 'color 0.15s',
-                        transitionTimingFunction: 'ease-out',
-                        fontWeight: '500',
-                        _hover: {
-                            color: 'blue.300'
-                        }
-                    },
-                    gradient: {
-                        bgGradient: 'linear(to-br, blue.400,blue.300)',
-                        bgClip: 'text',
-                        fontWeight: '500',
-                        _hover: {
-                            bgGradient: 'linear(to-br, blue.500,blue.300)',
-                            bgClip: 'text'
-                        }
-                    }
                 }
+            })
+        },
+        Button: {
+            baseStyle: ({ colorMode }: Record<string, any>) => ({}),
+            variants: {
+                primaryButton: ({ colorMode }: Record<string, any>) => ({
+                    color: useAccentMode(colorMode, {
+                        lightModeWeight: ColorWeight.W900,
+                        darkModeWeight: ColorWeight.W50
+                    }),
+                    bg: useAccentMode(colorMode, {
+                        lightModeWeight: ColorWeight.W100,
+                        darkModeWeight: ColorWeight.W700
+                    }),
+                    _hover: {
+                        color: useAccentMode(colorMode, {
+                            lightModeWeight: ColorWeight.W900,
+                            darkModeWeight: ColorWeight.W50
+                        }),
+                        bg: useAccentMode(colorMode, {
+                            lightModeWeight: ColorWeight.W300,
+                            darkModeWeight: ColorWeight.W900
+                        })
+                    }
+                })
             }
         }
     }

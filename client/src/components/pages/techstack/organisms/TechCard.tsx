@@ -3,12 +3,36 @@ import { Box, HStack, Image, Link, Text, useColorModeValue, VStack } from '@chak
 import { SkillDetail } from '../../../../config/techstack/SkillDetail';
 import { MotionBox } from '../../../shared/MotionComponents';
 import { useAccentColor } from '../../../../theme/accentColor';
+import { MotionDuration } from '../../../shared/variants';
+
+const leftVariants = {
+    initial: { opacity: 0, x: 100 },
+    enter: (index: number) => ({
+        opacity: 1,
+        x: 0,
+        transition: {
+            delay: index * MotionDuration.BLIP
+        }
+    })
+};
+
+const rightVariants = {
+    initial: { opacity: 0, x: -100 },
+    enter: (index: number) => ({
+        opacity: 1,
+        x: 0,
+        transition: {
+            delay: index * MotionDuration.BLIP
+        }
+    })
+};
 
 export interface SkillCardProps extends SkillDetail {
+    index: number;
     // empty
 }
 
-const TechCard: React.FC<SkillCardProps> = ({ title, description, link, categories, imageRefs, bgColor }) => {
+const TechCard: React.FC<SkillCardProps> = ({ title, description, link, categories, imageRefs, bgColor, index }) => {
     const [isHovered, setIsHovered] = useState(false);
     const cardBackground = useColorModeValue('white', 'gray.800');
     const borderColor = useColorModeValue('gray.900', 'gray.700');
@@ -18,7 +42,14 @@ const TechCard: React.FC<SkillCardProps> = ({ title, description, link, categori
 
     return (
         <MotionBox>
-            <MotionBox whileHover={{ y: -5 }}>
+            <MotionBox
+                initial="initial"
+                animate="enter"
+                variants={index % 2 === 0 ? rightVariants : leftVariants}
+                custom={index}
+                key={index}
+                whileHover={{ scale: 1.05 }}
+            >
                 <Link href={link} isExternal>
                     <HStack
                         p={4}
@@ -43,7 +74,7 @@ const TechCard: React.FC<SkillCardProps> = ({ title, description, link, categori
                             rounded="lg"
                             p={2}
                             position="relative"
-                            overflow="hidden"
+                            overflow="initial"
                             lineHeight={0}
                             boxShadow="inset 0 0 1px 1px rgba(0, 0, 0, 0.015)"
                         >
