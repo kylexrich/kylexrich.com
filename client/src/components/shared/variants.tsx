@@ -18,4 +18,4 @@ export enum MotionDuration {
     SLUGGISH = 1
 }
 
-export const initialenter = { initial: 'initial', animate: 'enter' };
+export const initialEnter = { initial: 'initial', animate: 'enter' };

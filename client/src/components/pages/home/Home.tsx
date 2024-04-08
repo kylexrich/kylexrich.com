@@ -5,7 +5,7 @@ import { ME_CUT_REMOVE_BG } from '../../../assets/other';
 import UnderlinedHeader from '../../shared/UnderlinedHeader';
 import { ColorWeight, useAccentColor } from '../../../theme/accentColor';
 import MainLayout from '../../app/layout/MainLayout';
-import { initialenter, MotionDuration } from '../../shared/variants';
+import { initialEnter, MotionDuration } from '../../shared/variants';
 
 export interface HomeProps {
     // empty
@@ -40,7 +40,7 @@ const Home: React.FC<HomeProps> = () => {
                             }
                         }
                     }}
-                    {...initialenter}
+                    {...initialEnter}
                     whileHover={{ scale: 1.5 }}
                 >
                     <Avatar size={'2xl'} bg={avatarColor} showBorder={true} borderColor={avatarBorderColor} src={ME_CUT_REMOVE_BG} />
@@ -68,7 +68,7 @@ const Home: React.FC<HomeProps> = () => {
                             }
                         }
                     }}
-                    {...initialenter}
+                    {...initialEnter}
                 >
                     <Box position="relative">
                         <MotionBox whileHover={{ translateY: -5 }} width="max-content">

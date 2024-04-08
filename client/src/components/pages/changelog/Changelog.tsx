@@ -26,7 +26,7 @@ import moment from 'moment';
 import ReactMarkdown from 'react-markdown';
 import { AiFillCheckCircle } from 'react-icons/ai';
 import UnderlinedHeader from '../../shared/UnderlinedHeader';
-import { initialenter, MotionDuration } from '../../shared/variants';
+import { initialEnter, MotionDuration } from '../../shared/variants';
 import MainLayout from '../../app/layout/MainLayout';
 
 const parentVariants = {
@@ -94,7 +94,7 @@ const Changelog: React.FC<ChangelogProps> = () => {
 
     return (
         <MainLayout>
-            <MotionBox {...initialenter} variants={parentVariants}>
+            <MotionBox {...initialEnter} variants={parentVariants}>
                 <VStack align="start">
                     <UnderlinedHeader mt={0} mb={2}>
                         Changelog
