@@ -4,7 +4,7 @@ import { Box, useBoolean, useColorModeValue, useDisclosure, useTheme } from '@ch
 import AboutCardContent from './AboutCardContent';
 import { AboutCardDetail } from '../../../../config/about/AboutCardDetail';
 import AboutCardModal from './AboutCardModal';
-import { useAccentColor } from '../../../../theme/accentColor';
+import { ColorWeight, useAccentColor } from '../../../../theme/accentColor';
 
 export interface AboutCardThemeProps {
     textColor: string;
@@ -35,7 +35,10 @@ const AboutCard: React.FC<GenericAboutCardProps> = ({
     let textColor = useColorModeValue(colors.about.aboutCard.textColor.light, colors.about.aboutCard.textColor.dark);
     let subTextColor = useColorModeValue(colors.about.aboutCard.textColor.light, colors.about.aboutCard.textColor.dark);
     let skillColor = useAccentColor();
-    let bg = useColorModeValue(colors.about.aboutCard.bg.light, colors.about.aboutCard.bg.dark);
+
+    const modalHoverBg = useAccentColor({ lightModeWeight: ColorWeight.W50, darkModeWeight: ColorWeight.W900 });
+    const nonModalBg = useColorModeValue(colors.about.aboutCard.bg.light, colors.about.aboutCard.bg.dark)
+    const bg = hasModal && isHovered ? modalHoverBg : nonModalBg;
 
     return (
         <Box onClick={hasModal ? onOpen : undefined} cursor={hasModal ? 'pointer' : 'default'}>

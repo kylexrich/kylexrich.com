@@ -1,12 +1,11 @@
 import React from 'react';
-import { Flex, Stack, Text, Box, Tag, Heading, useColorModeValue, useBoolean } from '@chakra-ui/react';
+import { Box, Flex, Heading, Stack, Tag, Text, useColorModeValue } from '@chakra-ui/react';
 import AboutCardImage from './AboutCardImage';
 import { AboutCardDetail } from '../../../../config/about/AboutCardDetail';
 import { AboutCardThemeProps } from './AboutCard';
 
 import SkillTags from './SkillTags';
-import { useAccentColor } from '../../../../theme/accentColor';
-import { hover } from '@testing-library/user-event/dist/hover';
+import { ColorWeight, useAccentColor } from '../../../../theme/accentColor';
 
 const CardTag: React.FC<{ color: string; borderColor: string; text: string }> = ({ color, borderColor, text }) => (
     <Tag size="sm" borderRadius="md" px={2} py={1} bg="transparent" border="1px solid" borderColor={borderColor} color={color}>
