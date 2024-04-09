@@ -18,6 +18,7 @@ const NavBarLink: React.FC<NavBarLinkProps> = (props) => {
             py={1}
             rounded={'md'}
             whiteSpace="nowrap"
+            userSelect="none"
             _hover={{
                 bg: useAccentColor({ lightModeWeight: ColorWeight.W100, darkModeWeight: ColorWeight.W900 }),
                 color: useAccentColor({ lightModeWeight: ColorWeight.W900, darkModeWeight: ColorWeight.W50 })

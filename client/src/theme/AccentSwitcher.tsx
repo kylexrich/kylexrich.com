@@ -42,6 +42,7 @@ export const AccentPicker: React.FC<IconButtonProps> = ({ ...props }) => {
 
     return (
         <MotionIconButton
+            userSelect="none"
             isRound={true}
             onMouseDown={updateAccent}
             onClick={handleClick}
