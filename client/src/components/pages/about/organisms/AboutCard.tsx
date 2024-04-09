@@ -37,7 +37,7 @@ const AboutCard: React.FC<GenericAboutCardProps> = ({
     let skillColor = useAccentColor();
 
     const modalHoverBg = useAccentColor({ lightModeWeight: ColorWeight.W50, darkModeWeight: ColorWeight.W900 });
-    const nonModalBg = useColorModeValue(colors.about.aboutCard.bg.light, colors.about.aboutCard.bg.dark)
+    const nonModalBg = useColorModeValue(colors.about.aboutCard.bg.light, colors.about.aboutCard.bg.dark);
     const bg = hasModal && isHovered ? modalHoverBg : nonModalBg;
 
     return (

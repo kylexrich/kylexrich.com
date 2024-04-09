@@ -5,7 +5,7 @@ export const careerDetails: AboutCardDetail[] = [
         title: 'Amazon',
         subtitle: 'Software Development Engineer',
         shortDescription:
-            'Coding to ensure you receive your packages as quickly as humanly possible. If your package was late, you can blame me!',
+            'Coding to ensure you receive your packages as quickly as humanly possible. If your package was late, you can blame getUser!',
         skills: [
             'Java',
             'Mockito',

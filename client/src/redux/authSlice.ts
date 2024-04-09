@@ -23,7 +23,7 @@ export interface AuthState extends BaseState {
 }
 
 // =================== Async thunks ===================
-export const login = createAsyncThunk<User, LoginInfo>('auth/login', async (payload: LoginInfo, { rejectWithValue }) => {
+export const login = createAsyncThunk<User, LoginInfo>('auth/loginUser', async (payload: LoginInfo, { rejectWithValue }) => {
     try {
         const response: AxiosResponse<User> = await kylexrichApi.post<User>('/auth/login', payload);
         return response.data;
@@ -32,7 +32,7 @@ export const login = createAsyncThunk<User, LoginInfo>('auth/login', async (payl
     }
 });
 
-export const logout = createAsyncThunk<string, void>('auth/logout', async (_, { rejectWithValue }) => {
+export const logout = createAsyncThunk<string, void>('auth/logoutUser', async (_, { rejectWithValue }) => {
     try {
         const response: AxiosResponse<string> = await kylexrichApi.post<string>('/auth/logout');
         return response.data;
@@ -41,7 +41,7 @@ export const logout = createAsyncThunk<string, void>('auth/logout', async (_, { 
     }
 });
 
-export const me = createAsyncThunk<User, void>('auth/me', async (_, { rejectWithValue }) => {
+export const me = createAsyncThunk<User, void>('auth/getUser', async (_, { rejectWithValue }) => {
     try {
         const response: AxiosResponse<User> = await kylexrichApi.get<User>('/auth/me');
         return response.data;
