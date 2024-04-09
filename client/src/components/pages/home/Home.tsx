@@ -71,7 +71,7 @@ const Home: React.FC<HomeProps> = () => {
                     {...initialEnter}
                 >
                     <Box position="relative">
-                        <MotionBox whileHover={{ translateY: -5 }} width="max-content">
+                        <MotionBox width="max-content">
                             <UnderlinedHeader>{'Hey! 👋'}</UnderlinedHeader>
                         </MotionBox>
                     </Box>

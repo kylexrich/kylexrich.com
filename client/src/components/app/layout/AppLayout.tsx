@@ -31,10 +31,8 @@ const AppLayout: React.FC<MainLayoutProps> = (props) => {
         <BrowserRouter>
             <NavBar />
             <DottedBackground />
-            <Box textAlign="center" fontSize="xl" w={['90%', '85%', '80%']} maxW={800} mx="auto">
-                <Box pt={10} pb={10}>
-                    <Navigation />
-                </Box>
+            <Box textAlign="center" fontSize="xl" w={{ base: '90%', sm: '85%', md: '80%' }} py={10} maxW={800} mx="auto">
+                <Navigation />
             </Box>
             <Box w="full" pb={UNDER_CONSTRUCTION ? bannerPadding : '0'}>
                 <Footer />
