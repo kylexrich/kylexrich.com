@@ -45,11 +45,11 @@ const AboutCard: React.FC<GenericAboutCardProps> = ({
             <Box
                 px={4}
                 py={5}
-                borderWidth="1px"
+                borderWidth='1px'
                 _hover={{ shadow: 'lg' }}
                 bg={bg}
-                position="relative"
-                rounded="md"
+                position='relative'
+                rounded='md'
                 onMouseEnter={on}
                 onMouseLeave={off}
             >

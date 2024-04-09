@@ -46,9 +46,9 @@ const AboutSection: React.FC<AboutSectionProps> = ({ headerText, details }) => {
     const shownDetails = details.slice(0, showAll ? details.length : ABOUT_DISPLAY_MAX_ITEMS);
 
     return (
-        <MotionFlex flexDirection="column" alignItems="flex-start" width="100%" variants={parentVariants}>
+        <MotionFlex flexDirection='column' alignItems='flex-start' width='100%' variants={parentVariants}>
             <UnderlinedHeader variants={childVariants}>{headerText}</UnderlinedHeader>
-            <MotionVStack variants={parentVariants} spacing={4} marginBottom={6} align="left" mx={{ base: 0, md: 6 }} w={'100%'}>
+            <MotionVStack variants={parentVariants} spacing={4} marginBottom={6} align='left' mx={{ base: 0, md: 6 }} w={'100%'}>
                 <AnimatePresence>
                     {shownDetails.map((detail, index) => (
                         <MotionBox
@@ -64,9 +64,9 @@ const AboutSection: React.FC<AboutSectionProps> = ({ headerText, details }) => {
                 </AnimatePresence>
             </MotionVStack>
             {details.length > ABOUT_DISPLAY_MAX_ITEMS && (
-                <MotionFlex width="100%" justifyContent="center" variants={childVariants}>
+                <MotionFlex width='100%' justifyContent='center' variants={childVariants}>
                     <Button onClick={() => setShowAll(!showAll)}>
-                        {showAll ? <ChevronUpIcon boxSize="6" /> : <ChevronDownIcon boxSize="6" />}
+                        {showAll ? <ChevronUpIcon boxSize='6' /> : <ChevronDownIcon boxSize='6' />}
                     </Button>
                 </MotionFlex>
             )}

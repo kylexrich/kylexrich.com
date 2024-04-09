@@ -12,7 +12,7 @@ const Navigation: React.FC<NavigationProps> = () => {
     const location = useLocation();
 
     return (
-        <AnimatePresence mode="wait" initial={false} onExitComplete={() => window.scrollTo(0, 0)}>
+        <AnimatePresence mode='wait' initial={false} onExitComplete={() => window.scrollTo(0, 0)}>
             <Routes location={location} key={location.pathname}>
                 {routes.map((route, index) => {
                     if (route.secure) {

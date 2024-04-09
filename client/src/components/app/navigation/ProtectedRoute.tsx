@@ -10,7 +10,7 @@ export interface ProtectedRouteProps {
 const ProtectedRoute: React.FC<ProtectedRouteProps> = () => {
     const userId = useSelector((state: RootState) => state.auth.userId);
 
-    return userId ? <Outlet /> : <Navigate to="/" />;
+    return userId ? <Outlet /> : <Navigate to='/' />;
 };
 
 export default ProtectedRoute;

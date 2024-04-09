@@ -14,9 +14,9 @@ const AuthIcon: React.FC<AuthIconProps> = ({ userId, onLogout, onOpen }) => {
     return (
         <IconButton
             aria-label={loggedIn ? 'Login' : 'Logout'}
-            size="lg"
+            size='lg'
             icon={loggedIn ? <FaSignInAlt /> : <FaSignOutAlt />}
-            variant="ghost"
+            variant='ghost'
             isRound={true}
             onClick={loggedIn ? onOpen : onLogout}
         />

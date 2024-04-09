@@ -34,7 +34,7 @@ const NavBar: React.FC = () => {
                 justifyContent={'space-between'}
                 w={{ base: '90%', sm: '85%', md: '80%' }}
                 maxW={800}
-                mx="auto"
+                mx='auto'
             >
                 <IconButton
                     size={'md'}
@@ -44,11 +44,11 @@ const NavBar: React.FC = () => {
                     onClick={isOpen ? onClose : onOpen}
                 />
                 <HStack spacing={8} alignItems={'center'}>
-                    <MotionBox whileHover={{ scale: 1.5 }} shadow="md" rounded="full">
+                    <MotionBox whileHover={{ scale: 1.5 }} shadow='md' rounded='full'>
                         <Avatar
                             as={RouterNavLink}
                             bg={avatarColor}
-                            boxSize="38px"
+                            boxSize='38px'
                             showBorder={true}
                             borderColor={avatarBorderColor}
                             to={homeRoute.path}
@@ -58,8 +58,8 @@ const NavBar: React.FC = () => {
                     <DesktopNavLinks routes={filteredRoutes} />
                 </HStack>
                 <Flex alignItems={'center'}>
-                    <MotionBox whileHover="hover">
-                        <AccentPicker aria-label="Accent Color Picker" variant="ghost" zIndex={1} mr={2} />
+                    <MotionBox whileHover='hover'>
+                        <AccentPicker aria-label='Accent Color Picker' variant='ghost' zIndex={1} mr={2} />
                     </MotionBox>
                     <ColorModeSwitcher />
                 </Flex>

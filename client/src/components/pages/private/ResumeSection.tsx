@@ -11,7 +11,7 @@ const FileInput: React.FC<{ onFileChange: (file: File) => void }> = ({ onFileCha
         }
     };
 
-    return <Input type="file" accept=".pdf" onChange={handleChange} mb={4} />;
+    return <Input type='file' accept='.pdf' onChange={handleChange} mb={4} />;
 };
 
 const ResumeSection: React.FC = () => {
@@ -47,12 +47,12 @@ const ResumeSection: React.FC = () => {
     }, [dispatch, selectedFile, toast]);
 
     return (
-        <Box p={6} boxShadow="lg" borderRadius="md" bg="white">
+        <Box p={6} boxShadow='lg' borderRadius='md' bg='white'>
             <FileInput onFileChange={setSelectedFile} />
-            <Button colorScheme="blue" mr={4} onClick={handleUploadResume}>
+            <Button colorScheme='blue' mr={4} onClick={handleUploadResume}>
                 Upload Resume
             </Button>
-            <Button colorScheme="green" onClick={handleOpenMostRecentResume}>
+            <Button colorScheme='green' onClick={handleOpenMostRecentResume}>
                 Open Most Recent Resume
             </Button>
         </Box>

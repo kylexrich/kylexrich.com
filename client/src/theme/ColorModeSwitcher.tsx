@@ -31,9 +31,9 @@ const ColorModeSwitcher: React.FC<ColorModeSwitcherProps> = () => {
     };
 
     return (
-        <AnimatePresence mode="wait" initial={false}>
+        <AnimatePresence mode='wait' initial={false}>
             <MotionBox
-                userSelect="none"
+                userSelect='none'
                 onClick={handleClick}
                 key={iconKey}
                 initial={{ y: -20, opacity: 0 }}
@@ -41,7 +41,7 @@ const ColorModeSwitcher: React.FC<ColorModeSwitcherProps> = () => {
                 whileHover={{ scale: 1.2 }}
                 exit={{ y: 20, opacity: 0 }}
                 transition={{ duration: MotionDuration.SHORT }}
-                cursor="pointer"
+                cursor='pointer'
                 fontSize={{ base: '2xl', sm: '3xl', md: '3xl' }}
             >
                 {emoji}
