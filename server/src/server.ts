@@ -7,9 +7,7 @@ import * as log4js from 'log4js';
 import { httpLogger, log } from './config/log4jsConfig';
 import fileUpload from 'express-fileupload';
 import cookieParser from 'cookie-parser';
-import resumeRoutes from './api/resume/resumeRoutes';
-import authRoutes from './api/auth/authRoutes';
-import githubRoutes from './api/github/githubRoutes';
+import { DependencyInjector } from './DependencyInjector';
 
 const env = process.env.NODE_ENV;
 const port = process.env.PORT || 3001;
@@ -33,12 +31,14 @@ class Server {
     private readonly port: string | number;
     private readonly origin: string;
     private readonly host: string;
+    private readonly di: DependencyInjector;
 
     constructor() {
         this.app = express();
         this.port = port;
         this.host = host;
         this.origin = this.host.endsWith(String(this.port)) ? `http://localhost:${3000}` : this.host;
+        this.di = new DependencyInjector();
         this.setupExpress();
         this.setupRoutes();
         this.serveBuild();
@@ -46,7 +46,6 @@ class Server {
     }
 
     private setupExpress(): void {
-        log.debug(this.origin);
         const corsOptions = {
             origin: this.origin,
             credentials: true
@@ -60,9 +59,9 @@ class Server {
     }
 
     private setupRoutes(): void {
-        this.app.use('/api/auth', authRoutes);
-        this.app.use('/api/resume', resumeRoutes);
-        this.app.use('/api/github', githubRoutes);
+        this.app.use('/api/auth', this.di.getAuthRouterFactory().createAuthRouter());
+        this.app.use('/api/resume', this.di.getResumeRouterFactory().createResumeRouter());
+        this.app.use('/api/github', this.di.getGithubRouterFactory().createGithubRouter());
     }
 
     private serveBuild(): void {
