@@ -33,6 +33,7 @@ const ColorModeSwitcher: React.FC<ColorModeSwitcherProps> = () => {
     return (
         <AnimatePresence mode="wait" initial={false}>
             <MotionBox
+                userSelect="none"
                 onClick={handleClick}
                 key={iconKey}
                 initial={{ y: -20, opacity: 0 }}
