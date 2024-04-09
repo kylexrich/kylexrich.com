@@ -28,7 +28,14 @@ const NavBar: React.FC = () => {
 
     return (
         <Box bg={useColorModeValue(colors.navBar.bg.light, colors.navBar.bg.dark)} px={4} boxShadow={'lg'}>
-            <Flex h={16} alignItems={'center'} justifyContent={'space-between'} w={['90%', '85%', '80%']} maxW={800} mx="auto">
+            <Flex
+                h={16}
+                alignItems={'center'}
+                justifyContent={'space-between'}
+                w={{ base: '90%', sm: '85%', md: '80%' }}
+                maxW={800}
+                mx="auto"
+            >
                 <IconButton
                     size={'md'}
                     icon={isOpen ? <AiOutlineClose /> : <GiHamburgerMenu />}

@@ -97,7 +97,7 @@ const Changelog: React.FC<ChangelogProps> = () => {
             <MotionBox {...initialEnter} variants={parentVariants}>
                 <VStack align="start">
                     <UnderlinedHeader mt={0} mb={2}>
-                        Changelog
+                        Changelog 🖥️
                     </UnderlinedHeader>
                     <Text color={subHeaderColor} textAlign="left" mb={6}>
                         {"An overview of the changes I've made to my portfolio website."}

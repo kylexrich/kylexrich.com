@@ -19,7 +19,14 @@ const DottedBackground: React.FC<DottedBackgroundProps> = (props) => {
     );
 
     return (
-        <Box position="absolute" height="50rem" width="100%" overflow="initial" display={['none', 'none', 'block']} zIndex={-1}>
+        <Box
+            position="absolute"
+            height="50rem"
+            width="100%"
+            overflow="initial"
+            display={{ base: 'none', sm: 'none', md: 'block' }}
+            zIndex={-1}
+        >
             <Box position="relative" height="full" mx="auto" maxW="940px">
                 <Box position="absolute" left="100%">
                     <svg style={{ transform: rightTransform, color: color }} width="404" height="784" fill="none" viewBox="0 0 404 784">

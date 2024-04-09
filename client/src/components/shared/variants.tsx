@@ -1,11 +1,5 @@
 import React from 'react';
 
-export const VISIBLE = {
-    x: 0,
-    y: 0,
-    opacity: 1
-};
-
 export enum MotionDuration {
     INSTANT = 0.01,
     BLIP = 0.03,

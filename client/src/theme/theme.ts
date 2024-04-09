@@ -46,6 +46,10 @@ export const theme = extendTheme({
     },
     styles: {
         global: ({ colorMode }: Record<string, any>) => ({
+            html: {
+                maxWidth: '100vw',
+                overflowX: 'hidden'
+            },
             body: {
                 color: useMode(colorMode, { lightMode: 'gray.700', darkMode: 'whiteAlpha.900' }),
                 bg: useMode(colorMode, { lightMode: 'gray.50', darkMode: 'gray.900' }),

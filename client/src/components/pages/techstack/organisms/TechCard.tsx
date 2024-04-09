@@ -35,7 +35,7 @@ export interface SkillCardProps extends SkillDetail {
 const TechCard: React.FC<SkillCardProps> = ({ title, description, link, categories, imageRefs, bgColor, index }) => {
     const [isHovered, setIsHovered] = useState(false);
     const cardBackground = useColorModeValue('white', 'gray.800');
-    const borderColor = useColorModeValue('gray.900', 'gray.700');
+    const borderColor = useColorModeValue('gray.300', 'gray.700');
     const descriptionColor = useColorModeValue('gray.500', 'gray.200');
     const descriptionHoverColor = useColorModeValue('inherit', 'accent.500');
     const titleColor = useAccentColor();
@@ -55,8 +55,8 @@ const TechCard: React.FC<SkillCardProps> = ({ title, description, link, categori
                         p={4}
                         bg={cardBackground}
                         rounded="xl"
-                        borderWidth="0.5px"
                         borderColor={borderColor}
+                        borderWidth="0.5px"
                         w="100%"
                         textAlign="left"
                         align="start"

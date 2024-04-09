@@ -17,6 +17,7 @@ const NavBarLink: React.FC<NavBarLinkProps> = (props) => {
             px={2}
             py={1}
             rounded={'md'}
+            whiteSpace="nowrap"
             _hover={{
                 bg: useAccentColor({ lightModeWeight: ColorWeight.W100, darkModeWeight: ColorWeight.W900 }),
                 color: useAccentColor({ lightModeWeight: ColorWeight.W900, darkModeWeight: ColorWeight.W50 })
@@ -35,7 +36,7 @@ const NavBarLink: React.FC<NavBarLinkProps> = (props) => {
 
 export const DesktopNavLinks: React.FC<{ routes: RouteItem[] }> = ({ routes }) => {
     return (
-        <HStack as={'nav'} spacing={4} display={{ base: 'none', md: 'flex' }}>
+        <HStack as={'nav'} spacing={4} display={{ base: 'none', md: 'flex' }} mr={4}>
             {routes.map((route) => (
                 <NavBarLink key={route.path} name={route.name} path={route.path} />
             ))}
