@@ -12,6 +12,8 @@ import { GithubService } from './api/github/GithubService';
 import { GithubController } from './api/github/GithubController';
 import { GithubRouterFactory } from './api/github/GithubRouterFactory';
 import { ResponseHandler } from './util/ResponseHandler';
+import {CacheExpiration, LocalCache} from "./util/LocalCache";
+import {GithubPullRequest} from "./api/github/types/GithubPullRequest";
 
 export class DependencyInjector {
     private readonly responseHandler: ResponseHandler;
@@ -48,7 +50,8 @@ export class DependencyInjector {
         this.resumeController = new ResumeController(this.resumeService, this.responseHandler);
         this.resumeRouterFactory = new ResumeRouterFactory(this.resumeController, this.tokenService);
 
-        this.githubRepository = new GithubRepository();
+        const pullRequestCache = new LocalCache<GithubPullRequest[]>(CacheExpiration.DAILY);
+        this.githubRepository = new GithubRepository(pullRequestCache);
         this.githubService = new GithubService(this.githubRepository);
         this.githubController = new GithubController(this.githubService, this.responseHandler);
         this.githubRouterFactory = new GithubRouterFactory(this.githubController);
