@@ -47,7 +47,6 @@ export class AuthController {
             if (error instanceof AuthenticationError) {
                 this.responseHandler.sendErrorResponse(res, 401, error.message, error);
             } else {
-                log.info(this.authService);
                 this.responseHandler.sendErrorResponse(res, 500, 'Error logging in', error);
             }
         }
