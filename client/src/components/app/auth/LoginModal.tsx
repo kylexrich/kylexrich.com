@@ -43,20 +43,20 @@ const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose }) => {
                 <ModalBody>
                     <Stack spacing={3}>
                         <Input
-                            type="email"
-                            name="email"
-                            placeholder="Enter your email"
+                            type='email'
+                            name='email'
+                            placeholder='Enter your email'
                             value={loginInfo.email}
                             onChange={handleInputChange}
                         />
                         <Input
-                            type="password"
-                            name="password"
-                            placeholder="Enter your password"
+                            type='password'
+                            name='password'
+                            placeholder='Enter your password'
                             value={loginInfo.password}
                             onChange={handleInputChange}
                         />
-                        <Button variant="primaryButton" onClick={handleLogin}>
+                        <Button variant='primaryButton' onClick={handleLogin}>
                             Login
                         </Button>
                     </Stack>

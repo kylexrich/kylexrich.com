@@ -20,12 +20,12 @@ const Home: React.FC<HomeProps> = () => {
 
     return (
         <MainLayout>
-            <Flex direction={{ base: 'column', md: 'row' }} align="center">
+            <Flex direction={{ base: 'column', md: 'row' }} align='center'>
                 <MotionBox
-                    opacity="0"
-                    m="auto"
-                    rounded="full"
-                    shadow="lg"
+                    opacity='0'
+                    m='auto'
+                    rounded='full'
+                    shadow='lg'
                     mb={{ base: 16, md: 'auto' }}
                     variants={{
                         initial: {
@@ -47,14 +47,14 @@ const Home: React.FC<HomeProps> = () => {
                 </MotionBox>
 
                 <MotionFlex
-                    position="relative"
+                    position='relative'
                     m={{ base: 'auto', sm: 'initial' }}
                     ml={{ base: 'auto', md: 16 }}
                     w={{ base: '90%', sm: '85%', md: '80%' }}
-                    maxW="800px"
-                    opacity="0"
-                    justify="center"
-                    direction="column"
+                    maxW='800px'
+                    opacity='0'
+                    justify='center'
+                    direction='column'
                     variants={{
                         initial: {
                             opacity: 0,
@@ -70,23 +70,23 @@ const Home: React.FC<HomeProps> = () => {
                     }}
                     {...initialEnter}
                 >
-                    <Box position="relative">
-                        <MotionBox width="max-content">
+                    <Box position='relative'>
+                        <MotionBox width='max-content'>
                             <UnderlinedHeader>{'Hey! 👋'}</UnderlinedHeader>
                         </MotionBox>
                     </Box>
-                    <Box as="h2" fontSize="2xl" fontWeight="400" textAlign="left">
+                    <Box as='h2' fontSize='2xl' fontWeight='400' textAlign='left'>
                         My name is{' '}
-                        <Text as="strong" fontWeight="600" display="inline">
+                        <Text as='strong' fontWeight='600' display='inline'>
                             Kyle Rich
                         </Text>{' '}
-                        and I&apos;m a backend engineer <Text as="span" whiteSpace="nowrap" display="inline"></Text>
+                        and I&apos;m a backend engineer <Text as='span' whiteSpace='nowrap' display='inline'></Text>
                         from{' '}
-                        <Text as="span" whiteSpace="nowrap" display="inline">
+                        <Text as='span' whiteSpace='nowrap' display='inline'>
                             Canada 🇨🇦
                         </Text>
                     </Box>
-                    <Box as="h2" fontSize="2xl" fontWeight="400" mt={5} textAlign="left">
+                    <Box as='h2' fontSize='2xl' fontWeight='400' mt={5} textAlign='left'>
                         This is my digital portfolio and playground. Poke around if you&apos;re interested 😊
                     </Box>
                 </MotionFlex>

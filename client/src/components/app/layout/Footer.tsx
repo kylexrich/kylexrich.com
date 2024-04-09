@@ -25,36 +25,36 @@ const Footer: React.FC = () => {
                 isExternal
                 href={acc.url}
                 aria-label={acc.label}
-                size="lg"
+                size='lg'
                 colorScheme={acc.colorScheme}
                 icon={<acc.icon />}
-                variant="ghost"
+                variant='ghost'
                 isRound={true}
             />
         ));
 
     return (
         <Stack
-            as="footer"
+            as='footer'
             p={4}
-            justifyContent="space-between"
-            alignItems="center"
+            justifyContent='space-between'
+            alignItems='center'
             w={{ base: '100%', sm: '85%', md: '80%' }}
             spacing={{ base: 1, sm: 2 }}
             maxW={800}
-            mx="auto"
+            mx='auto'
         >
             <Flex
                 flexDirection={{ base: 'column', md: 'row' }}
                 flexFlow={{ base: 'column-reverse' }}
                 justifyContent={{ base: 'center', sm: 'space-between' }}
-                alignItems="center"
-                w="100%"
+                alignItems='center'
+                w='100%'
             >
-                <Text textAlign="center" fontSize="sm">
+                <Text textAlign='center' fontSize='sm'>
                     © {new Date().getFullYear()} {author.name}
                 </Text>
-                <Box textAlign="center">
+                <Box textAlign='center'>
                     {renderSocialMediaIcons()}
                     <AuthIcon userId={userId} onLogout={onLogout} onOpen={onOpen} />
                 </Box>

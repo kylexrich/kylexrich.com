@@ -23,10 +23,10 @@ export interface AboutProps {}
 const About: React.FC<AboutProps> = () => {
     return (
         <MainLayout>
-            <MotionVStack spacing={8} align="start" variants={parentVariants}>
-                <AboutSection headerText="Career 🛠️" details={careerDetails} />
-                <AboutSection headerText="Education 🎓" details={educationDetails} />
-                <AboutSection headerText="Extracurriculars 🎭" details={extracurricularDetails} />
+            <MotionVStack spacing={8} align='start' variants={parentVariants}>
+                <AboutSection headerText='Career 🛠️' details={careerDetails} />
+                <AboutSection headerText='Education 🎓' details={educationDetails} />
+                <AboutSection headerText='Extracurriculars 🎭' details={extracurricularDetails} />
             </MotionVStack>
         </MainLayout>
     );

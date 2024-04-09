@@ -25,14 +25,14 @@ const ModalContentComponent: React.FC<CardModalProps> = (props) => {
     const paragraphs = props.longDescriptionParagraphs;
 
     return (
-        <ModalContent borderRadius={{ base: '0', md: '2xl' }} boxShadow="xl" m={{ base: 0, md: 4 }}>
-            <ModalHeader fontSize={{ base: 'xl', md: '2xl' }} fontWeight="bold" borderBottomWidth="1px" pb={2}>
+        <ModalContent borderRadius={{ base: '0', md: '2xl' }} boxShadow='xl' m={{ base: 0, md: 4 }}>
+            <ModalHeader fontSize={{ base: 'xl', md: '2xl' }} fontWeight='bold' borderBottomWidth='1px' pb={2}>
                 {props.title}
             </ModalHeader>
             <ModalCloseButton size={{ base: 'xl', md: 'md' }} m={3} />
             <ModalBody p={{ base: 4, md: 6 }}>
-                <Flex direction="column" justifyContent="center" alignItems="center">
-                    <Box boxShadow="lg" p={2} bg={props.textColor} borderRadius="full">
+                <Flex direction='column' justifyContent='center' alignItems='center'>
+                    <Box boxShadow='lg' p={2} bg={props.textColor} borderRadius='full'>
                         <AboutCardImage
                             logoRef={useColorModeValue(props.imageRefs.light, props.imageRefs.dark)}
                             title={props.title}
@@ -57,17 +57,17 @@ const ModalContentComponent: React.FC<CardModalProps> = (props) => {
                                     ? 4 // For the last paragraph
                                     : 2 // For all middle paragraphs
                             }
-                            textAlign="left"
+                            textAlign='left'
                         >
                             {paragraph}
                         </Text>
                     ))}
-                    <Flex direction="column" w="100%" alignItems="flex-start">
-                        <Text fontWeight="bold" fontSize={{ base: 'lg', md: 'xl' }}>
+                    <Flex direction='column' w='100%' alignItems='flex-start'>
+                        <Text fontWeight='bold' fontSize={{ base: 'lg', md: 'xl' }}>
                             {props.title}
                         </Text>
                         {props.subtitle && (
-                            <Text fontSize={{ base: 'md', md: 'lg' }} color={props.subTextColor} fontStyle="italic">
+                            <Text fontSize={{ base: 'md', md: 'lg' }} color={props.subTextColor} fontStyle='italic'>
                                 {props.subtitle}
                             </Text>
                         )}

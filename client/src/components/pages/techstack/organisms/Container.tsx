@@ -7,8 +7,8 @@ export type ContainerProps = {
 
 export const Container: React.FC<ContainerProps> = ({ children, ...props }) => {
     return (
-        <Center as="section" {...props} w="100%">
-            <Box textAlign="center" fontSize="xl" w={['90%', '85%', '80%']} maxW={800} mx="auto">
+        <Center as='section' {...props} w='100%'>
+            <Box textAlign='center' fontSize='xl' w={['90%', '85%', '80%']} maxW={800} mx='auto'>
                 {children}
             </Box>
         </Center>

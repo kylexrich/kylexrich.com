@@ -42,7 +42,7 @@ export const AccentPicker: React.FC<IconButtonProps> = ({ ...props }) => {
 
     return (
         <MotionIconButton
-            userSelect="none"
+            userSelect='none'
             isRound={true}
             onMouseDown={updateAccent}
             onClick={handleClick}
@@ -51,8 +51,8 @@ export const AccentPicker: React.FC<IconButtonProps> = ({ ...props }) => {
             onHoverStart={handleMouseEnter}
             onHoverEnd={handleMouseLeave}
         >
-            <MotionIcon viewBox="0 0 200 200" boxSize="1.3em" color={color} animate={controls} initial={{ scale: 1 }}>
-                <path fill="currentColor" d="M 100, 100 m -75, 0 a 75,75 0 1,0 150,0 a 75,75 0 1,0 -150,0" />
+            <MotionIcon viewBox='0 0 200 200' boxSize='1.3em' color={color} animate={controls} initial={{ scale: 1 }}>
+                <path fill='currentColor' d='M 100, 100 m -75, 0 a 75,75 0 1,0 150,0 a 75,75 0 1,0 -150,0' />
             </MotionIcon>
         </MotionIconButton>
     );

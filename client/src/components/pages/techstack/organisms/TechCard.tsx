@@ -43,8 +43,8 @@ const TechCard: React.FC<SkillCardProps> = ({ title, description, link, categori
     return (
         <MotionBox>
             <MotionBox
-                initial="initial"
-                animate="enter"
+                initial='initial'
+                animate='enter'
                 variants={index % 2 === 0 ? rightVariants : leftVariants}
                 custom={index}
                 key={index}
@@ -54,12 +54,12 @@ const TechCard: React.FC<SkillCardProps> = ({ title, description, link, categori
                     <HStack
                         p={4}
                         bg={cardBackground}
-                        rounded="xl"
+                        rounded='xl'
                         borderColor={borderColor}
-                        borderWidth="0.5px"
-                        w="100%"
-                        textAlign="left"
-                        align="start"
+                        borderWidth='0.5px'
+                        w='100%'
+                        textAlign='left'
+                        align='start'
                         spacing={4}
                         _hover={{
                             shadow: 'md',
@@ -71,22 +71,22 @@ const TechCard: React.FC<SkillCardProps> = ({ title, description, link, categori
                     >
                         <Box
                             bgColor={bgColor}
-                            rounded="lg"
+                            rounded='lg'
                             p={2}
-                            position="relative"
-                            overflow="initial"
+                            position='relative'
+                            overflow='initial'
                             lineHeight={0}
-                            boxShadow="inset 0 0 1px 1px rgba(0, 0, 0, 0.015)"
+                            boxShadow='inset 0 0 1px 1px rgba(0, 0, 0, 0.015)'
                         >
-                            <Box position="absolute" top={0} bottom={0} left={0} right={0} opacity={0.25}></Box>
-                            <Image src={imageRefs} height={26} width={26} rounded="md" />
+                            <Box position='absolute' top={0} bottom={0} left={0} right={0} opacity={0.25}></Box>
+                            <Image src={imageRefs} height={26} width={26} rounded='md' />
                         </Box>
-                        <VStack align="start" justify="flex-start" spacing={1} maxW="lg" h="100%">
-                            <VStack spacing={0} align="start" flexGrow={1}>
-                                <Text fontWeight="bold" fontSize="md" noOfLines={2} color={titleColor}>
+                        <VStack align='start' justify='flex-start' spacing={1} maxW='lg' h='100%'>
+                            <VStack spacing={0} align='start' flexGrow={1}>
+                                <Text fontWeight='bold' fontSize='md' noOfLines={2} color={titleColor}>
                                     {title}
                                 </Text>
-                                <Text fontSize="sm" color={isHovered ? descriptionHoverColor : descriptionColor}>
+                                <Text fontSize='sm' color={isHovered ? descriptionHoverColor : descriptionColor}>
                                     {description}
                                 </Text>
                             </VStack>

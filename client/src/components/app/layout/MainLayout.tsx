@@ -14,9 +14,9 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children, ...motionOverrideProp
     };
     return (
         <motion.main
-            initial="initial"
-            animate="enter"
-            exit="exit"
+            initial='initial'
+            animate='enter'
+            exit='exit'
             variants={mainVariants}
             transition={{ type: 'linear' }}
             {...motionOverrideProps}
