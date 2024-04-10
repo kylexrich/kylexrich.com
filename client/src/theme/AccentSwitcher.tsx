@@ -1,11 +1,11 @@
-import { IconButtonProps } from '@chakra-ui/react';
+import { IconButtonProps, useColorModeValue } from '@chakra-ui/react';
 import React, { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '../redux/store';
 import { changeAccentColor } from '../redux/uiSlice';
 import { theme } from './theme';
 import { css, Global } from '@emotion/react';
-import { buildAccentColorVariables, useAccentColor } from './accentColor';
+import { AccentColor, buildAccentColorVariables, useAccentColor } from './accentColor';
 import useSound from 'use-sound';
 import { useAnimationControls } from 'framer-motion';
 import { MotionIcon, MotionIconButton } from '../components/shared/MotionComponents';
@@ -60,6 +60,8 @@ export const AccentPicker: React.FC<IconButtonProps> = ({ ...props }) => {
 
 export const GlobalAccent: React.FC = () => {
     const accentColor = useSelector((state: RootState) => state.ui.accentColor);
+    const colorMode = useColorModeValue('light', 'dark');
+    setFavicon(accentColor, colorMode);
     const accent = theme.colors[accentColor];
 
     const styles = React.useMemo(
@@ -70,4 +72,26 @@ export const GlobalAccent: React.FC = () => {
         [accentColor]
     );
     return <Global styles={styles} />;
+};
+
+export const setFavicon = (color: AccentColor, mode: 'light' | 'dark') => {
+    const faviconSizes = ['16x16', '32x32'];
+    const version = new Date().getTime(); // Generates a timestamp to append as a query string
+
+    faviconSizes.forEach((size) => {
+        const link = document.querySelector(`link[rel*='icon'][sizes='${size}']`) as HTMLLinkElement;
+        if (link) {
+            link.href = `/assets/favicon/${mode}/${color}/favicon-${size}.png?v=${version}`;
+        }
+    });
+
+    const appleLink = document.querySelector(`link[rel='apple-touch-icon']`) as HTMLLinkElement;
+    if (appleLink) {
+        appleLink.href = `/assets/favicon/${mode}/${color}/apple-touch-icon.png?v=${version}`;
+    }
+
+    const standardFavicon = document.querySelector("link[rel='icon'][type='image/x-icon']") as HTMLLinkElement;
+    if (standardFavicon) {
+        standardFavicon.href = `/assets/favicon/${mode}/${color}/favicon.ico?v=${version}`;
+    }
 };
