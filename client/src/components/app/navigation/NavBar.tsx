@@ -44,7 +44,7 @@ const NavBar: React.FC = () => {
                     onClick={isOpen ? onClose : onOpen}
                 />
                 <HStack spacing={8} alignItems={'center'}>
-                    <MotionBox whileHover={{ scale: 1.5 }} shadow='md' rounded='full'>
+                    <MotionBox whileHover={{ scale: 1.2 }} shadow='md' rounded='full'>
                         <Avatar
                             as={RouterNavLink}
                             bg={avatarColor}
