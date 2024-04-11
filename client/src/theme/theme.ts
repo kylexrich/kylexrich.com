@@ -9,8 +9,8 @@ export interface ColorMode {
 }
 
 const config: ThemeConfig = {
-    initialColorMode: 'light',
-    useSystemColorMode: false
+    initialColorMode: 'system',
+    useSystemColorMode: true
 };
 
 export const theme = extendTheme({
