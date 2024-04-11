@@ -4,6 +4,7 @@ import { ContentType } from '../../util/types/ContentType';
 import { GithubPullRequest, GithubPullRequestDTO } from './types/GithubPullRequest';
 import { GithubLabel } from './types/GitHubLabel';
 import { GithubRepository } from './GithubRepository';
+import { GithubRepo, GithubRepoDTO } from './types/GithubRepo';
 
 export class GithubService {
     private readonly githubRepo: GithubRepository;
@@ -42,6 +43,42 @@ export class GithubService {
 
         return {
             data: mergedAndOpenPullRequests,
+            contentType: ContentType.JSON
+        };
+    }
+
+    public async getKylexrichGithubRepositories(): Promise<ServiceResponse<GithubRepoDTO[]>> {
+        const githubRepos: GithubRepo[] = await this.githubRepo.getKyleRichWebsiteGithubRepositories();
+
+        if (githubRepos.length === 0) {
+            throw new NotFoundError('No repositories found');
+        }
+
+        const repositoriesDTO: GithubRepoDTO[] = githubRepos.map((repo: GithubRepo) => {
+            return {
+                name: repo.name,
+                full_name: repo.full_name,
+                html_url: repo.html_url,
+                description: repo.description,
+                fork: repo.fork,
+                url: repo.url,
+                created_at: repo.created_at,
+                updated_at: repo.updated_at,
+                pushed_at: repo.pushed_at,
+                git_url: repo.git_url,
+                ssh_url: repo.ssh_url,
+                clone_url: repo.clone_url,
+                svn_url: repo.svn_url,
+                stargazers_count: repo.stargazers_count,
+                watchers_count: repo.watchers_count,
+                language: repo.language,
+                forks_count: repo.forks_count,
+                open_issues_count: repo.open_issues_count
+            };
+        });
+
+        return {
+            data: repositoriesDTO,
             contentType: ContentType.JSON
         };
     }

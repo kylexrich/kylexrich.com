@@ -102,3 +102,24 @@ export interface GithubRepo {
     open_issues: number;
     watchers: number;
 }
+
+export interface GithubRepoDTO {
+    name: string;
+    full_name: string;
+    html_url: string;
+    description: string | null;
+    fork: boolean;
+    url: string;
+    created_at: string;
+    updated_at: string;
+    pushed_at: string;
+    git_url: string;
+    ssh_url: string;
+    clone_url: string;
+    svn_url: string;
+    stargazers_count: number;
+    watchers_count: number;
+    language: string;
+    forks_count: number;
+    open_issues_count: number;
+}

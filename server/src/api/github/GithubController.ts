@@ -4,6 +4,7 @@ import { ServiceResponse } from '../../util/types/ServiceResponse';
 import { NotFoundError } from '../../errors/NotFoundError';
 import { GithubPullRequestDTO } from './types/GithubPullRequest';
 import { ResponseHandler } from '../../util/helper/ResponseHandler';
+import { GithubRepoDTO } from './types/GithubRepo';
 
 export class GithubController {
     private readonly githubService: GithubService;
@@ -25,6 +26,20 @@ export class GithubController {
                 this.responseHandler.sendErrorResponse(res, 404, error.message, error);
             } else {
                 this.responseHandler.sendErrorResponse(res, 500, 'Error fetching pull requests', error);
+            }
+        }
+    }
+
+    public async getKylexrichGithubRepositories(req: Request, res: Response): Promise<void> {
+        try {
+            const result: ServiceResponse<GithubRepoDTO[]> = await this.githubService.getKylexrichGithubRepositories();
+
+            this.responseHandler.sendSuccessResponse(res, 200, result);
+        } catch (error) {
+            if (error instanceof NotFoundError) {
+                this.responseHandler.sendErrorResponse(res, 404, error.message, error);
+            } else {
+                this.responseHandler.sendErrorResponse(res, 500, 'Error fetching repositories', error);
             }
         }
     }
