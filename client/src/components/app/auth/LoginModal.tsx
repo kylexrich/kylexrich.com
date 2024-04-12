@@ -3,7 +3,6 @@ import { Button, Input, Modal, ModalBody, ModalCloseButton, ModalContent, ModalH
 import { AppDispatch } from '../../../redux/store';
 import { useDispatch } from 'react-redux';
 import { login } from '../../../redux/authSlice';
-import { ColorWeight, useAccentColor } from '../../../theme/accentColor';
 
 export interface LoginModalProps {
     isOpen: boolean;
