@@ -9,7 +9,7 @@ switch (ENV) {
         HOST_URL = 'https://kylexrich-staging-d5a9dbd6a715.herokuapp.com';
         break;
     case 'production':
-        HOST_URL = 'https://kylexrich-402391673bb6.herokuapp.com';
+        HOST_URL = 'https://kylerich.com';
         break;
     default:
         HOST_URL = `http://localhost:${PORT}`;
