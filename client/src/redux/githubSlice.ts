@@ -23,8 +23,23 @@ export interface GithubPullRequest {
 
 export type GithubPullRequestMap = { [key: string]: GithubPullRequest[] };
 
+export interface GithubRepo {
+    name: string;
+    full_name: string;
+    html_url: string;
+    description: string;
+    fork: boolean;
+    url: string;
+    stargazers_count: number;
+    watchers_count: number;
+    language: string;
+    forks_count: number;
+    open_issues_count: number;
+}
+
 export interface GithubState extends BaseState {
     pullRequests: GithubPullRequestMap;
+    repositories: GithubRepo[];
 }
 
 // =================== Async thunks ===================
@@ -42,11 +57,24 @@ export const getPullRequests = createAsyncThunk<GithubPullRequestMap, string>(
     }
 );
 
+export const getGithubRepositories = createAsyncThunk<GithubRepo[], void>(
+    'github/getGithubRepositories',
+    async (_, { rejectWithValue }) => {
+        try {
+            const response: AxiosResponse<GithubRepo[]> = await kylexrichApi.get<GithubRepo[]>('/github/repositories');
+            return response.data;
+        } catch (error: unknown) {
+            return rejectWithValue(getRejectedValue(error));
+        }
+    }
+);
+
 // =================== Initial state ===================
 const initialState: GithubState = {
     loading: false,
     error: null,
-    pullRequests: {}
+    pullRequests: {},
+    repositories: []
 };
 
 // =================== Slice ===================
@@ -61,6 +89,14 @@ const githubSlice = createSlice({
         builder.addCase(getPullRequests.rejected, (state: GithubState, action: PayloadAction<unknown>) => handleRejected(state, action));
         builder.addCase(getPullRequests.fulfilled, (state: GithubState, action: PayloadAction<GithubPullRequestMap>) => {
             state.pullRequests = { ...state.pullRequests, ...action.payload };
+            handleLoading(state, false);
+        });
+        builder.addCase(getGithubRepositories.pending, (state: GithubState) => handleLoading(state, true));
+        builder.addCase(getGithubRepositories.rejected, (state: GithubState, action: PayloadAction<unknown>) =>
+            handleRejected(state, action)
+        );
+        builder.addCase(getGithubRepositories.fulfilled, (state: GithubState, action: PayloadAction<GithubRepo[]>) => {
+            state.repositories = action.payload;
             handleLoading(state, false);
         });
         builder.addMatcher(
