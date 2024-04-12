@@ -21,17 +21,21 @@ export interface GithubPullRequest {
     labels: GithubLabel[];
 }
 
+export type GithubPullRequestMap = { [key: string]: GithubPullRequest[] };
+
 export interface GithubState extends BaseState {
-    websitePullRequests: GithubPullRequest[];
+    pullRequests: GithubPullRequestMap;
 }
 
 // =================== Async thunks ===================
-export const getWebsitePullRequests = createAsyncThunk<GithubPullRequest[], void>(
-    'github/getWebsitePullRequests',
-    async (_, { rejectWithValue }) => {
+export const getPullRequests = createAsyncThunk<GithubPullRequestMap, string>(
+    'github/getPullRequests',
+    async (repositoryName, { rejectWithValue }) => {
         try {
-            const response: AxiosResponse<GithubPullRequest[]> = await kylexrichApi.get<GithubPullRequest[]>('/github/pull-requests');
-            return response.data;
+            const response: AxiosResponse<GithubPullRequest[]> = await kylexrichApi.get<GithubPullRequest[]>(
+                `/github/${repositoryName}/pull-requests`
+            );
+            return { [repositoryName]: response.data };
         } catch (error: unknown) {
             return rejectWithValue(getRejectedValue(error));
         }
@@ -42,21 +46,21 @@ export const getWebsitePullRequests = createAsyncThunk<GithubPullRequest[], void
 const initialState: GithubState = {
     loading: false,
     error: null,
-    websitePullRequests: []
+    pullRequests: {}
 };
 
 // =================== Slice ===================
+export const KYLEXRICH_DOT_COM = 'kylexrich.com';
+
 const githubSlice = createSlice({
     name: 'github',
     initialState: initialState,
     reducers: {},
     extraReducers: (builder) => {
-        builder.addCase(getWebsitePullRequests.pending, (state: GithubState) => handleLoading(state, true));
-        builder.addCase(getWebsitePullRequests.rejected, (state: GithubState, action: PayloadAction<unknown>) =>
-            handleRejected(state, action)
-        );
-        builder.addCase(getWebsitePullRequests.fulfilled, (state: GithubState, action: PayloadAction<GithubPullRequest[]>) => {
-            state.websitePullRequests = action.payload;
+        builder.addCase(getPullRequests.pending, (state: GithubState) => handleLoading(state, true));
+        builder.addCase(getPullRequests.rejected, (state: GithubState, action: PayloadAction<unknown>) => handleRejected(state, action));
+        builder.addCase(getPullRequests.fulfilled, (state: GithubState, action: PayloadAction<GithubPullRequestMap>) => {
+            state.pullRequests = { ...state.pullRequests, ...action.payload };
             handleLoading(state, false);
         });
         builder.addMatcher(

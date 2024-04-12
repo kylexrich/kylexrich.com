@@ -6,7 +6,6 @@ import { MotionBox, MotionFlex, MotionVStack } from '../../../shared/MotionCompo
 import { AboutCardDetail } from '../../../../config/about/AboutCardDetail';
 import AboutCard from './AboutCard';
 import { PassThroughProps } from '../../../../util/types/PassThroughProps';
-import { AnimatePresence } from 'framer-motion';
 import { MotionDuration } from '../../../shared/variants';
 
 export const ABOUT_DISPLAY_MAX_ITEMS = 3;
@@ -46,31 +45,29 @@ const AboutSection: React.FC<AboutSectionProps> = ({ headerText, details }) => {
     const shownDetails = details.slice(0, showAll ? details.length : ABOUT_DISPLAY_MAX_ITEMS);
 
     return (
-        <MotionFlex flexDirection='column' alignItems='flex-start' width='100%' variants={parentVariants}>
-            <UnderlinedHeader variants={childVariants}>{headerText}</UnderlinedHeader>
-            <MotionVStack variants={parentVariants} spacing={4} marginBottom={6} align='left' mx={{ base: 0, md: 6 }} w={'100%'}>
-                <AnimatePresence>
-                    {shownDetails.map((detail, index) => (
-                        <MotionBox
-                            key={index}
-                            animate={manualHover(firstDetailsHover, index)}
-                            onMouseEnter={() => setFirstDetailsHover(index)}
-                            onMouseLeave={() => setFirstDetailsHover(null)}
-                            variants={childVariants}
-                        >
-                            <AboutCard {...detail} />
-                        </MotionBox>
-                    ))}
-                </AnimatePresence>
+        <MotionVStack align='left' width='100%' variants={parentVariants}>
+            <UnderlinedHeader variants={childVariants} header={headerText} />
+            <MotionVStack align='left' width='100%' spacing={4} mb={6} mx={{ base: 0, md: 6 }} variants={parentVariants}>
+                {shownDetails.map((detail, index) => (
+                    <MotionBox
+                        key={index}
+                        animate={manualHover(firstDetailsHover, index)}
+                        onMouseEnter={() => setFirstDetailsHover(index)}
+                        onMouseLeave={() => setFirstDetailsHover(null)}
+                        variants={childVariants}
+                    >
+                        <AboutCard {...detail} />
+                    </MotionBox>
+                ))}
             </MotionVStack>
             {details.length > ABOUT_DISPLAY_MAX_ITEMS && (
-                <MotionFlex width='100%' justifyContent='center' variants={childVariants}>
+                <MotionFlex width='100%' justify='center' variants={childVariants}>
                     <Button onClick={() => setShowAll(!showAll)}>
                         {showAll ? <ChevronUpIcon boxSize='6' /> : <ChevronDownIcon boxSize='6' />}
                     </Button>
                 </MotionFlex>
             )}
-        </MotionFlex>
+        </MotionVStack>
     );
 };
 

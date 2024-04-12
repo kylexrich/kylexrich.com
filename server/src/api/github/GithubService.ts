@@ -1,6 +1,6 @@
-import { ServiceResponse } from '../../types/ServiceResponse';
+import { ServiceResponse } from '../../util/types/ServiceResponse';
 import { NotFoundError } from '../../errors/NotFoundError';
-import { ContentType } from '../../types/ContentType';
+import { ContentType } from '../../util/types/ContentType';
 import { GithubPullRequest, GithubPullRequestDTO } from './types/GithubPullRequest';
 import { GithubLabel } from './types/GitHubLabel';
 import { GithubRepository } from './GithubRepository';
@@ -12,8 +12,8 @@ export class GithubService {
         this.githubRepo = githubRepo;
     }
 
-    public async getKyleRichWebsiteGithubPullRequests(): Promise<ServiceResponse<GithubPullRequestDTO[]>> {
-        const githubPullRequests: GithubPullRequest[] = await this.githubRepo.getKyleRichWebsiteGithubPullRequests();
+    public async getKylexrichGithubPullRequests(repository: string): Promise<ServiceResponse<GithubPullRequestDTO[]>> {
+        const githubPullRequests: GithubPullRequest[] = await this.githubRepo.getKylexrichGithubPullRequests(repository);
 
         if (githubPullRequests.length === 0) {
             throw new NotFoundError('No pull requests found');

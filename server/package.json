@@ -2,9 +2,9 @@
   "name": "server",
   "version": "1.0.0",
   "description": "",
-  "main": "dist/server.js",
+  "main": "dist/Server.js",
   "scripts": {
-    "start:dev": "nodemon --watch 'src/**/*.{js,jsx,ts,tsx}' --exec ts-node src/server.ts",
+    "start:dev": "nodemon --watch 'src/**/*.{js,jsx,ts,tsx}' --exec ts-node src/Server.ts",
     "build": "tsc",
     "start:prod": "node dist/server.js",
     "lint:fix": "eslint 'src/**/*.{js,jsx,ts,tsx}' --fix && prettier --write 'src/**/*.{js,jsx,ts,tsx}'",

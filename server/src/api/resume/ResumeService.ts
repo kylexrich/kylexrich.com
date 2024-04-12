@@ -1,8 +1,8 @@
 import { ResumeRepository } from './ResumeRepository';
-import { ServiceResponse } from '../../types/ServiceResponse';
+import { ServiceResponse } from '../../util/types/ServiceResponse';
 import { NotFoundError } from '../../errors/NotFoundError';
 import { ResumeDocument } from '../../models/Resume';
-import { ContentType } from '../../types/ContentType';
+import { ContentType } from '../../util/types/ContentType';
 
 export type ResumeData = Buffer;
 

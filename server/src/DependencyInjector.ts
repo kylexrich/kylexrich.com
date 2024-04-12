@@ -11,8 +11,8 @@ import { GithubRepository } from './api/github/GithubRepository';
 import { GithubService } from './api/github/GithubService';
 import { GithubController } from './api/github/GithubController';
 import { GithubRouterFactory } from './api/github/GithubRouterFactory';
-import { ResponseHandler } from './util/ResponseHandler';
-import { CacheExpiration, LocalCache } from './util/LocalCache';
+import { ResponseHandler } from './util/helper/ResponseHandler';
+import { CacheExpiration, LocalCache } from './util/helper/LocalCache';
 import { GithubPullRequest } from './api/github/types/GithubPullRequest';
 
 export class DependencyInjector {

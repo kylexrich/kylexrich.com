@@ -1,7 +1,7 @@
 import express, { Router } from 'express';
 import { ResumeController } from './ResumeController';
 import { TokenService } from '../token/TokenService';
-import { AuthenticatedRequest } from '../../types/AuthenticatedRequest';
+import { AuthenticatedRequest } from '../../util/types/AuthenticatedRequest';
 
 export class ResumeRouterFactory {
     private readonly resumeController: ResumeController;

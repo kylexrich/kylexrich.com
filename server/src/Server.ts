@@ -8,35 +8,21 @@ import { httpLogger, log } from './config/log4jsConfig';
 import fileUpload from 'express-fileupload';
 import cookieParser from 'cookie-parser';
 import { DependencyInjector } from './DependencyInjector';
-
-const env = process.env.NODE_ENV;
-const port = process.env.PORT || 3001;
-let host: string;
-switch (env) {
-    case 'development':
-        host = `http://localhost:${port}`;
-        break;
-    case 'staging':
-        host = 'https://kylexrich-staging-d5a9dbd6a715.herokuapp.com';
-        break;
-    case 'production':
-        host = 'https://kylexrich-402391673bb6.herokuapp.com';
-        break;
-    default:
-        host = `http://localhost:${port}`;
-}
+import { ENV, HOST_URL, PORT } from './config/serverConfig';
 
 class Server {
     private readonly app: Express;
     private readonly port: string | number;
     private readonly origin: string;
     private readonly host: string;
+    private readonly env: string;
     private readonly di: DependencyInjector;
 
     constructor() {
         this.app = express();
-        this.port = port;
-        this.host = host;
+        this.port = PORT;
+        this.host = HOST_URL;
+        this.env = ENV;
         this.origin = this.host.endsWith(String(this.port)) ? `http://localhost:${3000}` : this.host;
         this.di = new DependencyInjector();
         this.setupExpress();
@@ -65,7 +51,7 @@ class Server {
     }
 
     private serveBuild(): void {
-        if (process.env.NODE_ENV !== 'development') {
+        if (this.env !== 'development') {
             const buildPath = path.join(__dirname, '../../client/build');
             this.app.use(express.static(buildPath));
             this.app.get('*', (req, res) => {
@@ -78,13 +64,13 @@ class Server {
         connectToDB()
             .then(() => {
                 this.app.listen(this.port, () => {
-                    log.info(`[[${env}] Running on port ${this.port}! Server URL: ${this.host}, Frontend Origin: ${this.origin}`);
+                    log.info(`[[${this.env}] Running on port ${this.port}! Server URL: ${this.host}, Frontend Origin: ${this.origin}`);
                 });
             })
             .catch(() => {
                 this.app.listen(this.port, () => {
                     log.warn(
-                        `[${env}] Running on port ${this.port} without DB Connection. Server URL: ${this.host}, Frontend Origin: ${this.origin}`
+                        `[${this.env}] Running on port ${this.port} without DB Connection. Server URL: ${this.host}, Frontend Origin: ${this.origin}`
                     );
                 });
             });

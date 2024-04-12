@@ -1,9 +1,9 @@
 import { Request, Response } from 'express';
 import { GithubService } from './GithubService';
-import { ServiceResponse } from '../../types/ServiceResponse';
+import { ServiceResponse } from '../../util/types/ServiceResponse';
 import { NotFoundError } from '../../errors/NotFoundError';
 import { GithubPullRequestDTO } from './types/GithubPullRequest';
-import { ResponseHandler } from '../../util/ResponseHandler';
+import { ResponseHandler } from '../../util/helper/ResponseHandler';
 
 export class GithubController {
     private readonly githubService: GithubService;
@@ -14,9 +14,10 @@ export class GithubController {
         this.responseHandler = responseHandler;
     }
 
-    public async getKyleRichWebsiteGithubPullRequests(req: Request, res: Response): Promise<void> {
+    public async getKylexrichGithubPullRequests(req: Request, res: Response): Promise<void> {
         try {
-            const result: ServiceResponse<GithubPullRequestDTO[]> = await this.githubService.getKyleRichWebsiteGithubPullRequests();
+            const { repository } = req.params;
+            const result: ServiceResponse<GithubPullRequestDTO[]> = await this.githubService.getKylexrichGithubPullRequests(repository);
 
             this.responseHandler.sendSuccessResponse(res, 200, result);
         } catch (error) {

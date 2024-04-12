@@ -71,23 +71,21 @@ const Home: React.FC<HomeProps> = () => {
                     {...initialEnter}
                 >
                     <Box position='relative'>
-                        <MotionBox width='max-content'>
-                            <UnderlinedHeader>{'Hey! 👋'}</UnderlinedHeader>
+                        <MotionBox width='100%'>
+                            <UnderlinedHeader header={'Hey! 👋'} />
                         </MotionBox>
                     </Box>
                     <Box as='h2' fontSize='2xl' fontWeight='400' textAlign='left'>
                         My name is{' '}
                         <Text as='strong' fontWeight='600' display='inline'>
-                            Kyle Rich
-                        </Text>{' '}
-                        and I&apos;m a backend engineer <Text as='span' whiteSpace='nowrap' display='inline'></Text>
-                        from{' '}
-                        <Text as='span' whiteSpace='nowrap' display='inline'>
-                            Canada 🇨🇦
+                            {'Kyle Rich '}
+                        </Text>
+                        <Text as='span' display='inline'>
+                            {"and I'm a backend engineer from Canada 🇨🇦"}
                         </Text>
                     </Box>
                     <Box as='h2' fontSize='2xl' fontWeight='400' mt={5} textAlign='left'>
-                        This is my digital portfolio and playground. Poke around if you&apos;re interested 😊
+                        {"This is my digital portfolio and playground. Poke around if you're interested 😊"}
                     </Box>
                 </MotionFlex>
             </Flex>

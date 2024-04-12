@@ -11,7 +11,7 @@ import { useDispatch } from 'react-redux';
 import { me } from '../../../redux/authSlice';
 import UnderConstructionBanner from './UnderConstructionBanner';
 import { UNDER_CONSTRUCTION } from '../../../config/constants';
-import { getWebsitePullRequests } from '../../../redux/githubSlice';
+import { getPullRequests, KYLEXRICH_DOT_COM } from '../../../redux/githubSlice';
 
 export interface MainLayoutProps {
     // empty
@@ -22,7 +22,7 @@ const AppLayout: React.FC<MainLayoutProps> = (props) => {
     useErrorNotification();
     useEffect(() => {
         dispatch(me());
-        dispatch(getWebsitePullRequests());
+        dispatch(getPullRequests(KYLEXRICH_DOT_COM));
     }, [dispatch]);
 
     const bannerPadding = '50px';

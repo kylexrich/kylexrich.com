@@ -1,18 +1,18 @@
 import React from 'react';
 import { Box } from '@chakra-ui/react';
-import { PropsAndChildren } from '../../util/types/PassThroughProps';
+import { PassThroughProps } from '../../util/types/PassThroughProps';
 import { ColorWeight, useAccentColor } from '../../theme/accentColor';
 import { MotionBox } from './MotionComponents';
 
-export interface UnderlinedEmojiHeaderProps extends PropsAndChildren {
-    // empty
+export interface UnderlinedHeaderProps extends PassThroughProps {
+    header: string;
 }
 
-const UnderlinedHeader: React.FC<UnderlinedEmojiHeaderProps> = ({ children, ...props }) => {
+const UnderlinedHeader: React.FC<UnderlinedHeaderProps> = ({ header, ...props }) => {
     return (
         <MotionBox as='h1' mt={0} mb={6} fontSize='3xl' lineHeight='shorter' fontWeight='bold' textAlign='left' {...props}>
             <Box as='span' display='inline-block' position='relative'>
-                {children}
+                {header}
                 <Box
                     as='span'
                     display='block'
