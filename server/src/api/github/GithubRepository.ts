@@ -1,6 +1,6 @@
 import { GithubPullRequest } from './types/GithubPullRequest';
 import axios, { AxiosResponse } from 'axios';
-import { CacheExpiration, LocalCache } from '../../util/LocalCache';
+import { CacheExpiration, LocalCache } from '../../util/helper/LocalCache';
 
 export class GithubRepository {
     private readonly pullRequestCache: LocalCache<GithubPullRequest[]>;
@@ -9,22 +9,21 @@ export class GithubRepository {
         this.pullRequestCache = pullRequestCache;
     }
 
-    public async getKyleRichWebsiteGithubPullRequests(): Promise<GithubPullRequest[]> {
-        const cacheKey = 'kylexrich.com';
-        const cachedData = this.pullRequestCache.get(cacheKey);
+    public async getKylexrichGithubPullRequests(repository: string): Promise<GithubPullRequest[]> {
+        const cachedData = this.pullRequestCache.get(repository);
 
         if (cachedData !== null) {
             return cachedData;
         }
 
         const response: AxiosResponse<GithubPullRequest[]> = await axios.get(
-            'https://api.github.com/repos/kylexrich/kylexrich.com/pulls?state=all',
+            `https://api.github.com/repos/kylexrich/${repository}/pulls?state=all`,
             {
                 headers: { Authorization: `token ${process.env.GITHUB_TOKEN}` }
             }
         );
 
-        this.pullRequestCache.set(cacheKey, response.data);
+        this.pullRequestCache.set(repository, response.data);
 
         return response.data;
     }

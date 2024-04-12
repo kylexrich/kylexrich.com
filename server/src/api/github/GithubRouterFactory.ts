@@ -11,7 +11,7 @@ export class GithubRouterFactory {
     public createGithubRouter(): Router {
         const router = express.Router({ mergeParams: true });
 
-        router.get('/pull-requests', (req, res) => this.githubController.getKyleRichWebsiteGithubPullRequests(req, res));
+        router.get('/:repository/pull-requests', (req, res) => this.githubController.getKylexrichGithubPullRequests(req, res));
 
         return router;
     }

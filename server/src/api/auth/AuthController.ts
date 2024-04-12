@@ -1,12 +1,12 @@
 import { Request, Response } from 'express';
 import { AuthService, LogoutMessage, UserData } from './AuthService';
-import { AuthenticatedRequest } from '../../types/AuthenticatedRequest';
+import { AuthenticatedRequest } from '../../util/types/AuthenticatedRequest';
 import { TokenService } from '../token/TokenService';
-import { ServiceResponse } from '../../types/ServiceResponse';
+import { ServiceResponse } from '../../util/types/ServiceResponse';
 import { UserExistsError } from '../../errors/UserExistsError';
 import { AuthenticationError } from '../../errors/AuthenticationError';
 import { log } from '../../config/log4jsConfig';
-import { ResponseHandler } from '../../util/ResponseHandler';
+import { ResponseHandler } from '../../util/helper/ResponseHandler';
 
 export class AuthController {
     private readonly authService: AuthService;

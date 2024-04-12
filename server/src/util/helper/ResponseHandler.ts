@@ -1,7 +1,7 @@
 import { Response } from 'express';
 import { ServiceResponse } from '../types/ServiceResponse';
 import { ContentType } from '../types/ContentType';
-import { log } from '../config/log4jsConfig';
+import { log } from '../../config/log4jsConfig';
 
 export class ResponseHandler {
     public sendErrorResponse<T>(res: Response, status: number, message: string, error: T): void {

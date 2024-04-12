@@ -1,10 +1,10 @@
 import { Response } from 'express';
 import { ResumeData, ResumeService } from './ResumeService';
-import { AuthenticatedRequest } from '../../types/AuthenticatedRequest';
+import { AuthenticatedRequest } from '../../util/types/AuthenticatedRequest';
 import { BadRequestError } from '../../errors/BadRequestError';
 import { NotFoundError } from '../../errors/NotFoundError';
-import { ServiceResponse } from '../../types/ServiceResponse';
-import { ResponseHandler } from '../../util/ResponseHandler';
+import { ServiceResponse } from '../../util/types/ServiceResponse';
+import { ResponseHandler } from '../../util/helper/ResponseHandler';
 
 export class ResumeController {
     private readonly resumeService: ResumeService;

@@ -1,6 +1,6 @@
 import axios, { AxiosError } from 'axios';
 import { PayloadAction } from '@reduxjs/toolkit';
-import { isObject } from '../../util/isObject';
+import { isObject } from '../../util/helper/isObject';
 
 export interface RejectedValue {
     errorMessage: string;

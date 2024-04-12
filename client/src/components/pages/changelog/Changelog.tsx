@@ -1,33 +1,17 @@
 import React, { useEffect } from 'react';
-import { MotionBox } from '../../shared/MotionComponents';
-import {
-    Box,
-    Divider,
-    Flex,
-    Heading,
-    HStack,
-    Link,
-    List,
-    ListIcon,
-    ListItem,
-    Skeleton,
-    SkeletonText,
-    Tag,
-    Text,
-    useColorModeValue,
-    VStack
-} from '@chakra-ui/react';
+import { MotionBox, MotionVStack } from '../../shared/MotionComponents';
+import { Box, Divider, Heading, HStack, Link, List, ListIcon, ListItem, Skeleton, SkeletonText, Tag, Text, VStack } from '@chakra-ui/react';
 import { GoIssueOpened } from 'react-icons/go';
 import { AppDispatch, RootState } from '../../../redux/store';
 import { useDispatch, useSelector } from 'react-redux';
-import { getWebsitePullRequests, GithubPullRequest } from '../../../redux/githubSlice';
+import { getPullRequests, GithubPullRequest, KYLEXRICH_DOT_COM } from '../../../redux/githubSlice';
 import { useAccentColor } from '../../../theme/accentColor';
 import moment from 'moment';
 import ReactMarkdown from 'react-markdown';
 import { AiFillCheckCircle } from 'react-icons/ai';
-import UnderlinedHeader from '../../shared/UnderlinedHeader';
 import { initialEnter, MotionDuration } from '../../shared/variants';
 import MainLayout from '../../app/layout/MainLayout';
+import HeaderWithSubheader from '../../shared/HeaderWithSubheader';
 
 const parentVariants = {
     initial: {
@@ -61,14 +45,14 @@ export interface ChangelogProps {
 
 const Changelog: React.FC<ChangelogProps> = () => {
     const dispatch: AppDispatch = useDispatch();
-    let pullRequests: GithubPullRequest[] = useSelector((state: RootState) => state.github.websitePullRequests);
+    let kylexrichPullRequests: GithubPullRequest[] = useSelector((state: RootState) => state.github.pullRequests[KYLEXRICH_DOT_COM]);
 
-    let isLoading = pullRequests.length === 0;
+    let isLoading = !kylexrichPullRequests || Object.entries(kylexrichPullRequests).length === 0;
 
     useEffect(() => {
         try {
-            if (pullRequests.length === 0) {
-                dispatch(getWebsitePullRequests());
+            if (isLoading) {
+                dispatch(getPullRequests(KYLEXRICH_DOT_COM));
             }
         } catch (error) {
             console.error(error);
@@ -76,8 +60,6 @@ const Changelog: React.FC<ChangelogProps> = () => {
     }, [dispatch]);
 
     const colour = useAccentColor();
-
-    const subHeaderColor = useColorModeValue('gray.500', 'gray.200');
 
     if (isLoading) {
         return (
@@ -95,62 +77,44 @@ const Changelog: React.FC<ChangelogProps> = () => {
     return (
         <MainLayout>
             <MotionBox {...initialEnter} variants={parentVariants}>
-                <VStack align='start'>
-                    <UnderlinedHeader mt={0} mb={2}>
-                        Changelog 🖥️
-                    </UnderlinedHeader>
-                    <Text color={subHeaderColor} textAlign='left' mb={6}>
-                        {"An overview of the changes I've made to my portfolio website."}
-                    </Text>
-                </VStack>
+                <HeaderWithSubheader header={'Changelog 🖥️'} subheader={"An overview of the changes I've made to my portfolio website."} />
                 <List>
-                    {pullRequests.map((pr, index) => {
+                    {kylexrichPullRequests.map((pr, index) => {
                         return (
-                            <MotionBox key={pr.html_url} variants={childVariants}>
-                                <VStack spacing={4} align='left' mx={[0, 0, 6]} mt={8}>
-                                    <ListItem>
-                                        <MotionBox whileHover={{ x: 10 }} key={index} align='left'>
-                                            <MotionBox variants={childVariants}>
-                                                <Heading fontSize='lg' textAlign='left' mt={0} mb={1}>
-                                                    {pr.state === 'closed' && pr.merged_at ? (
-                                                        <ListIcon as={AiFillCheckCircle} color='green.500' />
-                                                    ) : (
-                                                        <ListIcon as={GoIssueOpened} color='gray.500' />
-                                                    )}
-                                                    <Text as={Link} color={colour} target='_blank' href={pr.html_url}>
-                                                        {pr.title}
-                                                    </Text>
-                                                </Heading>
-                                                <HStack spacing={2} ml={[0, 0, 6]}>
-                                                    <Text fontSize='sm' fontWeight='600'>
-                                                        {moment(pr.merged_at).format('MMMM Do YYYY')}
-                                                    </Text>
-                                                    <HStack spacing={1} alignItems='center' display={['none', 'none', 'flex']}>
-                                                        <Flex alignItems='center' flexWrap='wrap' m='-2px'>
-                                                            {pr.labels.map((label) => (
-                                                                <Tag
-                                                                    key={label.name}
-                                                                    m='2px'
-                                                                    padding='0 3px'
-                                                                    size='sm'
-                                                                    bg={label.color}
-                                                                    color={'black'}
-                                                                >
-                                                                    {label.name}
-                                                                </Tag>
-                                                            ))}
-                                                        </Flex>
-                                                    </HStack>
+                            <MotionVStack spacing={4} align='left' mx={[0, 0, 6]} mb={4} key={pr.html_url} variants={childVariants}>
+                                <ListItem>
+                                    <MotionBox whileHover={{ x: 10 }} key={index} align='left'>
+                                        <MotionBox variants={childVariants}>
+                                            <Heading fontSize='lg' textAlign='left' mt={0} mb={1}>
+                                                {pr.state === 'closed' && pr.merged_at ? (
+                                                    <ListIcon as={AiFillCheckCircle} color='green.500' />
+                                                ) : (
+                                                    <ListIcon as={GoIssueOpened} color='green.500' />
+                                                )}
+                                                <Text as={Link} color={colour} target='_blank' href={pr.html_url}>
+                                                    {pr.title}
+                                                </Text>
+                                            </Heading>
+                                            <HStack spacing={2} ml={[0, 0, 6]} wrap='wrap'>
+                                                <Text fontSize='sm' fontWeight='600'>
+                                                    {moment(pr.merged_at).format('MMMM Do YYYY')}
+                                                </Text>
+                                                <HStack spacing={1} alignItems='center' justify='center' display='flex'>
+                                                    {pr.labels.map((label) => (
+                                                        <Tag key={label.name} px={1} size='sm' bg={label.color} color={'black'}>
+                                                            {label.name}
+                                                        </Tag>
+                                                    ))}
                                                 </HStack>
-                                                <Box ml={12} mt={2} fontSize='md' fontWeight='400'>
-                                                    <ReactMarkdown>{pr.body}</ReactMarkdown>
-                                                </Box>
-                                            </MotionBox>
+                                            </HStack>
+                                            <Box ml={12} mt={2} fontSize='md' fontWeight='400'>
+                                                <ReactMarkdown>{pr.body}</ReactMarkdown>
+                                            </Box>
                                         </MotionBox>
-                                    </ListItem>
-                                    {pullRequests.length - 1 !== index && <Divider />}
-                                </VStack>
-                            </MotionBox>
+                                    </MotionBox>
+                                </ListItem>
+                                {kylexrichPullRequests.length - 1 !== index && <Divider />}
+                            </MotionVStack>
                         );
                     })}
                 </List>

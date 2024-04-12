@@ -1,7 +1,7 @@
 import jwt, { JwtPayload } from 'jsonwebtoken';
 import { NextFunction, Request, Response } from 'express';
-import { AuthenticatedRequest, isAuthenticatedRequest } from '../../types/AuthenticatedRequest';
-import { ResponseHandler } from '../../util/ResponseHandler';
+import { AuthenticatedRequest, isAuthenticatedRequest } from '../../util/types/AuthenticatedRequest';
+import { ResponseHandler } from '../../util/helper/ResponseHandler';
 
 export class TokenService {
     private readonly responseHandler: ResponseHandler;

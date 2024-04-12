@@ -1,7 +1,7 @@
 import express, { Router } from 'express';
 import { TokenService } from '../token/TokenService';
 import { AuthController } from './AuthController';
-import { AuthenticatedRequest } from '../../types/AuthenticatedRequest';
+import { AuthenticatedRequest } from '../../util/types/AuthenticatedRequest';
 
 export class AuthRouterFactory {
     private readonly authController: AuthController;

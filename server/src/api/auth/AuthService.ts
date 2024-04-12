@@ -1,8 +1,8 @@
 import { AuthRepository } from './AuthRepository';
-import { ServiceResponse } from '../../types/ServiceResponse';
+import { ServiceResponse } from '../../util/types/ServiceResponse';
 import { UserExistsError } from '../../errors/UserExistsError';
 import { AuthenticationError } from '../../errors/AuthenticationError';
-import { ContentType } from '../../types/ContentType';
+import { ContentType } from '../../util/types/ContentType';
 import { UserDocument } from '../../models/User';
 
 export type UserData = Omit<UserDocument, 'password'>;
