@@ -1,10 +1,11 @@
-import { Request, Response } from 'express';
-import { GithubService } from './GithubService';
-import { ServiceResponse } from '../../util/types/ServiceResponse';
-import { NotFoundError } from '../../errors/NotFoundError';
-import { GithubPullRequestDTO } from './types/GithubPullRequest';
-import { ResponseHandler } from '../../util/helper/ResponseHandler';
-import { GithubRepoDTO } from './types/GithubRepo';
+import {Request, Response} from 'express';
+import {ResponseHandler} from '../../util/helper/ResponseHandler.js';
+import {GithubService} from './GithubService.js';
+import {ServiceResponse} from '../../util/types/ServiceResponse.js';
+import {GithubPullRequestDTO} from './types/GithubPullRequest.js';
+import {NotFoundError} from '../../errors/NotFoundError.js';
+import {GithubRepoDTO} from './types/GithubRepo.js';
+import {BadRequestError} from '../../errors/BadRequestError.js';
 
 export class GithubController {
     private readonly githubService: GithubService;
@@ -17,7 +18,12 @@ export class GithubController {
 
     public async getKylexrichGithubPullRequests(req: Request, res: Response): Promise<void> {
         try {
-            const { repository } = req.params;
+            const {repository} = req.params;
+
+            if (!repository) {
+                throw new BadRequestError('No repository provided');
+            }
+
             const result: ServiceResponse<GithubPullRequestDTO[]> = await this.githubService.getKylexrichGithubPullRequests(repository);
 
             this.responseHandler.sendSuccessResponse(res, 200, result);

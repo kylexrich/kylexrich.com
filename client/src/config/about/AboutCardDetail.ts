@@ -1,4 +1,4 @@
-import { ColorMode } from '../../theme/theme';
+import {ColorMode} from '../../theme/theme.ts';
 
 export interface AboutCardDetail {
     imageRefs: ColorMode;

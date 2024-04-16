@@ -1,7 +1,7 @@
-import jwt, { JwtPayload } from 'jsonwebtoken';
-import { NextFunction, Request, Response } from 'express';
-import { AuthenticatedRequest, isAuthenticatedRequest } from '../../util/types/AuthenticatedRequest';
-import { ResponseHandler } from '../../util/helper/ResponseHandler';
+import jwt, {JwtPayload} from 'jsonwebtoken';
+import {NextFunction, Request, Response} from 'express';
+import {ResponseHandler} from '../../util/helper/ResponseHandler.js';
+import {AuthenticatedRequest, isAuthenticatedRequest} from '../../util/types/AuthenticatedRequest.js';
 
 export class TokenService {
     private readonly responseHandler: ResponseHandler;
@@ -18,12 +18,12 @@ export class TokenService {
     }
 
     public signToken(userId: string): string {
-        const payload = { user: { id: userId } };
-        return jwt.sign(payload, this.jwtSecret, { expiresIn: this.expiresInSeconds });
+        const payload = {user: {id: userId}};
+        return jwt.sign(payload, this.jwtSecret, {expiresIn: this.expiresInSeconds});
     }
 
-    public async verifyToken(req: Request, res: Response, next: NextFunction): Promise<void> {
-        const token = req.cookies.token;
+    public verifyToken(req: Request, res: Response, next: NextFunction): void {
+        const token: string = req.cookies.token as string;
 
         if (!token) {
             this.responseHandler.sendErrorResponse(res, 401, 'No token provided', null);
@@ -35,7 +35,7 @@ export class TokenService {
                 this.responseHandler.sendErrorResponse(res, 403, 'Invalid token', null);
                 return;
             }
-            (req as AuthenticatedRequest).user = { id: (decodedToken as JwtPayload).user.id };
+            (req as AuthenticatedRequest).user = {id: (decodedToken as JwtPayload).user.id as string};
             if (isAuthenticatedRequest(req)) {
                 next();
             } else {

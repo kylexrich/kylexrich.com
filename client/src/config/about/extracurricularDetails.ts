@@ -1,4 +1,4 @@
-import { AboutCardDetail } from './AboutCardDetail';
+import {AboutCardDetail} from './AboutCardDetail.ts';
 
 export const extracurricularDetails: AboutCardDetail[] = [
     {
@@ -31,9 +31,9 @@ export const extracurricularDetails: AboutCardDetail[] = [
         title: 'ThinkTECH | Deloitte x SFU',
         subtitle: 'Academic Competitor',
         shortDescription:
-            "Placed 1st place out of 15 teams, directed technical analysis for Vancity's open banking space, and prototyped an integrated platform using the Plaid API.",
+            'Placed 1st place out of 15 teams, directed technical analysis for Vancity\'s open banking space, and prototyped an integrated platform using the Plaid API.',
         skills: ['Technical Analysis', 'Open Banking', 'API Integration', 'Team Collaboration'],
-        imageRefs: { light: '/assets/images/about/thinktechlogo.png', dark: '/assets/images/about/thinktechlogo.png' },
+        imageRefs: {light: '/assets/images/about/thinktechlogo.png', dark: '/assets/images/about/thinktechlogo.png'},
         dateText: 'Nov 2021 - Dec 2021',
         type: 'competition'
     },
@@ -43,7 +43,7 @@ export const extracurricularDetails: AboutCardDetail[] = [
         shortDescription:
             'Mentored a team of 5 developers to improve the BizHacks website, introduced Agile and Scrum methodologies, and built automated kanban boards and management dashboards.',
         skills: ['Team Leadership', 'Agile Methodologies', 'Scrum', 'Web Development', 'Project Management'],
-        imageRefs: { light: '/assets/images/about/bizhackslogo.png', dark: '/assets/images/about/bizhackslogo.png' },
+        imageRefs: {light: '/assets/images/about/bizhackslogo.png', dark: '/assets/images/about/bizhackslogo.png'},
         dateText: 'Sep 2021 - Dec 2021',
         type: 'club'
     },
@@ -53,7 +53,7 @@ export const extracurricularDetails: AboutCardDetail[] = [
         shortDescription:
             'Engaged regularly with an industry professional and advised a lower-year student on academics, programming, and career paths.',
         skills: ['Mentorship', 'Advice & Guidance', 'Networking'],
-        imageRefs: { light: '/assets/images/about/ubclogo.jpeg', dark: '/assets/images/about/ubclogo.jpeg' },
+        imageRefs: {light: '/assets/images/about/ubclogo.jpeg', dark: '/assets/images/about/ubclogo.jpeg'},
         dateText: 'Sep 2020 - May 2021',
         type: 'mentorship'
     },
@@ -63,7 +63,10 @@ export const extracurricularDetails: AboutCardDetail[] = [
         shortDescription:
             'Consolidated member ideas into event plans and managed event logistics, hosted team-building events to reduce club turnover, increased average raised capital by over $2000, and implemented data-driven marketing to engage more professors.',
         skills: ['Event Planning', 'Fundraising', 'Data-Driven Marketing', 'Team Leadership'],
-        imageRefs: { light: '/assets/images/about/langarabalogo.jpeg', dark: '/assets/images/about/langarabalogo.jpeg' },
+        imageRefs: {
+            light: '/assets/images/about/langarabalogo.jpeg',
+            dark: '/assets/images/about/langarabalogo.jpeg'
+        },
         dateText: 'Sep 2018 - Apr 2019',
         type: 'club'
     },
@@ -73,7 +76,7 @@ export const extracurricularDetails: AboutCardDetail[] = [
         shortDescription:
             'Placed 3rd place among 64 teams. Directed analysis, recommendations, and implementation to improve Dropox’s competitive positioning and drive customer satisfaction',
         skills: ['Strategic Analysis', 'Team Collaboration', 'Case Study Analysis'],
-        imageRefs: { light: '/assets/images/about/cpalogo.jpeg', dark: '/assets/images/about/cpalogo.jpeg' },
+        imageRefs: {light: '/assets/images/about/cpalogo.jpeg', dark: '/assets/images/about/cpalogo.jpeg'},
         dateText: 'Jan 2019 - Mar 2019',
         type: 'competition'
     },
@@ -83,7 +86,7 @@ export const extracurricularDetails: AboutCardDetail[] = [
         shortDescription:
             'Played an key role in the rehabilitation of orphaned wildlife, providing guided tours and ensuring the well-being and care of the birds.',
         skills: ['Animal Welfare', 'Public Speaking', 'Wildlife Rehabilitation'],
-        imageRefs: { light: '/assets/images/about/owllogo.png', dark: '/assets/images/about/owllogo.png' },
+        imageRefs: {light: '/assets/images/about/owllogo.png', dark: '/assets/images/about/owllogo.png'},
         dateText: 'Dec 2014 - Sep 2015',
         type: 'volunteer'
     }

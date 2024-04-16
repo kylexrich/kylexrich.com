@@ -1,5 +1,3 @@
-import React from 'react';
-
 export enum MotionDuration {
     INSTANT = 0.01,
     BLIP = 0.03,
@@ -12,4 +10,4 @@ export enum MotionDuration {
     SLUGGISH = 1
 }
 
-export const initialEnter = { initial: 'initial', animate: 'enter' };
+export const initialEnter = {initial: 'initial', animate: 'enter'};

@@ -1,4 +1,4 @@
-import { AboutCardDetail } from './AboutCardDetail';
+import {AboutCardDetail} from './AboutCardDetail.ts';
 
 export const educationDetails: AboutCardDetail[] = [
     {

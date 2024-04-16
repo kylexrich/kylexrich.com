@@ -1,4 +1,4 @@
-import axios, { AxiosInstance } from 'axios';
+import axios, {AxiosInstance} from 'axios';
 
 const env = process.env.REACT_APP_ENV === 'staging' ? 'staging' : process.env.NODE_ENV;
 let host: string;
@@ -18,9 +18,6 @@ switch (env) {
         break;
 }
 
-const kylexrichApi: AxiosInstance = axios.create({
-    baseURL: host,
-    withCredentials: true
-});
+const kylexrichApi: AxiosInstance = axios.create({baseURL: host, withCredentials: true});
 
 export default kylexrichApi;

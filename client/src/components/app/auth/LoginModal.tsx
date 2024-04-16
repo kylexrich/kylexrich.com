@@ -1,31 +1,30 @@
-import React, { useState } from 'react';
-import { Button, Input, Modal, ModalBody, ModalCloseButton, ModalContent, ModalHeader, ModalOverlay, Stack } from '@chakra-ui/react';
-import { AppDispatch } from '../../../redux/store';
-import { useDispatch } from 'react-redux';
-import { login } from '../../../redux/authSlice';
+import React, {useState} from 'react';
+import {Button, Input, Modal, ModalBody, ModalCloseButton, ModalContent, ModalHeader, ModalOverlay, Stack} from '@chakra-ui/react';
+import {AppDispatch} from '../../../redux/store.ts';
+import {useAppDispatch} from '../../../hooks/reduxHooks.tsx';
+import {login} from '../../../redux/authSlice.ts';
 
 export interface LoginModalProps {
     isOpen: boolean;
     onClose: () => void;
 }
 
-const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose }) => {
-    const dispatch: AppDispatch = useDispatch();
-    const [loginInfo, setLoginInfo] = useState({ email: '', password: '' });
+const LoginModal: React.FC<LoginModalProps> = ({isOpen, onClose}) => {
+    const dispatch: AppDispatch = useAppDispatch();
+    const [loginInfo, setLoginInfo] = useState({email: '', password: ''});
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const { name, value } = e.target;
+        const {name, value} = e.target;
         setLoginInfo({
-            ...loginInfo,
-            [name]: value
-        });
+                         ...loginInfo, [name]: value
+                     });
     };
 
     const handleLogin = () => {
         dispatch(login(loginInfo))
             .unwrap()
             .then(() => {
-                setLoginInfo({ email: '', password: '' });
+                setLoginInfo({email: '', password: ''});
                 onClose();
             })
             .catch((error) => {
@@ -35,27 +34,27 @@ const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose }) => {
 
     return (
         <Modal isOpen={isOpen} onClose={onClose}>
-            <ModalOverlay />
+            <ModalOverlay/>
             <ModalContent>
                 <ModalHeader>Login</ModalHeader>
-                <ModalCloseButton />
+                <ModalCloseButton/>
                 <ModalBody>
                     <Stack spacing={3}>
                         <Input
-                            type='email'
-                            name='email'
-                            placeholder='Enter your email'
+                            type="email"
+                            name="email"
+                            placeholder="Enter your email"
                             value={loginInfo.email}
                             onChange={handleInputChange}
                         />
                         <Input
-                            type='password'
-                            name='password'
-                            placeholder='Enter your password'
+                            type="password"
+                            name="password"
+                            placeholder="Enter your password"
                             value={loginInfo.password}
                             onChange={handleInputChange}
                         />
-                        <Button variant='primaryButton' onClick={handleLogin}>
+                        <Button variant="primaryButton" onClick={handleLogin}>
                             Login
                         </Button>
                     </Stack>

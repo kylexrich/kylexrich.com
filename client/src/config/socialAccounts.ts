@@ -1,5 +1,5 @@
-import { FaFacebook, FaGithub, FaInstagram, FaLinkedin } from 'react-icons/fa';
-import { FiMail } from 'react-icons/fi';
+import {FaFacebook, FaGithub, FaInstagram, FaLinkedin} from 'react-icons/fa';
+import {FiMail} from 'react-icons/fi';
 import React from 'react';
 
 export interface SocialAccount {

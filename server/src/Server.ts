@@ -1,14 +1,13 @@
 import 'dotenv/config';
-import express, { Express } from 'express';
+import express, {Express} from 'express';
 import cors from 'cors';
-import connectToDB from './config/connectToDB';
-import * as path from 'path';
-import * as log4js from 'log4js';
-import { httpLogger, log } from './config/log4jsConfig';
-import fileUpload from 'express-fileupload';
+import path from 'path';
+import log4js from 'log4js';
 import cookieParser from 'cookie-parser';
-import { DependencyInjector } from './DependencyInjector';
-import { ENV, HOST_URL, PORT } from './config/serverConfig';
+import {DependencyInjector} from './DependencyInjector.js';
+import {ENV, HOST_URL, PORT} from './config/serverConfig.js';
+import {httpLogger, log} from './config/log4jsConfig.js';
+import connectToDB from './config/connectToDB.js';
 
 class Server {
     private readonly app: Express;
@@ -33,14 +32,12 @@ class Server {
 
     private setupExpress(): void {
         const corsOptions = {
-            origin: this.origin,
-            credentials: true
+            origin: this.origin, credentials: true
         };
-        this.app.use(log4js.connectLogger(httpLogger, { level: 'auto' }));
+        this.app.use(log4js.connectLogger(httpLogger, {level: 'auto'}));
         this.app.use(cors(corsOptions));
         this.app.use(express.json());
-        this.app.use(express.urlencoded({ extended: false }));
-        this.app.use(fileUpload());
+        this.app.use(express.urlencoded({extended: false}));
         this.app.use(cookieParser());
     }
 
@@ -54,9 +51,7 @@ class Server {
         if (this.env !== 'development') {
             const buildPath = path.join(__dirname, '../../client/build');
             this.app.use(express.static(buildPath));
-            this.app.get('*', (req, res) => {
-                res.sendFile(path.resolve(buildPath, 'index.html'));
-            });
+            this.app.get('*', (_, res) => res.sendFile(path.resolve(buildPath, 'index.html')));
         }
     }
 
@@ -69,9 +64,7 @@ class Server {
             })
             .catch(() => {
                 this.app.listen(this.port, () => {
-                    log.warn(
-                        `[${this.env}] Running on port ${this.port} without DB Connection. Server URL: ${this.host}, Frontend Origin: ${this.origin}`
-                    );
+                    log.warn(`[${this.env}] Running on port ${this.port} without DB Connection. Server URL: ${this.host}, Frontend Origin: ${this.origin}`);
                 });
             });
     }

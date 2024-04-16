@@ -1,16 +1,16 @@
 import React from 'react';
-import ResumeSection from './ResumeSection';
-import MainLayout from '../../app/layout/MainLayout';
+import MainLayout from '../../app/layout/MainLayout.tsx';
+import ResumeSection from './ResumeSection.tsx';
 
 export interface SecretProps {
     // empty
 }
 
-const Secret: React.FC<SecretProps> = (props) => {
+const Secret: React.FC<SecretProps> = () => {
     return (
         <MainLayout>
             <h1>Secret</h1>
-            <ResumeSection />
+            <ResumeSection/>
         </MainLayout>
     );
 };

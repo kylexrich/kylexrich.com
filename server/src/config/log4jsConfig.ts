@@ -1,7 +1,6 @@
-import * as log4js from 'log4js';
+import log4js, {LoggingEvent} from 'log4js';
 import colors from 'colors';
-import { LoggingEvent } from 'log4js';
-import { ENV } from './serverConfig';
+import {ENV} from './serverConfig.js';
 
 const getFormattedTime = (date: Date): string => {
     const hours = String(date.getHours()).padStart(2, '0');
@@ -46,32 +45,32 @@ const writePattern = '%d{ISO8601_WITH_TZ_OFFSET} [%p] %m%n';
 
 if (ENV === 'production') {
     appenders = {
-        out: { type: 'stdout', layout: { type: 'custom' } },
+        out: {type: 'stdout', layout: {type: 'custom'}},
         app: {
             type: 'dateFile',
             filename: 'logs/application.log',
             pattern: '.yyyy-MM-dd',
-            layout: { type: 'pattern', pattern: writePattern },
+            layout: {type: 'pattern', pattern: writePattern},
             daysToKeep: 10
         },
-        errorFile: { type: 'file', filename: 'logs/errors.log', layout: { type: 'pattern', pattern: writePattern } },
+        errorFile: {type: 'file', filename: 'logs/errors.log', layout: {type: 'pattern', pattern: writePattern}},
         errors: {
             type: 'logLevelFilter',
             level: 'ERROR',
             appender: 'errorFile',
-            layout: { type: 'pattern', pattern: writePattern }
+            layout: {type: 'pattern', pattern: writePattern}
         }
     };
 } else {
     appenders = {
-        out: { type: 'stdout', layout: { type: 'custom' } },
-        app: { type: 'file', filename: 'logs/application.log', layout: { type: 'pattern', pattern: writePattern } },
-        errorFile: { type: 'file', filename: 'logs/errors.log', layout: { type: 'pattern', pattern: writePattern } },
+        out: {type: 'stdout', layout: {type: 'custom'}},
+        app: {type: 'file', filename: 'logs/application.log', layout: {type: 'pattern', pattern: writePattern}},
+        errorFile: {type: 'file', filename: 'logs/errors.log', layout: {type: 'pattern', pattern: writePattern}},
         errors: {
             type: 'logLevelFilter',
             level: 'ERROR',
             appender: 'errorFile',
-            layout: { type: 'pattern', pattern: writePattern }
+            layout: {type: 'pattern', pattern: writePattern}
         }
     };
 }
@@ -79,8 +78,8 @@ if (ENV === 'production') {
 const log4jsConfig = {
     appenders: appenders,
     categories: {
-        default: { appenders: ['out', 'app', 'errors'], level: ENV === 'production' ? 'INFO' : 'TRACE' },
-        http: { appenders: ['out'], level: 'INFO' }
+        default: {appenders: ['out', 'app', 'errors'], level: ENV === 'production' ? 'INFO' : 'TRACE'},
+        http: {appenders: ['out'], level: 'INFO'}
     }
 };
 

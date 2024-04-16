@@ -1,14 +1,7 @@
 import React from 'react';
-import { Image } from '@chakra-ui/react';
+import {Image, ResponsiveValue} from '@chakra-ui/react';
 
-export interface SizeType {
-    base?: string;
-    sm?: string;
-    md?: string;
-    lg?: string;
-    xl?: string;
-    [key: string]: any;
-}
+export type SizeType = ResponsiveValue<string | number>;
 
 export interface AboutCardImageProps {
     logoRef: string;
@@ -16,13 +9,13 @@ export interface AboutCardImageProps {
     size?: { width: SizeType; height: SizeType };
 }
 
-const AboutCardImage: React.FC<AboutCardImageProps> = ({ logoRef, title, size }) => {
+const AboutCardImage: React.FC<AboutCardImageProps> = ({logoRef, title, size}) => {
     return (
         <Image
-            rounded='full'
-            w={size?.width || { base: '16', md: '32' }}
-            h={size?.height || { base: '16', md: '32' }}
-            objectFit='cover'
+            rounded="full"
+            w={size?.width ?? {base: '16', md: '32'}}
+            h={size?.height ?? {base: '16', md: '32'}}
+            objectFit="cover"
             src={logoRef || '/assets/images/placeholder.png'}
             alt={title}
         />

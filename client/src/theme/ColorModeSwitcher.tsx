@@ -1,16 +1,17 @@
 import React from 'react';
-import { useColorMode, useColorModeValue } from '@chakra-ui/react';
-import { AnimatePresence } from 'framer-motion';
-import { MotionBox } from '../components/shared/MotionComponents';
+import {useColorMode, useColorModeValue} from '@chakra-ui/react';
+import {AnimatePresence} from 'framer-motion';
+import {MotionBox} from '../components/shared/MotionComponents.tsx';
+import {MotionDuration} from '../components/shared/variants.tsx';
+// @ts-expect-error use-sound doesn't have types
 import useSound from 'use-sound';
-import { MotionDuration } from '../components/shared/variants';
 
 export interface ColorModeSwitcherProps {
     // empty
 }
 
 const ColorModeSwitcher: React.FC<ColorModeSwitcherProps> = () => {
-    const { toggleColorMode } = useColorMode();
+    const {toggleColorMode} = useColorMode();
 
     const text = useColorModeValue('dark', 'light');
 
@@ -26,23 +27,23 @@ const ColorModeSwitcher: React.FC<ColorModeSwitcherProps> = () => {
     const emoji = useColorModeValue('🌙', '🌤');
 
     const handleClick = () => {
-        text === 'dark' ? play({ id: 'on' }) : play({ id: 'off' });
+        text === 'dark' ? play({id: 'on'}) : play({id: 'off'});
         toggleColorMode();
     };
 
     return (
-        <AnimatePresence mode='wait' initial={false}>
+        <AnimatePresence mode="wait" initial={false}>
             <MotionBox
-                userSelect='none'
+                userSelect="none"
                 onClick={handleClick}
                 key={iconKey}
-                initial={{ y: -20, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                whileHover={{ scale: 1.2 }}
-                exit={{ y: 20, opacity: 0 }}
-                transition={{ duration: MotionDuration.SHORT }}
-                cursor='pointer'
-                fontSize={{ base: '2xl', sm: '3xl', md: '3xl' }}
+                initial={{y: -20, opacity: 0}}
+                animate={{y: 0, opacity: 1}}
+                whileHover={{scale: 1.2}}
+                exit={{y: 20, opacity: 0}}
+                transition={{duration: MotionDuration.SHORT}}
+                cursor="pointer"
+                fontSize={{base: '2xl', sm: '3xl', md: '3xl'}}
             >
                 {emoji}
             </MotionBox>

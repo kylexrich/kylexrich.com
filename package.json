@@ -11,15 +11,6 @@
     "lint": "cd server && npm run lint && cd ../client && npm run lint"
   },
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^6.3.0",
-    "@typescript-eslint/parser": "^6.3.0",
-    "concurrently": "^8.0.1",
-    "eslint": "^8.46.0",
-    "eslint-config-prettier": "^9.0.0",
-    "eslint-config-react-app": "^7.0.1",
-    "eslint-plugin-prettier": "^5.0.0",
-    "eslint-plugin-react": "^7.33.1",
-    "nodemon": "^2.0.22",
-    "prettier": "^3.0.1"
+    "concurrently": "^8.0.1"
   }
 }

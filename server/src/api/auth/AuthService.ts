@@ -1,9 +1,10 @@
-import { AuthRepository } from './AuthRepository';
-import { ServiceResponse } from '../../util/types/ServiceResponse';
-import { UserExistsError } from '../../errors/UserExistsError';
-import { AuthenticationError } from '../../errors/AuthenticationError';
-import { ContentType } from '../../util/types/ContentType';
-import { UserDocument } from '../../models/User';
+import {UserDocument} from '../../models/User.js';
+import {AuthRepository} from './AuthRepository.js';
+import {ServiceResponse} from '../../util/types/ServiceResponse.js';
+import {UserExistsError} from '../../errors/UserExistsError.js';
+import {ContentType} from '../../util/types/ContentType.js';
+import {AuthenticationError} from '../../errors/AuthenticationError.js';
+
 
 export type UserData = Omit<UserDocument, 'password'>;
 
@@ -26,10 +27,10 @@ export class AuthService {
         }
 
         const userDocument: UserDocument = await this.authRepo.createUser(providedEmail, providedPassword);
-        const user = userDocument.toObject();
+        const user: UserData & { password?: string } = userDocument.toObject();
         delete user.password;
 
-        return { data: user, contentType: ContentType.JSON };
+        return {data: user, contentType: ContentType.JSON};
     }
 
     public async loginUser(providedEmail: string, providedPassword: string): Promise<ServiceResponse<UserData>> {
@@ -39,10 +40,10 @@ export class AuthService {
             throw new AuthenticationError('Invalid email or password');
         }
 
-        const user = userDocument.toObject();
+        const user: UserData & { password?: string } = userDocument.toObject();
         delete user.password;
 
-        return { data: user, contentType: ContentType.JSON };
+        return {data: user, contentType: ContentType.JSON};
     }
 
     public async getUser(id: string): Promise<ServiceResponse<UserData>> {
@@ -52,13 +53,13 @@ export class AuthService {
             throw new AuthenticationError('User not found');
         }
 
-        const user = userDocument.toObject();
+        const user: UserData & { password?: string } = userDocument.toObject();
         delete user.password;
 
-        return { data: user, contentType: ContentType.JSON };
+        return {data: user, contentType: ContentType.JSON};
     }
 
-    public async logoutUser(): Promise<ServiceResponse<LogoutMessage>> {
-        return { data: { message: 'Successfully logged out' }, contentType: ContentType.JSON };
+    public logoutUser(): ServiceResponse<LogoutMessage> {
+        return {data: {message: 'Successfully logged out'}, contentType: ContentType.JSON};
     }
 }

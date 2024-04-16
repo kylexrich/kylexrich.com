@@ -1,4 +1,5 @@
-import { ContentType } from './ContentType';
+import {ContentType} from './ContentType.js';
+
 
 export interface ServiceResponse<T> {
     data: T;

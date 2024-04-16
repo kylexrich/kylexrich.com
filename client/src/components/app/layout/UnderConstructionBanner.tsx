@@ -1,23 +1,23 @@
 import React from 'react';
-import { Box } from '@chakra-ui/react';
-import { ColorWeight, useAccentColor } from '../../../theme/accentColor';
+import {Box} from '@chakra-ui/react';
+import {ColorWeight, useAccentColor} from '../../../theme/accentColor.ts';
 
 const UnderConstructionBanner: React.FC = () => {
     return (
         <Box
-            position='fixed'
+            position="fixed"
             left={0}
             bottom={0}
-            w='100%'
+            w="100%"
             bg={useAccentColor({
                 lightModeWeight: ColorWeight.W500,
                 darkModeWeight: ColorWeight.W400
             })}
-            color='white'
-            textAlign='center'
-            fontWeight='bold'
+            color="white"
+            textAlign="center"
+            fontWeight="bold"
             p={2}
-            zIndex='banner'
+            zIndex="banner"
         >
             Website Under Construction
         </Box>

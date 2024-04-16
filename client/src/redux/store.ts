@@ -1,8 +1,8 @@
-import { configureStore } from '@reduxjs/toolkit';
-import uiReducer from './uiSlice';
-import authReducer from './authSlice';
-import resumeReducer from './resumeSlice';
-import githubReducer from './githubSlice';
+import {configureStore} from '@reduxjs/toolkit';
+import uiReducer from './uiSlice.ts';
+import authReducer from './authSlice.ts';
+import resumeReducer from './resumeSlice.ts';
+import githubReducer from './githubSlice.ts';
 
 const store = configureStore({
     reducer: {

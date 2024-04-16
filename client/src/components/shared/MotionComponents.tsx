@@ -1,6 +1,6 @@
 import React from 'react';
-import { Box, Button, Flex, forwardRef, Icon, IconButton, Image, List, Text, VStack } from '@chakra-ui/react';
-import { motion } from 'framer-motion';
+import {Box, Button, Flex, forwardRef, Icon, IconButton, Image, List, Text, VStack} from '@chakra-ui/react';
+import {motion} from 'framer-motion';
 
 function createMotionComponent(Component: React.ElementType) {
     return motion(forwardRef((props, ref) => <Component ref={ref} {...props} />));

@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import { log } from './log4jsConfig';
+import {log} from './log4jsConfig.js';
 
 async function connectToDB(): Promise<void> {
     try {

@@ -1,8 +1,7 @@
 import React from 'react';
-import AppLayout from './components/app/layout/AppLayout';
+import AppLayout from './components/app/layout/AppLayout.tsx';
 
-function App() {
-    return <AppLayout />;
+export function App() {
+    return <AppLayout/>;
 }
 
-export default App;

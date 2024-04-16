@@ -1,7 +1,7 @@
-import { createSlice } from '@reduxjs/toolkit';
-import { RESET_ALL_ERRORS } from './globalActions';
-import { BaseState } from './interfaces/BaseState';
-import { ACCENT_COLOURS, AccentColor } from '../theme/accentColor';
+import {createSlice, PayloadAction} from '@reduxjs/toolkit';
+import {ACCENT_COLOURS, AccentColor} from '../theme/accentColor.ts';
+import {BaseState} from './interfaces/BaseState.ts';
+import {RESET_ALL_ERRORS} from './globalActions.ts';
 
 // =================== Types ===================
 export interface UIState extends BaseState {
@@ -20,22 +20,22 @@ const uiSlice = createSlice({
     name: 'ui',
     initialState,
     reducers: {
-        changeAccentColor: (state) => {
+        changeAccentColor: (state: UIState) => {
             const currentIndex = ACCENT_COLOURS.indexOf(state.accentColor);
             const nextIndex = (currentIndex + 1) % ACCENT_COLOURS.length;
-            state.accentColor = ACCENT_COLOURS[nextIndex];
+            state.accentColor = ACCENT_COLOURS[nextIndex]!;
         }
     },
     extraReducers: (builder) => {
         builder.addMatcher(
-            (action) => action.type === RESET_ALL_ERRORS,
-            (state) => {
+            (action: PayloadAction<string>) => action.type === RESET_ALL_ERRORS,
+            (state: UIState) => {
                 state.error = null;
             }
         );
     }
 });
 
-export const { changeAccentColor } = uiSlice.actions;
+export const {changeAccentColor} = uiSlice.actions;
 
 export default uiSlice.reducer;
