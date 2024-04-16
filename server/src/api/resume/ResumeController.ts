@@ -1,10 +1,14 @@
-import { Response } from 'express';
+import {Request, Response} from 'express';
 import {ResponseHandler} from "../../util/helper/ResponseHandler.js";
 import {ResumeData, ResumeService} from "./ResumeService.js";
-import {AuthenticatedRequest} from "../../util/types/AuthenticatedRequest.js";
 import {BadRequestError} from "../../errors/BadRequestError.js";
 import {ServiceResponse} from "../../util/types/ServiceResponse.js";
 import {NotFoundError} from "../../errors/NotFoundError.js";
+import {isAuthenticatedRequest} from "../../util/types/AuthenticatedRequest.js";
+import {plainToInstance} from "class-transformer";
+import {ValidationError} from "class-validator/types/validation/ValidationError.js";
+import {validateSync} from "class-validator";
+import {ResumeInput} from "./inputTypes/ResumeInput.js";
 
 export class ResumeController {
     private readonly resumeService: ResumeService;
@@ -15,19 +19,21 @@ export class ResumeController {
         this.responseHandler = responseHandler;
     }
 
-    public async uploadResume(req: AuthenticatedRequest, res: Response): Promise<void> {
+    public async uploadResume(req: Request, res: Response): Promise<void> {
         try {
-            if (req.files && 'resume' in req.files && !req.files?.resume) {
-                throw new BadRequestError('No file uploaded');
+            if (!isAuthenticatedRequest(req)) {
+                this.responseHandler.sendNotAuthenticatedResponse(res);
+                return;
+            }
+            const input: ResumeInput = plainToInstance(ResumeInput, req.files);
+            const validationErrors: ValidationError[] = validateSync(input);
+
+            if (validationErrors.length > 0) {
+                this.responseHandler.sendInputValidationErrorResponse(res, validationErrors);
+                return;
             }
 
-            // @ts-expect-error temporary until next commit
-            const resumeFile = req.files.resume as { data: Buffer; mimetype: string };
-            const result: ServiceResponse<ResumeData> = await this.resumeService.uploadResume(
-                req.body.name,
-                resumeFile.data,
-                resumeFile.mimetype
-            );
+            const result: ServiceResponse<ResumeData> = await this.resumeService.uploadResume(input);
 
             this.responseHandler.sendSuccessResponse(res, 201, result);
         } catch (error) {
@@ -39,8 +45,12 @@ export class ResumeController {
         }
     }
 
-    public async getLatestResume(req: AuthenticatedRequest, res: Response): Promise<void> {
+    public async getLatestResume(req: Request, res: Response): Promise<void> {
         try {
+            if (!isAuthenticatedRequest(req)) {
+                this.responseHandler.sendNotAuthenticatedResponse(res);
+                return;
+            }
             const result: ServiceResponse<ResumeData> = await this.resumeService.getLatestResume();
 
             this.responseHandler.sendSuccessResponse(res, 200, result);

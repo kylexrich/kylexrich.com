@@ -2,10 +2,13 @@ import {Request, Response} from 'express';
 import {ResponseHandler} from '../../util/helper/ResponseHandler.js';
 import {GithubService} from './GithubService.js';
 import {ServiceResponse} from '../../util/types/ServiceResponse.js';
-import {GithubPullRequestDTO} from './types/GithubPullRequest.js';
+import {GithubPullRequestDTO} from './modelTypes/GithubPullRequest.js';
 import {NotFoundError} from '../../errors/NotFoundError.js';
-import {GithubRepoDTO} from './types/GithubRepo.js';
-import {BadRequestError} from '../../errors/BadRequestError.js';
+import {GithubRepoDTO} from './modelTypes/GithubRepo.js';
+import {plainToInstance} from "class-transformer";
+import {ValidationError} from "class-validator/types/validation/ValidationError.js";
+import {validateSync} from "class-validator";
+import {RepositoryInput} from "./inputTypes/RepositoryInput.js";
 
 export class GithubController {
     private readonly githubService: GithubService;
@@ -18,13 +21,15 @@ export class GithubController {
 
     public async getKylexrichGithubPullRequests(req: Request, res: Response): Promise<void> {
         try {
-            const {repository} = req.params;
+            const input: RepositoryInput = plainToInstance(RepositoryInput, req.params);
+            const validationErrors: ValidationError[] = validateSync(input);
 
-            if (!repository) {
-                throw new BadRequestError('No repository provided');
+            if (validationErrors.length > 0) {
+                this.responseHandler.sendInputValidationErrorResponse(res, validationErrors);
+                return;
             }
 
-            const result: ServiceResponse<GithubPullRequestDTO[]> = await this.githubService.getKylexrichGithubPullRequests(repository);
+            const result: ServiceResponse<GithubPullRequestDTO[]> = await this.githubService.getKylexrichGithubPullRequests(input);
 
             this.responseHandler.sendSuccessResponse(res, 200, result);
         } catch (error) {

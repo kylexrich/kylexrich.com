@@ -1,5 +1,4 @@
 import express, { Router } from 'express';
-import {AuthenticatedRequest} from "../../util/types/AuthenticatedRequest.js";
 import {ResumeController} from "./ResumeController.js";
 import {TokenService} from "../token/TokenService.js";
 import {asyncHandler} from "../../util/helper/asyncHandler.js";
@@ -19,12 +18,12 @@ export class ResumeRouterFactory {
         router.post(
             '/',
             (req, res, next) => this.tokenService.verifyToken(req, res, next),
-            asyncHandler((req, res) => this.resumeController.uploadResume(req as AuthenticatedRequest, res))
+            asyncHandler((req, res) => this.resumeController.uploadResume(req, res))
         );
         router.get(
             '/latest',
             (req, res, next) => this.tokenService.verifyToken(req, res, next),
-            asyncHandler((req, res) => this.resumeController.getLatestResume(req as AuthenticatedRequest, res))
+            asyncHandler((req, res) => this.resumeController.getLatestResume(req, res))
         );
 
         return router;

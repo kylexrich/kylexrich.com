@@ -20,7 +20,7 @@ export class AuthRouterFactory {
         router.post('/login', asyncHandler((req, res) => this.authController.loginUser(req, res)));
         router.get('/me',
             (req, res, next) => this.tokenService.verifyToken(req, res, next),
-            asyncHandler((req, res) => this.authController.getUser(req as AuthenticatedRequest, res)));
+            asyncHandler((req, res) => this.authController.getUser(req, res)));
         router.post('/logout',
             (req, res, next) => this.tokenService.verifyToken(req, res, next),
             (req, res) => this.authController.logoutUser(req as AuthenticatedRequest, res));
