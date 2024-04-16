@@ -1,20 +1,20 @@
 import React from 'react';
-import { socialAccounts } from '../../../config/socialAccounts';
-import { Box, Flex, IconButton, Link, Stack, Text, useDisclosure } from '@chakra-ui/react';
-import { author } from '../../../config/name';
-import LoginModal from '../auth/LoginModal';
-import AuthIcon from '../auth/AuthIcon';
-import { useDispatch, useSelector } from 'react-redux';
-import { AppDispatch, RootState } from '../../../redux/store';
-import { logout } from '../../../redux/authSlice';
+import {Box, Flex, IconButton, Link, Stack, Text, useDisclosure} from '@chakra-ui/react';
+import {useAppDispatch, useAppSelector} from '../../../hooks/reduxHooks.tsx';
+import {AppDispatch, RootState} from '../../../redux/store.ts';
+import {logout} from '../../../redux/authSlice.ts';
+import {socialAccounts} from '../../../config/socialAccounts.ts';
+import {author} from '../../../config/name.ts';
+import AuthIcon from '../auth/AuthIcon.tsx';
+import LoginModal from '../auth/LoginModal.tsx';
 
 const Footer: React.FC = () => {
-    const { isOpen, onOpen, onClose } = useDisclosure();
-    const dispatch: AppDispatch = useDispatch();
-    const userId = useSelector((state: RootState) => state.auth.userId);
+    const {isOpen, onOpen, onClose} = useDisclosure();
+    const dispatch: AppDispatch = useAppDispatch();
+    const userId: string | null = useAppSelector((state: RootState) => state.auth.userId);
 
     const onLogout = () => {
-        dispatch(logout());
+        void dispatch(logout());
     };
 
     const renderSocialMediaIcons = () =>
@@ -25,41 +25,41 @@ const Footer: React.FC = () => {
                 isExternal
                 href={acc.url}
                 aria-label={acc.label}
-                size='lg'
+                size="lg"
                 colorScheme={acc.colorScheme}
-                icon={<acc.icon />}
-                variant='ghost'
+                icon={<acc.icon/>}
+                variant="ghost"
                 isRound={true}
             />
         ));
 
     return (
         <Stack
-            as='footer'
+            as="footer"
             p={4}
-            justifyContent='space-between'
-            alignItems='center'
-            w={{ base: '100%', sm: '85%', md: '80%' }}
-            spacing={{ base: 1, sm: 2 }}
+            justifyContent="space-between"
+            alignItems="center"
+            w={{base: '100%', sm: '85%', md: '80%'}}
+            spacing={{base: 1, sm: 2}}
             maxW={800}
-            mx='auto'
+            mx="auto"
         >
             <Flex
-                flexDirection={{ base: 'column', md: 'row' }}
-                flexFlow={{ base: 'column-reverse' }}
-                justifyContent={{ base: 'center', sm: 'space-between' }}
-                alignItems='center'
-                w='100%'
+                flexDirection={{base: 'column', md: 'row'}}
+                flexFlow={{base: 'column-reverse'}}
+                justifyContent={{base: 'center', sm: 'space-between'}}
+                alignItems="center"
+                w="100%"
             >
-                <Text textAlign='center' fontSize='sm'>
+                <Text textAlign="center" fontSize="sm">
                     © {new Date().getFullYear()} {author.name}
                 </Text>
-                <Box textAlign='center'>
+                <Box textAlign="center">
                     {renderSocialMediaIcons()}
-                    <AuthIcon userId={userId} onLogout={onLogout} onOpen={onOpen} />
+                    <AuthIcon userId={userId} onLogout={onLogout} onOpen={onOpen}/>
                 </Box>
             </Flex>
-            <LoginModal isOpen={isOpen} onClose={onClose} />
+            <LoginModal isOpen={isOpen} onClose={onClose}/>
         </Stack>
     );
 };

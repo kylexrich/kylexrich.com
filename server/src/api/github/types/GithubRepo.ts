@@ -1,4 +1,4 @@
-import { GithubUser } from './GithubUser';
+import {GithubUser} from './GithubUser.js';
 
 export interface GithubRepo {
     id: number;

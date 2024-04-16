@@ -1,6 +1,6 @@
 import React from 'react';
-import { IconButton } from '@chakra-ui/react';
-import { FaSignOutAlt, FaSignInAlt } from 'react-icons/fa';
+import {IconButton} from '@chakra-ui/react';
+import {FaSignInAlt, FaSignOutAlt} from 'react-icons/fa';
 
 export interface AuthIconProps {
     userId: string | null;
@@ -8,15 +8,15 @@ export interface AuthIconProps {
     onOpen: () => void;
 }
 
-const AuthIcon: React.FC<AuthIconProps> = ({ userId, onLogout, onOpen }) => {
+const AuthIcon: React.FC<AuthIconProps> = ({userId, onLogout, onOpen}) => {
     const loggedIn = !userId;
 
     return (
         <IconButton
             aria-label={loggedIn ? 'Login' : 'Logout'}
-            size='lg'
-            icon={loggedIn ? <FaSignInAlt /> : <FaSignOutAlt />}
-            variant='ghost'
+            size="lg"
+            icon={loggedIn ? <FaSignInAlt/> : <FaSignOutAlt/>}
+            variant="ghost"
             isRound={true}
             onClick={loggedIn ? onOpen : onLogout}
         />

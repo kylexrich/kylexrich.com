@@ -1,6 +1,6 @@
-import { PayloadAction } from '@reduxjs/toolkit';
-import { BaseState } from './interfaces/BaseState';
-import { RejectedValue, isBackendErrorResponse, isRejectedPayloadAction } from './interfaces/BackendErrorResponse';
+import {PayloadAction} from '@reduxjs/toolkit';
+import {isBackendErrorResponse, isRejectedPayloadAction, RejectedValue} from './interfaces/BackendErrorResponse.ts';
+import {BaseState} from './interfaces/BaseState.ts';
 
 export function getRejectedValue(error: unknown): RejectedValue {
     let errorMessage = 'An unexpected error occurred';
@@ -11,7 +11,7 @@ export function getRejectedValue(error: unknown): RejectedValue {
         errorMessage = error.message;
     }
 
-    return { errorMessage };
+    return {errorMessage};
 }
 
 export const handleLoading = (state: BaseState, loadingStatus: boolean) => {

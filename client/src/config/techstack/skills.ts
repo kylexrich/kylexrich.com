@@ -1,4 +1,4 @@
-import { SkillDetail } from './SkillDetail';
+import {SkillDetail} from './SkillDetail.ts';
 
 export const skills: SkillDetail[] = [
     {
@@ -220,7 +220,7 @@ export const skills: SkillDetail[] = [
     {
         title: 'Redux',
         description: 'State Management',
-        link: 'https://redux.js.org/',
+        link: 'https://redux.ts.org/',
         categories: ['library', 'frontend development'],
         imageRefs: '/assets/images/skills/redux.png',
         bgColor: 'rgba(240,220,255,1)'

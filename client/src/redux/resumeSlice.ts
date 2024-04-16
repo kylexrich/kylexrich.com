@@ -1,11 +1,11 @@
 // resumeSlice.ts
 
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { getRejectedValue, handleLoading, handleRejected } from './asyncThunkHelpers';
-import kylexrichApi from '../api/kylexrichAxios';
-import { RESET_ALL_ERRORS } from './globalActions';
-import { BaseState } from './interfaces/BaseState';
 import { AxiosResponse } from 'axios';
+import kylexrichApi from "../api/kylexrichAxios.ts";
+import {BaseState} from "./interfaces/BaseState.ts";
+import {getRejectedValue, handleLoading, handleRejected} from "./asyncThunkHelpers.ts";
+import {RESET_ALL_ERRORS} from "./globalActions.ts";
 
 // =================== Types ===================
 export interface ResumeState extends BaseState {

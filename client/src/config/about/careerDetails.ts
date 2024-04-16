@@ -1,4 +1,4 @@
-import { AboutCardDetail } from './AboutCardDetail';
+import {AboutCardDetail} from './AboutCardDetail.ts';
 
 export const careerDetails: AboutCardDetail[] = [
     {
@@ -27,9 +27,9 @@ export const careerDetails: AboutCardDetail[] = [
         title: 'Amazon',
         subtitle: 'Software Engineer Intern',
         shortDescription:
-            "Developed a VS Code Extension for IEC-61131 PLC languages, designed a dynamic errorMessage recovery parser, and enhanced Amazon Control Engineers' development speed.",
+            'Developed a VS Code Extension for IEC-61131 PLC languages, designed a dynamic errorMessage recovery parser, and enhanced Amazon Control Engineers\' development speed.',
         longDescriptionParagraphs: [
-            "At Amazon, I led a project to integrate IEC-61131 PLC languages into VS Code. The project's core intention was to phase out a proprietary IDE, mitigating security vulnerabilities and optimizing the workflow for Amazon Control Engineers.",
+            'At Amazon, I led a project to integrate IEC-61131 PLC languages into VS Code. The project\'s core intention was to phase out a proprietary IDE, mitigating security vulnerabilities and optimizing the workflow for Amazon Control Engineers.',
             'I wrote a custom recursive predictive parser with immediate syntax errorMessage recovery. I then leveraged my parser and the Language Server Protocol (LSP) to implement workspace features such as: autocomplete, goto definition, symbol rename, hover information, syntax highlighting, errorMessage messages, and see symbol references.',
             'To ensure the tool met user needs, I routinely presented demos to prospective users, absorbing and implementing their feedback.'
         ],
@@ -79,7 +79,7 @@ export const careerDetails: AboutCardDetail[] = [
         longDescriptionParagraphs: [
             'At UBC, I led in-depth 3-hour tutorials for around 30 students, three times per week. These sessions centered around helping students navigate complex programming challenges, from mutual recursion to system design.',
             'My commitment to student success was reflected in a 100% satisfaction rate on teaching feedback, notably exceeding the 77% average for ME_CUT TAs.',
-            "Students frequently commented on my approachability, thoroughness, and preparation. Written feedback such as 'Kyle was an absolute joy...definitely one of the best TAs I have ever had.' stand testament to the impact I had on their learning."
+            'Students frequently commented on my approachability, thoroughness, and preparation. Written feedback such as \'Kyle was an absolute joy...definitely one of the best TAs I have ever had.\' stand testament to the impact I had on their learning.'
         ],
         skills: ['Instructional Techniques', 'Technical Mentoring', 'Interactive Feedback', 'Student Engagement'],
         imageRefs: {

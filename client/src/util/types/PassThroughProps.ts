@@ -1,8 +1,6 @@
-import { ReactNode } from 'react';
+import {ReactNode} from 'react';
 
-export interface PassThroughProps {
-    [key: string]: any;
-}
+export type PassThroughProps = Record<string, unknown>;
 
 export interface PropsAndChildren extends PassThroughProps {
     children?: ReactNode;

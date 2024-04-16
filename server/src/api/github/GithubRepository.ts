@@ -1,19 +1,22 @@
-import axios, { AxiosInstance, AxiosResponse } from 'axios';
-import { GithubPullRequest } from './types/GithubPullRequest';
-import { GithubRepo } from './types/GithubRepo';
-import { MultiValueCache, SingleValueCache } from '../../util/helper/LocalCache';
+import axios, {AxiosInstance, AxiosResponse} from 'axios';
+import {MultiValueCache, SingleValueCache} from '../../util/helper/LocalCache.js';
+import {GithubPullRequest} from './types/GithubPullRequest.js';
+import {GithubRepo} from './types/GithubRepo.js';
 
 export class GithubRepository {
     private readonly githubAxios: AxiosInstance;
     private readonly pullRequestCache: MultiValueCache<GithubPullRequest[]>;
     private readonly githubRepoCache: SingleValueCache<GithubRepo[]>;
 
-    constructor(pullRequestCache: MultiValueCache<GithubPullRequest[]>, githubRepoCache: SingleValueCache<GithubRepo[]>) {
+    constructor(
+        pullRequestCache: MultiValueCache<GithubPullRequest[]>,
+        githubRepoCache: SingleValueCache<GithubRepo[]>
+    ) {
         this.pullRequestCache = pullRequestCache;
         this.githubRepoCache = githubRepoCache;
         this.githubAxios = axios.create({
             baseURL: 'https://api.github.com/',
-            headers: { Authorization: `token ${process.env.GITHUB_TOKEN}` }
+            headers: {Authorization: `token ${process.env.GITHUB_TOKEN}`}
         });
     }
 
@@ -31,7 +34,7 @@ export class GithubRepository {
         return response.data;
     }
 
-    public async getKyleRichWebsiteGithubRepositories(): Promise<GithubRepo[]> {
+    public async getKylexrichGithubRepositories(): Promise<GithubRepo[]> {
         const cachedData = this.githubRepoCache.get();
 
         if (cachedData !== null) {

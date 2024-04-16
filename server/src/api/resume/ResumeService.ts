@@ -1,8 +1,9 @@
-import { ResumeRepository } from './ResumeRepository';
-import { ServiceResponse } from '../../util/types/ServiceResponse';
-import { NotFoundError } from '../../errors/NotFoundError';
-import { ResumeDocument } from '../../models/Resume';
-import { ContentType } from '../../util/types/ContentType';
+import { ServiceResponse } from "../../util/types/ServiceResponse.js";
+import {ContentType} from "../../util/types/ContentType.js";
+import {ResumeRepository} from "./ResumeRepository.js";
+import {ResumeDocument} from "../../models/Resume.js";
+import {NotFoundError} from "../../errors/NotFoundError.js";
+
 
 export type ResumeData = Buffer;
 

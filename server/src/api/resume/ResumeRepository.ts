@@ -1,4 +1,5 @@
-import Resume, { ResumeDocument } from '../../models/Resume';
+import Resume, {ResumeDocument} from "../../models/Resume.js";
+
 
 export class ResumeRepository {
     public async uploadResume(name: string, fileData: Buffer, mimeType: string): Promise<ResumeDocument> {

@@ -1,32 +1,38 @@
-import React, { useState, useCallback } from 'react';
-import { AppDispatch, RootState } from '../../../redux/store';
-import { useDispatch, useSelector } from 'react-redux';
-import { Button, Box, Input, useToast } from '@chakra-ui/react';
-import { fetchLatestResume, uploadResume } from '../../../redux/resumeSlice';
+import React, {useCallback, useState} from 'react';
+import {useAppDispatch, useAppSelector} from '../../../hooks/reduxHooks.tsx';
+import {AppDispatch, RootState} from '../../../redux/store.ts';
+import {Box, Button, Input, useToast} from '@chakra-ui/react';
+import {fetchLatestResume, uploadResume} from '../../../redux/resumeSlice.ts';
 
-const FileInput: React.FC<{ onFileChange: (file: File) => void }> = ({ onFileChange }) => {
+interface FileInputProps {
+    onFileChange: (file: File | null) => void;
+}
+
+const FileInput: React.FC<FileInputProps> = ({onFileChange}) => {
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        if (e.target.files) {
-            onFileChange(e.target.files[0]);
+        if (e.target.files && e.target.files.length > 0) {
+            onFileChange(e.target.files[0] ?? null);
+        } else {
+            onFileChange(null);
         }
     };
 
-    return <Input type='file' accept='.pdf' onChange={handleChange} mb={4} />;
+    return <Input type="file" accept=".pdf" onChange={handleChange} mb={4}/>;
 };
 
 const ResumeSection: React.FC = () => {
     const [selectedFile, setSelectedFile] = useState<File | null>(null);
-    const dispatch: AppDispatch = useDispatch();
-    const recentResumeBlobUrl = useSelector((state: RootState) => state.resume.recentResumeBlobUrl);
+    const dispatch: AppDispatch = useAppDispatch();
+    const recentResumeBlobUrl: string | null = useAppSelector((state: RootState) => state.resume.recentResumeBlobUrl);
     const toast = useToast();
 
-    const handleOpenMostRecentResume = useCallback(async () => {
+    const handleOpenMostRecentResume = useCallback(() => {
         try {
-            let url = recentResumeBlobUrl;
-            if (!url) {
-                url = await dispatch(fetchLatestResume()).unwrap();
+            if (recentResumeBlobUrl === null) {
+                void dispatch(fetchLatestResume());
+            } else {
+                window.open(recentResumeBlobUrl, '_blank');
             }
-            if (url) window.open(url, '_blank');
         } catch (error) {
             console.error(error);
         }
@@ -34,25 +40,32 @@ const ResumeSection: React.FC = () => {
 
     const handleUploadResume = useCallback(() => {
         if (selectedFile) {
-            dispatch(uploadResume(selectedFile));
-        } else {
-            toast({
-                title: 'No File Selected',
-                description: 'Please select a file to upload.',
-                status: 'warning',
-                duration: 5000,
-                isClosable: true
-            });
+            dispatch(uploadResume(selectedFile))
+                .unwrap()
+                .then(() => {
+                    setSelectedFile(null);
+                    toast({
+                        title: 'Upload Successful',
+                        description: 'Your resume has been uploaded successfully.',
+                        status: 'success',
+                        duration: 5000,
+                        isClosable: true
+                    });
+                })
+                .catch(() => {
+                    setSelectedFile(null);
+                });
         }
     }, [dispatch, selectedFile, toast]);
 
+
     return (
-        <Box p={6} boxShadow='lg' borderRadius='md' bg='white'>
-            <FileInput onFileChange={setSelectedFile} />
-            <Button colorScheme='blue' mr={4} onClick={handleUploadResume}>
+        <Box p={6} boxShadow="lg" borderRadius="md" bg="white">
+            <FileInput onFileChange={setSelectedFile}/>
+            <Button colorScheme="blue" mr={4} onClick={handleUploadResume}>
                 Upload Resume
             </Button>
-            <Button colorScheme='green' onClick={handleOpenMostRecentResume}>
+            <Button colorScheme="green" onClick={handleOpenMostRecentResume}>
                 Open Most Recent Resume
             </Button>
         </Box>

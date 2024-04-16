@@ -1,12 +1,13 @@
-import { Request, Response } from 'express';
-import { AuthService, LogoutMessage, UserData } from './AuthService';
-import { AuthenticatedRequest } from '../../util/types/AuthenticatedRequest';
-import { TokenService } from '../token/TokenService';
-import { ServiceResponse } from '../../util/types/ServiceResponse';
-import { UserExistsError } from '../../errors/UserExistsError';
-import { AuthenticationError } from '../../errors/AuthenticationError';
-import { log } from '../../config/log4jsConfig';
-import { ResponseHandler } from '../../util/helper/ResponseHandler';
+import {Request, Response} from 'express';
+import {AuthService, LogoutMessage, UserData} from './AuthService.js';
+import {TokenService} from '../token/TokenService.js';
+import {ResponseHandler} from '../../util/helper/ResponseHandler.js';
+import {ServiceResponse} from '../../util/types/ServiceResponse.js';
+import {UserExistsError} from '../../errors/UserExistsError.js';
+import {AuthenticationError} from '../../errors/AuthenticationError.js';
+import {AuthenticatedRequest} from '../../util/types/AuthenticatedRequest.js';
+import {BadRequestError} from '../../errors/BadRequestError.js';
+
 
 export class AuthController {
     private readonly authService: AuthService;
@@ -21,7 +22,12 @@ export class AuthController {
 
     public async registerUser(req: Request, res: Response): Promise<void> {
         try {
-            const { email, password } = req.body;
+            const {email, password} = req.body;
+
+            if (!email || !password || typeof email !== 'string' || typeof password !== 'string') {
+                throw new BadRequestError('Email or password invalid');
+            }
+
             const result: ServiceResponse<UserData> = await this.authService.registerUser(email, password);
             const token: string = this.tokenService.signToken(result.data._id);
             this.tokenService.setTokenCookie(res, token);
@@ -37,7 +43,7 @@ export class AuthController {
 
     public async loginUser(req: Request, res: Response): Promise<void> {
         try {
-            const { email, password } = req.body;
+            const {email, password} = req.body;
 
             const result: ServiceResponse<UserData> = await this.authService.loginUser(email, password);
             const token: string = this.tokenService.signToken(result.data._id);
@@ -61,9 +67,9 @@ export class AuthController {
         }
     }
 
-    public async logoutUser(req: AuthenticatedRequest, res: Response): Promise<void> {
+    public logoutUser(req: AuthenticatedRequest, res: Response): void {
         try {
-            const result: ServiceResponse<LogoutMessage> = await this.authService.logoutUser();
+            const result: ServiceResponse<LogoutMessage> = this.authService.logoutUser();
             this.tokenService.clearToken(res);
             this.responseHandler.sendSuccessResponse(res, 200, result);
         } catch (error) {

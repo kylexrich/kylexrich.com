@@ -1,10 +1,11 @@
-import { ServiceResponse } from '../../util/types/ServiceResponse';
-import { NotFoundError } from '../../errors/NotFoundError';
-import { ContentType } from '../../util/types/ContentType';
-import { GithubPullRequest, GithubPullRequestDTO } from './types/GithubPullRequest';
-import { GithubLabel } from './types/GitHubLabel';
-import { GithubRepository } from './GithubRepository';
-import { GithubRepo, GithubRepoDTO } from './types/GithubRepo';
+import {ServiceResponse} from '../../util/types/ServiceResponse.js';
+import {GithubRepository} from './GithubRepository.js';
+import {GithubPullRequest, GithubPullRequestDTO} from './types/GithubPullRequest.js';
+import {NotFoundError} from '../../errors/NotFoundError.js';
+import {GithubLabel} from './types/GitHubLabel.js';
+import {ContentType} from '../../util/types/ContentType.js';
+import {GithubRepo, GithubRepoDTO} from './types/GithubRepo.js';
+
 
 export class GithubService {
     private readonly githubRepo: GithubRepository;
@@ -48,7 +49,7 @@ export class GithubService {
     }
 
     public async getKylexrichGithubRepositories(): Promise<ServiceResponse<GithubRepoDTO[]>> {
-        const githubRepos: GithubRepo[] = await this.githubRepo.getKyleRichWebsiteGithubRepositories();
+        const githubRepos: GithubRepo[] = await this.githubRepo.getKylexrichGithubRepositories();
 
         if (githubRepos.length === 0) {
             throw new NotFoundError('No repositories found');

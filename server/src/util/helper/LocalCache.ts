@@ -18,7 +18,7 @@ export class MultiValueCache<T> {
 
     public set(key: string, data: T): void {
         const lastUpdated = Date.now();
-        this.cache.set(key, { data, lastUpdated });
+        this.cache.set(key, {data, lastUpdated});
     }
 
     public get(key: string): T | null {
@@ -44,7 +44,7 @@ export class SingleValueCache<T> {
 
     public set(data: T): void {
         const lastUpdated = Date.now();
-        this.cacheEntry = { data, lastUpdated };
+        this.cacheEntry = {data, lastUpdated};
     }
 
     public get(): T | null {

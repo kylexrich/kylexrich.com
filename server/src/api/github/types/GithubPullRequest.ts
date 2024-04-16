@@ -1,8 +1,8 @@
-import { GithubUser } from './GithubUser';
-import { GithubRepo } from './GithubRepo';
-import { GithubLabel, GithubLabelDTO } from './GitHubLabel';
-import { GithubMilestone } from './GithubMilestone';
-import { GithubTeam } from './GithubTeam';
+import {GithubUser} from './GithubUser.js';
+import {GithubLabel, GithubLabelDTO} from './GitHubLabel.js';
+import {GithubMilestone} from './GithubMilestone.js';
+import {GithubTeam} from './GithubTeam.js';
+import {GithubRepo} from './GithubRepo.js';
 
 export interface GithubPullRequest {
     url: string;

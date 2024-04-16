@@ -1,9 +1,9 @@
-import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
-import kylexrichApi from '../api/kylexrichAxios';
-import { getRejectedValue, handleLoading, handleRejected } from './asyncThunkHelpers';
-import { RESET_ALL_ERRORS } from './globalActions';
-import { AxiosResponse } from 'axios';
-import { BaseState } from './interfaces/BaseState';
+import {createAsyncThunk, createSlice, PayloadAction} from '@reduxjs/toolkit';
+import {AxiosResponse} from 'axios';
+import kylexrichApi from '../api/kylexrichAxios.ts';
+import {BaseState} from './interfaces/BaseState.ts';
+import {getRejectedValue, handleLoading, handleRejected} from './asyncThunkHelpers.ts';
+import {RESET_ALL_ERRORS} from './globalActions.ts';
 
 // =================== Types ===================
 export interface LoginInfo {
@@ -23,7 +23,8 @@ export interface AuthState extends BaseState {
 }
 
 // =================== Async thunks ===================
-export const login = createAsyncThunk<User, LoginInfo>('auth/loginUser', async (payload: LoginInfo, { rejectWithValue }) => {
+export const login = createAsyncThunk<User, LoginInfo>('auth/loginUser', async (payload: LoginInfo,
+                                                                                {rejectWithValue}) => {
     try {
         const response: AxiosResponse<User> = await kylexrichApi.post<User>('/auth/login', payload);
         return response.data;
@@ -32,7 +33,7 @@ export const login = createAsyncThunk<User, LoginInfo>('auth/loginUser', async (
     }
 });
 
-export const logout = createAsyncThunk<string, void>('auth/logoutUser', async (_, { rejectWithValue }) => {
+export const logout = createAsyncThunk<string, void>('auth/logoutUser', async (_, {rejectWithValue}) => {
     try {
         const response: AxiosResponse<string> = await kylexrichApi.post<string>('/auth/logout');
         return response.data;
@@ -41,7 +42,7 @@ export const logout = createAsyncThunk<string, void>('auth/logoutUser', async (_
     }
 });
 
-export const me = createAsyncThunk<User, void>('auth/getUser', async (_, { rejectWithValue }) => {
+export const me = createAsyncThunk<User, void>('auth/getUser', async (_, {rejectWithValue}) => {
     try {
         const response: AxiosResponse<User> = await kylexrichApi.get<User>('/auth/me');
         return response.data;
@@ -70,23 +71,21 @@ const authSlice = createSlice({
             handleLoading(state, false);
         });
         builder.addCase(me.pending, (state: AuthState) => handleLoading(state, true));
-        builder.addCase(me.rejected, (state: AuthState, action: PayloadAction<unknown>) => handleLoading(state, false));
+        builder.addCase(me.rejected, (state: AuthState) => handleLoading(state, false));
         builder.addCase(me.fulfilled, (state: AuthState, action: PayloadAction<User>) => {
             state.userId = action.payload._id;
             handleLoading(state, false);
         });
         builder.addCase(logout.pending, (state: AuthState) => handleLoading(state, true));
-        builder.addCase(logout.rejected, (state: AuthState, action: PayloadAction<unknown>) => handleRejected(state, action));
-        builder.addCase(logout.fulfilled, (state: AuthState, action: PayloadAction<string>) => {
+        builder.addCase(logout.rejected, (state: AuthState,
+                                          action: PayloadAction<unknown>) => handleRejected(state, action));
+        builder.addCase(logout.fulfilled, (state: AuthState) => {
             state.userId = null;
             handleLoading(state, false);
         });
-        builder.addMatcher(
-            (action) => action.type === RESET_ALL_ERRORS,
-            (state) => {
-                state.error = null;
-            }
-        );
+        builder.addMatcher((action: PayloadAction<string>) => action.type === RESET_ALL_ERRORS, (state: AuthState) => {
+            state.error = null;
+        });
     }
 });
 

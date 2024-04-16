@@ -1,4 +1,4 @@
-import { useColorModeValue } from '@chakra-ui/react';
+import {useColorModeValue} from '@chakra-ui/react';
 
 export enum AccentColor {
     Green = 'green',
@@ -28,6 +28,7 @@ export const ACCENT_THEME_DEF = {
     }
 };
 
+/* eslint-disable */
 export function buildAccentColorVariables(colorObject: any): string {
     return `{
                 --colors-accent-50: ${colorObject[50]};
@@ -42,6 +43,8 @@ export function buildAccentColorVariables(colorObject: any): string {
                 --colors-accent-900: ${colorObject[900]};
             }`;
 }
+
+/* eslint-enable */
 
 export enum ColorWeight {
     W50 = 50, // Lightest color weight
@@ -62,7 +65,7 @@ export interface AccentColorModeSettings {
 }
 
 export function useAccentColor(accentColorModeSettings?: AccentColorModeSettings) {
-    const { lightModeWeight, darkModeWeight } = accentColorModeSettings ?? {
+    const {lightModeWeight, darkModeWeight} = accentColorModeSettings ?? {
         lightModeWeight: ColorWeight.W500,
         darkModeWeight: ColorWeight.W400
     };
@@ -70,13 +73,13 @@ export function useAccentColor(accentColorModeSettings?: AccentColorModeSettings
 }
 
 export function useAccentMode(mode: string, accentColorModeSettings?: AccentColorModeSettings) {
-    const { lightModeWeight, darkModeWeight } = accentColorModeSettings ?? {
+    const {lightModeWeight, darkModeWeight} = accentColorModeSettings ?? {
         lightModeWeight: ColorWeight.W500,
         darkModeWeight: ColorWeight.W400
     };
-    return useMode(mode, { lightMode: `accent.${lightModeWeight}`, darkMode: `accent.${darkModeWeight}` });
+    return useMode(mode, {lightMode: `accent.${lightModeWeight}`, darkMode: `accent.${darkModeWeight}`});
 }
 
-export function useMode(mode: string, { lightMode, darkMode }: { lightMode: string; darkMode: string }) {
+export function useMode(mode: string, {lightMode, darkMode}: { lightMode: string; darkMode: string }) {
     return mode === 'light' ? lightMode : darkMode;
 }

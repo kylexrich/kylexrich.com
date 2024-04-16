@@ -1,14 +1,14 @@
-import { useToast } from '@chakra-ui/react';
-import { useEffect } from 'react';
-import { siteErrorSelector } from '../redux/selectors/siteErrorSelector';
-import { useDispatch, useSelector } from 'react-redux';
-import { AppDispatch } from '../redux/store';
-import { RESET_ALL_ERRORS } from '../redux/globalActions';
+import {useToast} from '@chakra-ui/react';
+import {useEffect} from 'react';
+import {useAppDispatch, useAppSelector} from './reduxHooks.tsx';
+import {siteErrorSelector} from '../redux/selectors/siteErrorSelector.ts';
+import {AppDispatch} from '../redux/store.ts';
+import {RESET_ALL_ERRORS} from '../redux/globalActions.ts';
 
 export function useErrorNotification() {
     const toast = useToast();
-    const error = useSelector(siteErrorSelector);
-    const dispatch: AppDispatch = useDispatch();
+    const error = useAppSelector(siteErrorSelector);
+    const dispatch: AppDispatch = useAppDispatch();
 
     useEffect(() => {
         if (error) {
@@ -19,7 +19,7 @@ export function useErrorNotification() {
                 duration: 5000,
                 isClosable: true
             });
-            dispatch({ type: RESET_ALL_ERRORS });
+            dispatch({type: RESET_ALL_ERRORS});
         }
     }, [dispatch, error, toast]);
 }

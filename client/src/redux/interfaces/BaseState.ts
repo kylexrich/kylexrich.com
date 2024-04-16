@@ -1,4 +1,4 @@
-export type BaseState = {
+export interface BaseState {
     loading: boolean;
     error: string | null;
-};
+}
