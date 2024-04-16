@@ -35,7 +35,8 @@ export class TokenService {
                 this.responseHandler.sendErrorResponse(res, 403, 'Invalid token', null);
                 return;
             }
-            (req as AuthenticatedRequest).user = {id: (decodedToken as JwtPayload).user.id as string};
+            const authReq = req as AuthenticatedRequest;
+            authReq.authenticatedUser =  {id: (decodedToken as JwtPayload).user.id as string};
             if (isAuthenticatedRequest(req)) {
                 next();
             } else {

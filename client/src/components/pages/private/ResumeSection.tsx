@@ -29,7 +29,7 @@ const ResumeSection: React.FC = () => {
     const handleOpenMostRecentResume = useCallback(() => {
         try {
             if (recentResumeBlobUrl === null) {
-                void dispatch(fetchLatestResume());
+                void dispatch(fetchLatestResume()).unwrap();
             } else {
                 window.open(recentResumeBlobUrl, '_blank');
             }

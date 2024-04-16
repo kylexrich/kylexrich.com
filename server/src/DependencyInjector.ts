@@ -13,8 +13,8 @@ import {GithubService} from './api/github/GithubService.js';
 import {GithubController} from './api/github/GithubController.js';
 import {GithubRouterFactory} from './api/github/GithubRouterFactory.js';
 import {CacheExpiration, MultiValueCache, SingleValueCache} from './util/helper/LocalCache.js';
-import {GithubPullRequest} from './api/github/types/GithubPullRequest.js';
-import {GithubRepo} from './api/github/types/GithubRepo.js';
+import {GithubPullRequest} from './api/github/modelTypes/GithubPullRequest.js';
+import {GithubRepo} from './api/github/modelTypes/GithubRepo.js';
 
 
 export class DependencyInjector {

@@ -3,6 +3,7 @@ import {ContentType} from "../../util/types/ContentType.js";
 import {ResumeRepository} from "./ResumeRepository.js";
 import {ResumeDocument} from "../../models/Resume.js";
 import {NotFoundError} from "../../errors/NotFoundError.js";
+import {ResumeInput} from "./inputTypes/ResumeInput.js";
 
 
 export type ResumeData = Buffer;
@@ -14,8 +15,8 @@ export class ResumeService {
         this.resumeRepo = resumeRepo;
     }
 
-    public async uploadResume(name: string, fileData: Buffer, mimeType: string): Promise<ServiceResponse<ResumeData>> {
-        const savedResume: ResumeDocument = await this.resumeRepo.uploadResume(name, fileData, mimeType);
+    public async uploadResume(resumeInput: ResumeInput): Promise<ServiceResponse<ResumeData>> {
+        const savedResume: ResumeDocument = await this.resumeRepo.uploadResume(resumeInput.resume.data);
         return { data: savedResume.file, contentType: ContentType.PDF };
     }
 

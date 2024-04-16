@@ -1,7 +1,7 @@
 import axios, {AxiosInstance, AxiosResponse} from 'axios';
 import {MultiValueCache, SingleValueCache} from '../../util/helper/LocalCache.js';
-import {GithubPullRequest} from './types/GithubPullRequest.js';
-import {GithubRepo} from './types/GithubRepo.js';
+import {GithubPullRequest} from './modelTypes/GithubPullRequest.js';
+import {GithubRepo} from './modelTypes/GithubRepo.js';
 
 export class GithubRepository {
     private readonly githubAxios: AxiosInstance;
