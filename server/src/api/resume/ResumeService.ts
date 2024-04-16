@@ -1,12 +1,11 @@
-import { ServiceResponse } from "../../util/types/ServiceResponse.js";
-import {ContentType} from "../../util/types/ContentType.js";
-import {ResumeRepository} from "./ResumeRepository.js";
-import {ResumeDocument} from "../../models/Resume.js";
-import {NotFoundError} from "../../errors/NotFoundError.js";
+import {ResumeRepository} from './ResumeRepository.js';
+import {ServiceResponse} from '../../util/types/ServiceResponse.js';
+import {ResumeDocument} from '../../models/Resume.js';
+import {ContentType} from '../../util/types/ContentType.js';
+import {NotFoundError} from '../../errors/NotFoundError.js';
 import {ResumeInput} from "./inputTypes/ResumeInput.js";
 
-
-export type ResumeData = Buffer;
+export interface ResumeData { s3Url: string }
 
 export class ResumeService {
     private readonly resumeRepo: ResumeRepository;
@@ -15,9 +14,9 @@ export class ResumeService {
         this.resumeRepo = resumeRepo;
     }
 
-    public async uploadResume(resumeInput: ResumeInput): Promise<ServiceResponse<ResumeData>> {
-        const savedResume: ResumeDocument = await this.resumeRepo.uploadResume(resumeInput.resume.data);
-        return { data: savedResume.file, contentType: ContentType.PDF };
+    public async uploadResume(file: ResumeInput): Promise<ServiceResponse<ResumeData>> {
+        const savedResume: ResumeDocument = await this.resumeRepo.uploadResume(file.file);
+        return {data: {s3Url: savedResume.s3Url}, contentType: ContentType.JSON};
     }
 
     public async getLatestResume(): Promise<ServiceResponse<ResumeData>> {
@@ -27,6 +26,6 @@ export class ResumeService {
             throw new NotFoundError('Resume not found');
         }
 
-        return { data: resume.file, contentType: ContentType.PDF };
+        return {data: {s3Url: resume.s3Url}, contentType: ContentType.JSON};
     }
 }

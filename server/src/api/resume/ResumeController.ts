@@ -5,7 +5,6 @@ import {BadRequestError} from "../../errors/BadRequestError.js";
 import {ServiceResponse} from "../../util/types/ServiceResponse.js";
 import {NotFoundError} from "../../errors/NotFoundError.js";
 import {isAuthenticatedRequest} from "../../util/types/AuthenticatedRequest.js";
-import {plainToInstance} from "class-transformer";
 import {ValidationError} from "class-validator/types/validation/ValidationError.js";
 import {validateSync} from "class-validator";
 import {ResumeInput} from "./inputTypes/ResumeInput.js";
@@ -25,7 +24,8 @@ export class ResumeController {
                 this.responseHandler.sendNotAuthenticatedResponse(res);
                 return;
             }
-            const input: ResumeInput = plainToInstance(ResumeInput, req.files);
+
+            const input: ResumeInput = new ResumeInput(req.file!);
             const validationErrors: ValidationError[] = validateSync(input);
 
             if (validationErrors.length > 0) {

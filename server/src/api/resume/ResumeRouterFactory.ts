@@ -1,7 +1,9 @@
-import express, { Router } from 'express';
-import {ResumeController} from "./ResumeController.js";
-import {TokenService} from "../token/TokenService.js";
-import {asyncHandler} from "../../util/helper/asyncHandler.js";
+import express, {Router} from 'express';
+import {ResumeController} from './ResumeController.js';
+import {TokenService} from '../token/TokenService.js';
+import {upload} from '../../config/serverConfig.js';
+import {asyncHandler} from '../../util/helper/asyncHandler.js';
+
 
 export class ResumeRouterFactory {
     private readonly resumeController: ResumeController;
@@ -13,11 +15,12 @@ export class ResumeRouterFactory {
     }
 
     public createResumeRouter(): Router {
-        const router = express.Router({ mergeParams: true });
+        const router = express.Router({mergeParams: true});
 
         router.post(
             '/',
             (req, res, next) => this.tokenService.verifyToken(req, res, next),
+            upload.single('resume'),
             asyncHandler((req, res) => this.resumeController.uploadResume(req, res))
         );
         router.get(

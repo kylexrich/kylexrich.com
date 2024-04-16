@@ -23,20 +23,28 @@ const FileInput: React.FC<FileInputProps> = ({onFileChange}) => {
 const ResumeSection: React.FC = () => {
     const [selectedFile, setSelectedFile] = useState<File | null>(null);
     const dispatch: AppDispatch = useAppDispatch();
-    const recentResumeBlobUrl: string | null = useAppSelector((state: RootState) => state.resume.recentResumeBlobUrl);
+    const recentResumeS3Url: string | null = useAppSelector((state: RootState) => state.resume.recentResumeBlobUrl);
     const toast = useToast();
 
     const handleOpenMostRecentResume = useCallback(() => {
         try {
-            if (recentResumeBlobUrl === null) {
-                void dispatch(fetchLatestResume()).unwrap();
+            if (recentResumeS3Url === null) {
+                dispatch(fetchLatestResume())
+                    .unwrap()
+                    .then((s3Url) => {
+                        window.open(s3Url, '_blank');
+                    })
+                    .catch((e) => {
+                        console.error(e);
+                        setSelectedFile(null);
+                    });
             } else {
-                window.open(recentResumeBlobUrl, '_blank');
+                window.open(recentResumeS3Url, '_blank');
             }
         } catch (error) {
             console.error(error);
         }
-    }, [dispatch, recentResumeBlobUrl]);
+    }, [dispatch, recentResumeS3Url]);
 
     const handleUploadResume = useCallback(() => {
         if (selectedFile) {
@@ -52,7 +60,8 @@ const ResumeSection: React.FC = () => {
                         isClosable: true
                     });
                 })
-                .catch(() => {
+                .catch((e) => {
+                    console.error(e);
                     setSelectedFile(null);
                 });
         }

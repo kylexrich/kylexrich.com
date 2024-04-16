@@ -1,3 +1,5 @@
+import multer from "multer";
+
 export const ENV = process.env.NODE_ENV ?? 'development';
 export const PORT = process.env.PORT ?? 3001;
 export let HOST_URL: string;
@@ -14,3 +16,6 @@ switch (ENV) {
     default:
         HOST_URL = `http://localhost:${PORT}`;
 }
+
+// Set up the multer middleware to handle file uploads
+export const upload: multer.Multer = multer({storage: multer.memoryStorage()});
