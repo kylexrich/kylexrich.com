@@ -18,6 +18,7 @@
       "dom.iterable"
     ],
     "jsx": "react-jsx",
-    "allowImportingTsExtensions": true
+    "allowImportingTsExtensions": true,
+    "noEmit": true
   }
 }
