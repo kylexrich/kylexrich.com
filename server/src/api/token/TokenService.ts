@@ -11,7 +11,10 @@ export class TokenService {
 
     constructor(responseHandler: ResponseHandler) {
         this.responseHandler = responseHandler;
-        this.jwtSecret = process.env.JWT_SECRET ?? 'secret';
+        this.jwtSecret = process.env.JWT_SECRET!;
+        if (!this.jwtSecret) {
+            throw new Error('.env JWT_SECRET is not set');
+        }
         this.isProd = process.env.NODE_ENV === 'production';
         const expireInDays = this.isProd ? 5 : 1;
         this.expiresInSeconds = expireInDays * 24 * 60 * 60;
