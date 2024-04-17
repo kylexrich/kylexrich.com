@@ -20,9 +20,8 @@
     "react-redux": "^9.1.1",
     "react-router-dom": "^6.22.3",
     "react-scripts": "^5.0.1",
-    "use-sound": "^4.0.1"
-  },
-  "devDependencies": {
+    "use-sound": "^4.0.1",
+
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "@eslint/js": "^9.0.0",
     "@testing-library/jest-dom": "^6.4.2",
@@ -38,6 +37,8 @@
     "eslint": "^8.57.0",
     "typescript": "^5.4.5",
     "typescript-eslint": "^7.7.0"
+  },
+  "devDependencies": {
   },
   "scripts": {
     "start": "react-scripts start",
