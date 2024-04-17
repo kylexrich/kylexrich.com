@@ -49,7 +49,7 @@ class Server {
 
     private serveBuild(): void {
         if (this.env !== 'development') {
-            const buildPath = path.join(__dirname, '../../client/build');
+            const buildPath = path.join(import.meta.dirname, '../../client/build');
             this.app.use(express.static(buildPath));
             this.app.get('*', (_, res) => res.sendFile(path.resolve(buildPath, 'index.html')));
         }
