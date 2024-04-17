@@ -5,7 +5,7 @@ import path from 'path';
 import log4js from 'log4js';
 import cookieParser from 'cookie-parser';
 import {DependencyInjector} from './DependencyInjector.js';
-import {ENV, HOST_URL, PORT} from './config/serverConfig.js';
+import {apiLimiter, ENV, HOST_URL, PORT, staticLimiter} from './config/serverConfig.js';
 import {httpLogger, log} from './config/log4jsConfig.js';
 import connectToDB from './config/connectToDB.js';
 
@@ -42,6 +42,7 @@ class Server {
     }
 
     private setupRoutes(): void {
+        this.app.use('/api', apiLimiter);
         this.app.use('/api/auth', this.di.getAuthRouterFactory().createAuthRouter());
         this.app.use('/api/resume', this.di.getResumeRouterFactory().createResumeRouter());
         this.app.use('/api/github', this.di.getGithubRouterFactory().createGithubRouter());
@@ -50,6 +51,7 @@ class Server {
     private serveBuild(): void {
         if (this.env !== 'development') {
             const buildPath = path.join(import.meta.dirname, '../../client/build');
+            this.app.use(staticLimiter);
             this.app.use(express.static(buildPath));
             this.app.get('*', (_, res) => res.sendFile(path.resolve(buildPath, 'index.html')));
         }
