@@ -31,7 +31,7 @@ export const careerDetails: AboutCardDetail[] = [
         longDescriptionParagraphs: [
             'At Amazon, I led a project to integrate IEC-61131 PLC languages into VS Code. The project\'s core intention was to phase out a proprietary IDE, mitigating security vulnerabilities and optimizing the workflow for Amazon Control Engineers.',
             'I wrote a custom recursive predictive parser with immediate syntax errorMessage recovery. I then leveraged my parser and the Language Server Protocol (LSP) to implement workspace features such as: autocomplete, goto definition, symbol rename, hover information, syntax highlighting, errorMessage messages, and see symbol references.',
-            'To ensure the tool met authenticatedUser needs, I routinely presented demos to prospective users, absorbing and implementing their feedback.'
+            'To ensure the tool met user needs, I routinely presented demos to prospective users, absorbing and implementing their feedback.'
         ],
         skills: [
             'React',

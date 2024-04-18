@@ -36,7 +36,6 @@ const ResumeSection: React.FC = () => {
                     })
                     .catch((e) => {
                         console.error(e);
-                        setSelectedFile(null);
                     });
             } else {
                 window.open(recentResumeS3Url, '_blank');
