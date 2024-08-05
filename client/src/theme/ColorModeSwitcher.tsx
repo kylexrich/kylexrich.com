@@ -27,7 +27,11 @@ const ColorModeSwitcher: React.FC<ColorModeSwitcherProps> = () => {
     const emoji = useColorModeValue('🌙', '🌤');
 
     const handleClick = () => {
-        text === 'dark' ? play({id: 'on'}) : play({id: 'off'});
+        if (text === 'dark') {
+            play({id: 'on'});
+        } else {
+            play({id: 'off'});
+        }
         toggleColorMode();
     };
 
