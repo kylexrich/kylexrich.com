@@ -27,13 +27,27 @@ export class GithubRepository {
             return cachedData;
         }
 
-        const response: AxiosResponse<GithubPullRequest[]> = await this.githubAxios.get(`repos/kylexrich/${repository}/pulls?state=all`);
+        let allPullRequests: GithubPullRequest[] = [];
+        let page = 1;
+        const perPage = 100;
+        let response: AxiosResponse<GithubPullRequest[]>;
 
-        this.pullRequestCache.set(repository, response.data);
+        do {
+            response = await this.githubAxios.get(`repos/kylexrich/${repository}/pulls`, {
+                params: {
+                    state: 'all',
+                    per_page: perPage,
+                    page: page
+                }
+            });
+            allPullRequests = allPullRequests.concat(response.data);
+            page++;
+        } while (response.data.length === perPage);
 
-        return response.data;
+        this.pullRequestCache.set(repository, allPullRequests);
+
+        return allPullRequests;
     }
-
     public async getKylexrichGithubRepositories(): Promise<GithubRepo[]> {
         const cachedData = this.githubRepoCache.get();
 
