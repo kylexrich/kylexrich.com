@@ -7,7 +7,6 @@ import {ContentType} from '../../util/types/ContentType.js';
 import {GithubRepo, GithubRepoDTO} from './modelTypes/GithubRepo.js';
 import {RepositoryInput} from "./inputTypes/RepositoryInput.js";
 
-
 export class GithubService {
     private readonly githubRepo: GithubRepository;
 
@@ -24,7 +23,8 @@ export class GithubService {
 
         const mergedAndOpenPullRequests: GithubPullRequestDTO[] = githubPullRequests
             .filter((pullRequest: GithubPullRequest) => {
-                return pullRequest.state === 'open' || pullRequest.merged_at !== null;
+                return (pullRequest.state === 'open' || pullRequest.merged_at !== null)
+                    && pullRequest.user.login !== 'dependabot[bot]';
             })
             .map((pullRequest: GithubPullRequest) => {
                 return {
