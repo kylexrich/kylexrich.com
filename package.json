@@ -11,6 +11,6 @@
     "lint": "cd server && npm run lint && cd ../client && npm run lint"
   },
   "devDependencies": {
-    "concurrently": "^8.0.1"
+    "concurrently": "^9.0.0"
   }
 }
