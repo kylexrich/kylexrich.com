@@ -78,7 +78,7 @@ export const careerDetails: AboutCardDetail[] = [
             'Led 3-hour tutorials for ~30 students three times weekly, focusing on advanced programming topics. Attained an exceptional 100% satisfaction rate, surpassing the 77% average.',
         longDescriptionParagraphs: [
             'At UBC, I led in-depth 3-hour tutorials for around 30 students, three times per week. These sessions centered around helping students navigate complex programming challenges, from mutual recursion to system design.',
-            'My commitment to student success was reflected in a 100% satisfaction rate on teaching feedback, notably exceeding the 77% average for ME_CUT TAs.',
+            'My commitment to student success was reflected in a 100% satisfaction rate on teaching feedback, notably exceeding the 77% average for other TAs.',
             'Students frequently commented on my approachability, thoroughness, and preparation. Written feedback such as \'Kyle was an absolute joy...definitely one of the best TAs I have ever had.\' stand testament to the impact I had on their learning.'
         ],
         skills: ['Instructional Techniques', 'Technical Mentoring', 'Interactive Feedback', 'Student Engagement'],
