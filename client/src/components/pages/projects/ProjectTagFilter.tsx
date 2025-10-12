@@ -42,7 +42,10 @@ const ProjectTagFilter: React.FC<ProjectTagFilterProps> = ({tags, selectedTags, 
                             borderColor={active ? accentBorder : inactiveBorder}
                             borderWidth={2}
                             _hover={{bg: active ? accentBg : hoverBg}}
+                            _active={{bg: accentBg}}
                             onClick={() => onToggleTag(tag)}
+                            aria-pressed={active}
+                            transition="all 0.2s ease"
                         >
                             {tag}
                         </Button>
