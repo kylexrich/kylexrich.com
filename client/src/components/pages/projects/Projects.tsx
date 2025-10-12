@@ -1,5 +1,5 @@
 import React, {useMemo, useState} from 'react';
-import {Box, Stack, Text} from '@chakra-ui/react';
+import {Box, SimpleGrid, Text} from '@chakra-ui/react';
 import MainLayout from '../../app/layout/MainLayout.tsx';
 import {MotionVStack} from '../../shared/MotionComponents.tsx';
 import {MotionDuration} from '../../shared/variants.tsx';
@@ -23,7 +23,7 @@ const childVariants = {
 };
 
 const Projects: React.FC = () => {
-    const [activeTag, setActiveTag] = useState('All');
+    const [selectedTags, setSelectedTags] = useState<string[]>([]);
 
     const tags = useMemo(() => {
         const tagSet = new Set<string>();
@@ -32,33 +32,47 @@ const Projects: React.FC = () => {
     }, []);
 
     const filteredProjects = useMemo(() => {
-        if (activeTag === 'All') {
+        if (selectedTags.length === 0) {
             return projects;
         }
-        return projects.filter((project) => project.tags.includes(activeTag));
-    }, [activeTag]);
+        return projects.filter((project) => selectedTags.every((tag) => project.tags.includes(tag)));
+    }, [selectedTags]);
+
+    const handleToggleTag = (tag: string) => {
+        if (tag === 'All') {
+            setSelectedTags([]);
+            return;
+        }
+
+        setSelectedTags((prev) => {
+            if (prev.includes(tag)) {
+                return prev.filter((item) => item !== tag);
+            }
+            return [...prev, tag];
+        });
+    };
 
     return (
         <MainLayout>
-            <MotionVStack spacing={12} align="stretch" variants={containerVariants}>
-                <MotionVStack spacing={6} align="flex-start" variants={childVariants}>
+            <MotionVStack spacing={10} align="stretch" variants={containerVariants}>
+                <MotionVStack spacing={5} align="flex-start" variants={childVariants}>
                     <UnderlinedHeader header="Projects ✨" variants={childVariants}/>
-                    <Text maxW={{base: '100%', md: '85%'}} textAlign="left">
-                        Case studies that highlight how I design, build, and ship thoughtful developer experiences. Filter by
-                        focus area to explore the work that resonates most with what you need next.
+                    <Text maxW={{base: '100%', md: '70%'}} textAlign="left">
+                        A curated set of recent work that blends product strategy, thoughtful UX, and durable engineering.
+                        Choose the capabilities you care about to tailor the list.
                     </Text>
-                    <ProjectTagFilter tags={tags} activeTag={activeTag} onTagSelect={setActiveTag}/>
+                    <ProjectTagFilter tags={tags} selectedTags={selectedTags} onToggleTag={handleToggleTag}/>
                 </MotionVStack>
-                <Stack spacing={10}>
+                <SimpleGrid columns={{base: 1, lg: 2}} spacing={8}>
                     {filteredProjects.map((project) => (
                         <ProjectCard key={project.id} project={project} variants={childVariants}/>
                     ))}
-                    {filteredProjects.length === 0 && (
-                        <Box textAlign="left">
-                            <Text>No projects found for this filter just yet. Try another tag.</Text>
-                        </Box>
-                    )}
-                </Stack>
+                </SimpleGrid>
+                {filteredProjects.length === 0 && (
+                    <Box textAlign="left">
+                        <Text>No projects match that combination just yet. Try adjusting a filter or two.</Text>
+                    </Box>
+                )}
             </MotionVStack>
         </MainLayout>
     );

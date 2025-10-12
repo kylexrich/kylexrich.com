@@ -1,24 +1,21 @@
 import React from 'react';
 import {
+    AspectRatio,
     Badge,
-    Box,
+    Button,
     Heading,
     HStack,
-    Link,
-    List,
-    ListIcon,
-    ListItem,
-    SimpleGrid,
     Stack,
     Tag,
     Text,
-    useColorModeValue
+    useColorModeValue,
+    useDisclosure
 } from '@chakra-ui/react';
-import {FiCheckCircle} from 'react-icons/fi';
 import {HiArrowTopRightOnSquare} from 'react-icons/hi2';
 import {ColorWeight, useAccentColor} from '../../../theme/accentColor.ts';
 import {MotionBox, MotionImage} from '../../shared/MotionComponents.tsx';
 import {Project} from '../../../config/projects/projectData.ts';
+import ProjectDetailsModal from './ProjectDetailsModal.tsx';
 
 export interface ProjectCardProps {
     project: Project;
@@ -26,45 +23,42 @@ export interface ProjectCardProps {
 }
 
 const ProjectCard: React.FC<ProjectCardProps> = ({project, variants}) => {
-    const cardBg = useColorModeValue('white', 'gray.800');
+    const cardBg = useColorModeValue('white', 'gray.900');
     const cardBorder = useColorModeValue('blackAlpha.100', 'whiteAlpha.200');
-    const secondaryText = useColorModeValue('gray.600', 'gray.400');
+    const summaryColor = useColorModeValue('gray.600', 'gray.400');
     const tagBg = useAccentColor({lightModeWeight: ColorWeight.W100, darkModeWeight: ColorWeight.W700});
     const tagText = useAccentColor({lightModeWeight: ColorWeight.W700, darkModeWeight: ColorWeight.W100});
     const badgeBg = useAccentColor({lightModeWeight: ColorWeight.W200, darkModeWeight: ColorWeight.W600});
     const badgeText = useAccentColor({lightModeWeight: ColorWeight.W800, darkModeWeight: ColorWeight.W100});
-    const metricBg = useColorModeValue('gray.50', 'whiteAlpha.100');
+    const ctaBg = useAccentColor({lightModeWeight: ColorWeight.W600, darkModeWeight: ColorWeight.W500});
+    const ctaHoverBg = useAccentColor({lightModeWeight: ColorWeight.W700, darkModeWeight: ColorWeight.W400});
+    const ctaText = useColorModeValue('white', 'gray.900');
+    const {isOpen, onOpen, onClose} = useDisclosure();
+
+    const primaryLink = project.links[0];
 
     return (
-        <MotionBox
-            variants={variants}
-            whileHover={{translateY: -6}}
-            transition={{type: 'spring', stiffness: 120, damping: 18}}
-        >
-            <Stack
-                direction={{base: 'column', md: 'row'}}
-                spacing={{base: 6, md: 8}}
-                p={{base: 6, md: 8}}
+        <>
+            <MotionBox
+                variants={variants}
+                whileHover={{translateY: -6}}
+                transition={{type: 'spring', stiffness: 120, damping: 18}}
                 borderRadius="2xl"
-                bg={cardBg}
                 borderWidth="1px"
                 borderColor={cardBorder}
-                boxShadow="lg"
-                align="stretch"
+                bg={cardBg}
+                overflow="hidden"
             >
-                <Box flex={{base: 'initial', md: '0 0 320px'}}>
-                    <MotionImage
-                        src={project.image}
-                        alt={project.title}
-                        rounded="xl"
-                        borderWidth="1px"
-                        borderColor={cardBorder}
-                        objectFit="cover"
-                        w="full"
-                        h="full"
-                    />
-                </Box>
-                <Stack spacing={5} flex={1} align="flex-start">
+                <Stack spacing={6} align="flex-start" p={{base: 5, md: 6}}>
+                    <AspectRatio ratio={16 / 9} w="full" borderRadius="xl" overflow="hidden" borderWidth="1px" borderColor={cardBorder}>
+                        <MotionImage
+                            src={project.image}
+                            alt={project.title}
+                            objectFit="cover"
+                            w="full"
+                            h="full"
+                        />
+                    </AspectRatio>
                     <Badge
                         px={3}
                         py={1}
@@ -75,70 +69,52 @@ const ProjectCard: React.FC<ProjectCardProps> = ({project, variants}) => {
                     >
                         {project.timeframe}
                     </Badge>
-                    <Stack spacing={3} align="flex-start">
-                        <Heading size="lg" textAlign="left">
+                    <Stack spacing={3} align="flex-start" w="full">
+                        <Heading size="md" textAlign="left">
                             {project.title}
                         </Heading>
-                        <Text fontSize="md" color={secondaryText} textAlign="left">
+                        <Text textAlign="left" color={summaryColor}>
                             {project.summary}
                         </Text>
-                        <Text textAlign="left">
-                            {project.description}
-                        </Text>
                     </Stack>
-                    <List spacing={2} textAlign="left">
-                        {project.contributions.map((item) => (
-                            <ListItem key={item} display="flex" alignItems="flex-start">
-                                <ListIcon as={FiCheckCircle} color={badgeText} mt={1}/>
-                                <Text>{item}</Text>
-                            </ListItem>
-                        ))}
-                    </List>
-                    <SimpleGrid columns={{base: 1, md: 3}} spacing={4} w="full">
-                        {project.metrics.map((metric) => (
-                            <Box
-                                key={`${project.id}-${metric.label}`}
-                                bg={metricBg}
-                                borderRadius="lg"
-                                px={4}
-                                py={3}
-                                borderWidth="1px"
-                                borderColor={cardBorder}
-                                textAlign="left"
-                            >
-                                <Text fontSize="sm" textTransform="uppercase" fontWeight="600" color={secondaryText}>
-                                    {metric.label}
-                                </Text>
-                                <Text fontWeight="600">{metric.value}</Text>
-                            </Box>
-                        ))}
-                    </SimpleGrid>
-                    <HStack spacing={3} flexWrap="wrap">
+                    <HStack spacing={2} flexWrap="wrap">
                         {project.tags.map((tag) => (
-                            <Tag key={`${project.id}-${tag}`} bg={tagBg} color={tagText} px={3} py={2} borderRadius="full">
+                            <Tag key={`${project.id}-${tag}`} bg={tagBg} color={tagText} px={3} py={1.5} borderRadius="full">
                                 {tag}
                             </Tag>
                         ))}
                     </HStack>
-                    <HStack spacing={4} flexWrap="wrap">
-                        {project.links.map((link) => (
-                            <Link
-                                key={`${project.id}-${link.label}`}
-                                href={link.url}
-                                isExternal
+                    <Stack direction={{base: 'column', md: 'row'}} spacing={3} w="full">
+                        <Button
+                            onClick={onOpen}
+                            bg={ctaBg}
+                            color={ctaText}
+                            _hover={{bg: ctaHoverBg}}
+                            borderRadius="full"
+                            fontWeight="600"
+                            flex={1}
+                        >
+                            View details
+                        </Button>
+                        {primaryLink && (
+                            <Button
+                                as="a"
+                                href={primaryLink.url}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                rightIcon={<HiArrowTopRightOnSquare/>}
+                                variant="outline"
+                                borderRadius="full"
                                 fontWeight="600"
-                                display="inline-flex"
-                                alignItems="center"
-                                gap={2}
                             >
-                                {link.label}
-                                <HiArrowTopRightOnSquare/>
-                            </Link>
-                        ))}
-                    </HStack>
+                                {primaryLink.label}
+                            </Button>
+                        )}
+                    </Stack>
                 </Stack>
-            </Stack>
-        </MotionBox>
+            </MotionBox>
+            <ProjectDetailsModal project={project} isOpen={isOpen} onClose={onClose}/>
+        </>
     );
 };
 

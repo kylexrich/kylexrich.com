@@ -4,24 +4,30 @@ import {ColorWeight, useAccentColor} from '../../../theme/accentColor.ts';
 
 export interface ProjectTagFilterProps {
     tags: string[];
-    activeTag: string;
-    onTagSelect: (tag: string) => void;
+    selectedTags: string[];
+    onToggleTag: (tag: string) => void;
 }
 
-const ProjectTagFilter: React.FC<ProjectTagFilterProps> = ({tags, activeTag, onTagSelect}) => {
+const ProjectTagFilter: React.FC<ProjectTagFilterProps> = ({tags, selectedTags, onToggleTag}) => {
     const accentBg = useAccentColor({lightModeWeight: ColorWeight.W100, darkModeWeight: ColorWeight.W700});
     const accentBorder = useAccentColor({lightModeWeight: ColorWeight.W400, darkModeWeight: ColorWeight.W500});
     const accentText = useAccentColor({lightModeWeight: ColorWeight.W700, darkModeWeight: ColorWeight.W100});
-    const inactiveBg = useColorModeValue('white', 'gray.800');
+    const inactiveBg = useColorModeValue('white', 'gray.900');
     const inactiveBorder = useColorModeValue('blackAlpha.100', 'whiteAlpha.200');
     const inactiveText = useColorModeValue('gray.600', 'gray.300');
-
     const hoverBg = useColorModeValue('gray.100', 'gray.700');
+
+    const isTagActive = (tag: string): boolean => {
+        if (tag === 'All') {
+            return selectedTags.length === 0;
+        }
+        return selectedTags.includes(tag);
+    };
 
     return (
         <Wrap spacing={3} shouldWrapChildren>
             {tags.map((tag) => {
-                const isActive = tag === activeTag;
+                const active = isTagActive(tag);
                 return (
                     <WrapItem key={tag}>
                         <Button
@@ -31,12 +37,12 @@ const ProjectTagFilter: React.FC<ProjectTagFilterProps> = ({tags, activeTag, onT
                             rounded="full"
                             px={4}
                             py={2}
-                            bg={isActive ? accentBg : inactiveBg}
-                            color={isActive ? accentText : inactiveText}
-                            borderColor={isActive ? accentBorder : inactiveBorder}
+                            bg={active ? accentBg : inactiveBg}
+                            color={active ? accentText : inactiveText}
+                            borderColor={active ? accentBorder : inactiveBorder}
                             borderWidth={2}
-                            _hover={{bg: isActive ? accentBg : hoverBg}}
-                            onClick={() => onTagSelect(tag)}
+                            _hover={{bg: active ? accentBg : hoverBg}}
+                            onClick={() => onToggleTag(tag)}
                         >
                             {tag}
                         </Button>
