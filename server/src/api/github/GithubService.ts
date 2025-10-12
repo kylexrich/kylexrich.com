@@ -24,7 +24,8 @@ export class GithubService {
         const mergedAndOpenPullRequests: GithubPullRequestDTO[] = githubPullRequests
             .filter((pullRequest: GithubPullRequest) => {
                 return (pullRequest.state === 'open' || pullRequest.merged_at !== null)
-                    && pullRequest.user.login !== 'dependabot[bot]';
+                    && pullRequest.user.login !== 'dependabot[bot]'
+                    && pullRequest.base.ref === 'main';
             })
             .map((pullRequest: GithubPullRequest) => {
                 return {
