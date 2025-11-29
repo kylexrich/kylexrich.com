@@ -38,8 +38,18 @@ export class TokenService {
                 this.responseHandler.sendErrorResponse(res, 403, 'Invalid token', null);
                 return;
             }
+
+            const decoded = decodedToken as JwtPayload & { user?: { id?: string } };
+            const userId = decoded?.user?.id;
+
+            if (!userId) {
+                this.responseHandler.sendErrorResponse(res, 403, 'Invalid token payload', null);
+                return;
+            }
+
             const authReq = req as AuthenticatedRequest;
-            authReq.authenticatedUser =  {id: (decodedToken as JwtPayload).user.id as string};
+            authReq.authenticatedUser = {id: userId};
+
             if (isAuthenticatedRequest(req)) {
                 next();
             } else {

@@ -21,17 +21,18 @@ export const careerDetails: AboutCardDetail[] = [
             light: '/assets/images/about/amazonlogo.png',
             dark: '/assets/images/about/amazonlogowhite.png'
         },
-        dateText: 'May 2023 – Current'
+        dateText: 'May 2023 - Current'
     },
     {
         title: 'Amazon',
         subtitle: 'Software Engineer Intern',
         shortDescription:
-            'Developed a VS Code Extension for IEC-61131 PLC languages, designed a dynamic errorMessage recovery parser, and enhanced Amazon Control Engineers\' development speed.',
+            'Shipped a VS Code extension and Language Server to add full IEC 61131 PLC language support for control engineers - replacing a proprietary IDE dependency, improving security, and accelerating development speed for Amazon Control Engineers.',
         longDescriptionParagraphs: [
-            'At Amazon, I led a project to integrate IEC-61131 PLC languages into VS Code. The project\'s core intention was to phase out a proprietary IDE, mitigating security vulnerabilities and optimizing the workflow for Amazon Control Engineers.',
-            'I wrote a custom recursive predictive parser with immediate syntax errorMessage recovery. I then leveraged my parser and the Language Server Protocol (LSP) to implement workspace features such as: autocomplete, goto definition, symbol rename, hover information, syntax highlighting, errorMessage messages, and see symbol references.',
-            'To ensure the tool met user needs, I routinely presented demos to prospective users, absorbing and implementing their feedback.'
+            'Built a custom parser with immediate syntax-error recovery and integrated with VS Code using Language Server Protocol (LSP).',
+            'Implemented core editor capabilities: autocomplete, Go to Definition, Rename Symbols, Hover info, syntax highlighting, diagnostics, and find references.',
+            'Ran iterative user demos with control engineers; incorporated feedback and earned approval to continue the project beyond the internship; delivered thorough docs for a seamless handoff.',
+            'Recognized by management for SDE II-level performance - delivered 3x the initial scope and kept stakeholders aligned through proactive communication.'
         ],
         skills: [
             'React',
@@ -49,13 +50,14 @@ export const careerDetails: AboutCardDetail[] = [
     },
     {
         title: 'Traction on Demand (acquired by Salesforce)',
-        subtitle: 'Business Solutions Consultant Intern',
+        subtitle: 'Salesforce Consultant Intern',
         shortDescription:
-            'Achieved a 100% client retention rate, generated over $100,000 in contract revenue, and reduced lead response time by 40% with custom automation.',
+            'Only intern ever trusted with end to end client ownership - owned 3 accounts, aligned stakeholders, prioritized parallel CRM improvement projects, and shipped Apex/Flow automations that delivered measurable outcomes.',
         longDescriptionParagraphs: [
-            'At Traction on Demand, I was the first intern in history to solely manage clients. My proactive communication and innovative solutions led to a 100% retention rate across my three clients, which subsequently drove over $100,000 in contract revenue.',
-            'A notable achievement was the implementation of a custom lead routing automation for a client in a highly competitive industry. This system efficiently allocated leads based on specific criteria, resulting in a 40% reduction in lead response time.',
-            'Besides technical contributions, I took ownership of improving team productivity. I proposed a revamped daily stand-up structure based on feedback and best practices, saving the team 30 hours weekly.'
+            'Achieved 100% client retention across 3 accounts, sustaining $100K+ in contract revenue via proactive communication, clear expectations, and on time delivery.',
+            'Reduced lead response time by >40% for one client by building a ZIP code + lead score based Apex routing automation (Apex, SOQL, Salesforce Flow).',
+            'Saved my team ~30 hours/week by proactively redesigning the daily stand up (cadence, agenda, facilitation) using teammate feedback and agile best practices; planned and executed a $10,000 team building offsite to strengthen cohesion.',
+            'Built reusable talk tracks/FAQs to standardize responses and accelerate discovery.'
         ],
         skills: [
             'IT Consulting',
@@ -75,11 +77,12 @@ export const careerDetails: AboutCardDetail[] = [
         title: 'University of British Columbia',
         subtitle: 'Undergraduate Teaching Assistant',
         shortDescription:
-            'Led 3-hour tutorials for ~30 students three times weekly, focusing on advanced programming topics. Attained an exceptional 100% satisfaction rate, surpassing the 77% average.',
+            'Led 3x weekly, 3 hour guided tutorials (~30 students per session) focused on complex programming problems (e.g., mutual recursion, graph algorithms, system design). Drove comprehension through structured walkthroughs and live problem solving.',
         longDescriptionParagraphs: [
-            'At UBC, I led in-depth 3-hour tutorials for around 30 students, three times per week. These sessions centered around helping students navigate complex programming challenges, from mutual recursion to system design.',
-            'My commitment to student success was reflected in a 100% satisfaction rate on teaching feedback, notably exceeding the 77% average for other TAs.',
-            'Students frequently commented on my approachability, thoroughness, and preparation. Written feedback such as \'Kyle was an absolute joy...definitely one of the best TAs I have ever had.\' stand testament to the impact I had on their learning.'
+            'Facilitated high engagement tutorials with emphasis on mastery: frequent comprehension checks and clear step by step explanations before students left each lab.',
+            'Earned 100% student satisfaction across all evaluation dimensions (vs 77% average for other TAs) in end of semester feedback.',
+            'Recognized by many students for preparation, approachability, and depth of knowledge; noted an example verbatim student feedback below.',
+            'Student feedback (verbatim): "Kyle was an absolute joy to have around for our tutorials and was extremely well put together. He would always be prepared, had a fantastic attitude in each lab, and was very approachable for questions. Similarly, he was extremely knowledgeable and made sure you understood every concept in the lab before you left. I have no suggestions for Kyle to improve because I believe he was a "perfect" TA who nailed every part of his job. Kyle was a huge reason why I looked forward to attending these tutorials every week and definitely one of the best TAs I have ever had."'
         ],
         skills: ['Instructional Techniques', 'Technical Mentoring', 'Interactive Feedback', 'Student Engagement'],
         imageRefs: {

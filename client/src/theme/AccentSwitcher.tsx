@@ -1,17 +1,20 @@
-import {IconButtonProps, useColorModeValue} from '@chakra-ui/react';
+import {IconButtonProps, useColorModeValue, useTheme} from '@chakra-ui/react';
 import {AppDispatch, RootState} from '../redux/store.ts';
 import {AccentColor, buildAccentColorVariables, useAccentColor} from './accentColor.ts';
 import React, {useCallback} from 'react';
 import {changeAccentColor} from '../redux/uiSlice.ts';
 import {MotionDuration} from '../components/shared/variants.tsx';
 import {MotionIcon, MotionIconButton} from '../components/shared/MotionComponents.tsx';
-import {theme} from './theme.ts';
 import {css, Global} from '@emotion/react';
 import {useAppDispatch, useAppSelector} from '../hooks/reduxHooks.tsx';
-// @ts-expect-error use-sound doesn't have types
 import useSound from 'use-sound';
 import {useAnimationControls} from 'framer-motion';
 
+interface AccentTheme {
+    colors: Record<string, Record<string, string>> & {
+        accent: Record<string, string>;
+    };
+}
 
 export const AccentPicker: React.FC<IconButtonProps> = ({...props}) => {
     const dispatch: AppDispatch = useAppDispatch();
@@ -61,17 +64,19 @@ export const AccentPicker: React.FC<IconButtonProps> = ({...props}) => {
 };
 
 export const GlobalAccent: React.FC = () => {
+    const themeWithAccent = useTheme<AccentTheme>();
     const accentColor = useAppSelector((state: RootState) => state.ui.accentColor);
     const colorMode = useColorModeValue('light', 'dark');
     setFavicon(accentColor, colorMode);
-    const accent = theme.colors[accentColor];
+    const accentPalette = (themeWithAccent.colors[accentColor] ?? themeWithAccent.colors.accent) ?? {};
+    const accent: Record<string, string> = accentPalette;
 
     const styles = React.useMemo(
         () => css`
             :root${buildAccentColorVariables(accent)}
         }
         `,
-        [accentColor]
+        [accentColor, accent]
     );
     return <Global styles={styles}/>;
 };

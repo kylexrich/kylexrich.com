@@ -1,6 +1,3 @@
-/* eslint-disable */
-
-
 export enum ContentType {
     // Text formats
     HTML = 'text/html',

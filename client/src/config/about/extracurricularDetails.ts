@@ -5,7 +5,12 @@ export const extracurricularDetails: AboutCardDetail[] = [
         title: 'Microsoft',
         subtitle: 'Student Ambassador',
         shortDescription:
-            'Collaborated with campus clubs to run tech workshops and events, organized an event with 30 students and 6 Microsoft employees, hosted an advanced Microsoft Excel workshop, and engaged with over 50 students globally about UBC and Microsoft.',
+            'Ran ambassador events and workshops while mentoring 50+ students about Microsoft, UBC, and technical learning paths.',
+        longDescriptionParagraphs: [
+            'Organized a career paths event connecting ~30 students with 6 Microsoft employees across technical roles; owned planning, agenda design, outreach, and live Q&A facilitation.',
+            'Built and delivered a 60 minute advanced Microsoft Excel workshop to ~50 students with live demos and Q&A.',
+            'Mentored 50+ students globally on university, career decisions, and learning paths into tech.'
+        ],
         skills: ['Event Organization', 'Technical Workshops', 'Peer Engagement', 'Microsoft Technologies'],
         imageRefs: {
             light: '/assets/images/about/microsoftslalogo.png',
@@ -41,7 +46,13 @@ export const extracurricularDetails: AboutCardDetail[] = [
         title: 'BizHacks',
         subtitle: 'VP of Technology',
         shortDescription:
-            'Mentored a team of 5 developers to improve the BizHacks website, introduced Agile and Scrum methodologies, and built automated kanban boards and management dashboards.',
+            'Led BizHacks tech team: hired/mentored five developers, rolled out Scrum, automated Kanban reporting, and shipped website improvements.',
+        longDescriptionParagraphs: [
+            'Hired and mentored a five-person developer team; defined engineering practices and delivery for the website and internal tools.',
+            'Introduced Scrum (sprint planning, reviews, retros) across five BizHacks teams to improve cadence and accountability.',
+            'Automated Kanban boards and a leadership dashboard that surfaced status, blockers, and throughput for faster prioritization.',
+            'Iterated the website to clarify event details and streamline registration, improving information access for prospective attendees.'
+        ],
         skills: ['Team Leadership', 'Agile Methodologies', 'Scrum', 'Web Development', 'Project Management'],
         imageRefs: {light: '/assets/images/about/bizhackslogo.png', dark: '/assets/images/about/bizhackslogo.png'},
         dateText: 'Sep 2021 - Dec 2021',
@@ -61,7 +72,13 @@ export const extracurricularDetails: AboutCardDetail[] = [
         title: 'Langara Business Association',
         subtitle: 'Fundraising Coordinator',
         shortDescription:
-            'Consolidated member ideas into event plans and managed event logistics, hosted team-building events to reduce club turnover, increased average raised capital by over $2000, and implemented data-driven marketing to engage more professors.',
+            'Coordinated LBA fundraisers and workshops, lifting average event revenue by $2,000+ through tighter planning, marketing, and team coordination.',
+        longDescriptionParagraphs: [
+            'Raised average funds per event by $2,000+ by tightening budgets, vendor coordination, and runbooks.',
+            'Led end to end execution for workshops and fundraisers, translating member ideas into plans, budgets, logistics, and day-of operations.',
+            'Drove data-driven marketing that increased faculty donations by 20% and boosted professor participation.',
+            'Organized team building activities that improved engagement and reduced volunteer turnover.'
+        ],
         skills: ['Event Planning', 'Fundraising', 'Data-Driven Marketing', 'Team Leadership'],
         imageRefs: {
             light: '/assets/images/about/langarabalogo.jpeg',
@@ -74,7 +91,7 @@ export const extracurricularDetails: AboutCardDetail[] = [
         title: 'CPA BC Case Competition',
         subtitle: 'Academic Competitor',
         shortDescription:
-            'Placed 3rd place among 64 teams. Directed analysis, recommendations, and implementation to improve Dropox’s competitive positioning and drive customer satisfaction',
+            'Placed 3rd place among 64 teams. Directed analysis, recommendations, and implementation to improve Dropox\'s competitive positioning and drive customer satisfaction. Watch the submission: https://www.youtube.com/watch?v=iLMz1SPIGJM',
         skills: ['Strategic Analysis', 'Team Collaboration', 'Case Study Analysis'],
         imageRefs: {light: '/assets/images/about/cpalogo.jpeg', dark: '/assets/images/about/cpalogo.jpeg'},
         dateText: 'Jan 2019 - Mar 2019',

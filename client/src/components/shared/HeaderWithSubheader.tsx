@@ -6,16 +6,18 @@ import UnderlinedHeader from './UnderlinedHeader.tsx';
 
 export interface HeaderWithSubheaderProps extends PassThroughProps {
     header: string;
-    subheader: string;
+    subheader?: string;
 }
 
 const HeaderWithSubheader: React.FC<HeaderWithSubheaderProps> = ({header, subheader, ...props}) => {
     return (
         <MotionVStack align="start" {...props}>
-            <UnderlinedHeader mt={0} mb={2} header={header}/>
-            <Text color={useColorModeValue('gray.500', 'gray.200')} textAlign="left" mb={6}>
-                {subheader}
-            </Text>
+            <UnderlinedHeader mt={0} mb={subheader ? 2 : 6} header={header}/>
+            {subheader && (
+                <Text color={useColorModeValue('gray.500', 'gray.200')} textAlign="left" mb={6}>
+                    {subheader}
+                </Text>
+            )}
         </MotionVStack>
     );
 };

@@ -82,7 +82,7 @@ const Home: React.FC<HomeProps> = () => {
                             {'Kyle Rich '}
                         </Text>
                         <Text as="span" display="inline">
-                            {'and I\'m a backend engineer from Canada 🇨🇦'}
+                            {'and I\'m a backend-leaning full-stack engineer from Canada 🇨🇦'}
                         </Text>
                     </Box>
                     <Box as="h2" fontSize="2xl" fontWeight="400" mt={5} textAlign="left">

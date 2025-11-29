@@ -3,7 +3,6 @@ import {useColorMode, useColorModeValue} from '@chakra-ui/react';
 import {AnimatePresence} from 'framer-motion';
 import {MotionBox} from '../components/shared/MotionComponents.tsx';
 import {MotionDuration} from '../components/shared/variants.tsx';
-// @ts-expect-error use-sound doesn't have types
 import useSound from 'use-sound';
 
 export interface ColorModeSwitcherProps {

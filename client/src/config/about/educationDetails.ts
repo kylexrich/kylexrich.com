@@ -4,7 +4,12 @@ export const educationDetails: AboutCardDetail[] = [
     {
         title: 'University of British Columbia',
         subtitle: 'Bachelor of Business and Computer Science',
-        shortDescription: 'Honours, GPA: 3.97/4',
+        shortDescription: 'Honours, 3.97 GPA',
+        longDescriptionParagraphs: [
+            'Honours, 3.97 GPA',
+            'Business 87.6%',
+            'Computer Science / Math 90.3%'
+        ],
         dateText: 'Graduation: 2025',
         imageRefs: {
             light: '/assets/images/about/ubclogo.jpeg',

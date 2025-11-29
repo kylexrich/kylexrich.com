@@ -18,6 +18,10 @@
       "dom.iterable"
     ],
     "jsx": "react-jsx",
+    "typeRoots": [
+      "./src/@types",
+      "./node_modules/@types"
+    ],
     "allowImportingTsExtensions": true,
     "noEmit": true
   }

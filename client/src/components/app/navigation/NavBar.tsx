@@ -13,8 +13,17 @@ import {AccentPicker} from '../../../theme/AccentSwitcher.tsx';
 import ColorModeSwitcher from '../../../theme/ColorModeSwitcher.tsx';
 import {useAppSelector} from '../../../hooks/reduxHooks.tsx';
 
+interface NavBarTheme {
+    navBar?: {
+        bg?: {
+            light?: string;
+            dark?: string;
+        };
+    };
+}
+
 const NavBar: React.FC = () => {
-    const {colors} = useTheme();
+    const theme = useTheme<NavBarTheme>();
 
     const avatarColor = useAccentColor();
     const avatarBorderColor = useAccentColor({
@@ -25,9 +34,13 @@ const NavBar: React.FC = () => {
     const userId = useAppSelector((state: RootState) => state.auth.userId);
 
     const filteredRoutes = routes.filter((route) => !route.secure || userId);
+    const navBg = useColorModeValue(
+        theme.navBar?.bg?.light ?? 'white',
+        theme.navBar?.bg?.dark ?? 'gray.900'
+    );
 
     return (
-        <Box bg={useColorModeValue(colors.navBar.bg.light, colors.navBar.bg.dark)} px={4} boxShadow={'lg'}>
+        <Box bg={navBg} px={4} boxShadow="lg">
             <Flex
                 h={16}
                 alignItems={'center'}
