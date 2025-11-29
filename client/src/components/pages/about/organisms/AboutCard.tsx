@@ -13,75 +13,105 @@ export interface AboutCardThemeProps {
 }
 
 export interface GenericAboutCardProps extends AboutCardDetail {
-    // empty
+}
+
+interface AboutTheme {
+    about?: {
+        aboutCard?: {
+            textColor?: {
+                light?: string;
+                dark?: string;
+            };
+            bg?: {
+                light?: string;
+                dark?: string;
+            };
+        };
+    };
 }
 
 const AboutCard: React.FC<GenericAboutCardProps> = ({
-                                                        imageRefs,
-                                                        title,
-                                                        subtitle,
-                                                        type,
-                                                        shortDescription,
-                                                        longDescriptionParagraphs,
-                                                        dateText,
-                                                        skills
-                                                    }) => {
-    const [isHovered, {on, off}] = useBoolean(false);
+    imageRefs,
+    title,
+    subtitle,
+    type,
+    shortDescription,
+    longDescriptionParagraphs,
+    dateText,
+    skills
+}) => {
+    const [isHovered, hoverState] = useBoolean(false);
+    const {on: activateHover, off: deactivateHover} = hoverState;
     const hasModal = longDescriptionParagraphs && longDescriptionParagraphs.length > 0;
 
     const {isOpen, onOpen, onClose} = useDisclosure();
-    const {colors} = useTheme();
+    const theme = useTheme<AboutTheme>();
 
-    const textColor = useColorModeValue(colors.about.aboutCard.textColor.light, colors.about.aboutCard.textColor.dark);
-    const subTextColor = useColorModeValue(colors.about.aboutCard.textColor.light, colors.about.aboutCard.textColor.dark);
+    const textColor = useColorModeValue(
+        theme.about?.aboutCard?.textColor?.light ?? 'gray.800',
+        theme.about?.aboutCard?.textColor?.dark ?? 'gray.100'
+    );
+    const subTextColor = useColorModeValue(
+        theme.about?.aboutCard?.textColor?.light ?? 'gray.700',
+        theme.about?.aboutCard?.textColor?.dark ?? 'gray.200'
+    );
     const skillColor = useAccentColor();
 
-    const modalHoverBg = useAccentColor({lightModeWeight: ColorWeight.W50, darkModeWeight: ColorWeight.W900});
-    const nonModalBg = useColorModeValue(colors.about.aboutCard.bg.light, colors.about.aboutCard.bg.dark);
-    const bg = hasModal && isHovered ? modalHoverBg : nonModalBg;
+    const modalHoverBackground = useAccentColor({lightModeWeight: ColorWeight.W50, darkModeWeight: ColorWeight.W900});
+    const nonModalBackground = useColorModeValue(
+        theme.about?.aboutCard?.bg?.light ?? 'white',
+        theme.about?.aboutCard?.bg?.dark ?? 'gray.900'
+    );
+    const cardBackground = hasModal && isHovered ? modalHoverBackground : nonModalBackground;
 
-    return (<Box onClick={hasModal ? onOpen : undefined} cursor={hasModal ? 'pointer' : 'default'}>
-        <Box
-            px={4}
-            py={5}
-            borderWidth="1px"
-            _hover={{shadow: 'lg'}}
-            bg={bg}
-            position="relative"
-            rounded="md"
-            onMouseEnter={on}
-            onMouseLeave={off}
-        >
-            <AboutCardContent
-                imageRefs={imageRefs}
-                title={title}
-                textColor={textColor}
-                subtitle={subtitle}
-                subTextColor={subTextColor}
-                shortDescription={shortDescription}
-                type={type}
-                skillColor={skillColor}
-                dateText={dateText}
-                skills={skills}
-                hasModal={hasModal ?? false}
-                isHovered={isHovered}
-            />
+    return (
+        <Box onClick={hasModal ? onOpen : undefined} cursor={hasModal ? 'pointer' : 'default'}>
+            <Box
+                px={4}
+                py={5}
+                borderWidth="1px"
+                _hover={{shadow: 'lg'}}
+                bg={cardBackground}
+                position="relative"
+                rounded="md"
+                onMouseEnter={activateHover}
+                onMouseLeave={deactivateHover}
+            >
+                <AboutCardContent
+                    imageRefs={imageRefs}
+                    title={title}
+                    textColor={textColor}
+                    subtitle={subtitle}
+                    subTextColor={subTextColor}
+                    shortDescription={shortDescription}
+                    type={type}
+                    skillColor={skillColor}
+                    dateText={dateText}
+                    skills={skills}
+                    hasModal={hasModal ?? false}
+                    isHovered={isHovered}
+                />
+            </Box>
+
+            {hasModal && (
+                <AboutCardModal
+                    imageRefs={imageRefs}
+                    title={title}
+                    textColor={textColor}
+                    subtitle={subtitle}
+                    subTextColor={subTextColor}
+                    shortDescription={shortDescription}
+                    longDescriptionParagraphs={longDescriptionParagraphs}
+                    skills={skills}
+                    skillColor={skillColor}
+                    isOpen={isOpen}
+                    onClose={onClose}
+                    dateText={dateText}
+                    type={type}
+                />
+            )}
         </Box>
-
-        {hasModal && (<AboutCardModal
-            imageRefs={imageRefs}
-            title={title}
-            textColor={textColor}
-            subtitle={subtitle}
-            subTextColor={subTextColor}
-            longDescriptionParagraphs={longDescriptionParagraphs}
-            skills={skills}
-            skillColor={skillColor}
-            isOpen={isOpen}
-            onClose={onClose}
-            dateText={dateText}
-        />)}
-    </Box>);
+    );
 };
 
 export default AboutCard;

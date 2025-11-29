@@ -33,7 +33,7 @@ const LoginModal: React.FC<LoginModalProps> = ({isOpen, onClose}) => {
     };
 
     return (
-        <Modal isOpen={isOpen} onClose={onClose}>
+        <Modal isOpen={isOpen} onClose={onClose} preserveScrollBarGap>
             <ModalOverlay/>
             <ModalContent>
                 <ModalHeader>Login</ModalHeader>

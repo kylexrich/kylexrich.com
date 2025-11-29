@@ -69,8 +69,12 @@ const AboutCardContent: React.FC<CardContentProps> = (props) => {
                     </>
                 )}
             </Stack>
-            <SkillTags skills={props.skills} skillColor={props.skillColor} textColor={props.textColor}
-                       subTextColor={props.subTextColor}/>
+            <SkillTags
+                skills={props.skills}
+                skillColor={props.skillColor}
+                textColor={props.textColor}
+                subTextColor={props.subTextColor}
+            />
         </>
     );
 };

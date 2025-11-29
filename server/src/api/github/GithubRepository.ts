@@ -2,7 +2,6 @@ import axios, {AxiosInstance, AxiosResponse} from 'axios';
 import {MultiValueCache, SingleValueCache} from '../../util/helper/LocalCache.js';
 import {GithubPullRequest} from './modelTypes/GithubPullRequest.js';
 import {GithubRepo} from './modelTypes/GithubRepo.js';
-import {log} from "../../config/log4jsConfig.js";
 
 export class GithubRepository {
     private readonly githubAxios: AxiosInstance;
@@ -44,7 +43,7 @@ export class GithubRepository {
             allPullRequests = allPullRequests.concat(response.data);
             page++;
         } while (response.data.length === perPage);
-        log.info(JSON.stringify(allPullRequests, null, 2));
+        
         this.pullRequestCache.set(repository, allPullRequests);
 
         return allPullRequests;
