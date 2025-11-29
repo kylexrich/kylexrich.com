@@ -1,0 +1,139 @@
+/*//////////// custom styles for about-me ////////////*/
+
+/* for text beside about-me photo */
+.about-me-title-text {
+    padding-top: 8%;
+}
+
+/* for personal details */
+.personal-details-box {
+    max-width: 58% !important;
+}
+
+.exp-tabs {
+    justify-content: left !important;
+}
+
+
+/*//////////// custom styles for interests ////////////*/
+.custom-padding-4 {
+	padding: 32px 36.8px !important;
+	padding: 2rem 2.3rem !important;
+}
+
+.custom-primary-font {
+    text-align: center;
+    font-size: 25px !important;
+}
+
+.interests-title {
+    margin-bottom: 30px !important;
+}
+
+/*//////////// custom styles for education ////////////*/
+.button-margin {
+    margin-top: 10px;
+}
+
+html .btn-outline.btn-primary:hover, html .btn-outline.btn-primary.hover {
+    color: #000 !important;
+}
+
+.custom-box-w-btn {
+    padding: 35px 45px !important;
+}
+
+
+/*//////////// custom styles for contact ////////////*/
+.contact-bg-x {
+    background: url(../img/contact/contact-bg.jpg) !important;
+    background-size: cover !important;
+}
+
+/*//////////// custom styles for portfolio ////////////*/
+
+.portfolio-content-pos {
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+/*//////////// custom styles for skills////////////*/
+
+.skills .skills-container {
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: 0 5px 5px 0 rgba(233, 240, 243, .5), 0 0 0 1px #e6ecf8 !important;
+}
+
+.skills .skill-container {
+    background: #fff;
+    text-align: center;
+    padding: 3em 2em 1em;
+    border-bottom: 1px solid #e6ecf8;
+    border-right: 0 solid #e6ecf8;
+}
+
+.skills .skill-container h2 {
+    font-weight: 600 !important;
+    color: #1e1e1e !important;
+    font-size: 1.3em;
+    padding-top: 0.5em;
+
+}
+
+.skills .skill-container li {
+    color: #727c93 !important;
+}
+
+.skills .skill-container ul {
+    list-style: none !important;
+    padding-left: 0 !important;
+}
+
+@media (min-width:768px) {
+.skills .skill-container {
+    border-bottom: 0 solid #e6ecf8;
+    border-right: 1px solid #e6ecf8;
+}
+}
+
+.skills .skill-container:last-child {
+    border-bottom: none !important;
+    border-right: none !important;
+}
+
+
+/*STYLE SWITHCER
+
+- Skin Colours -
+Primary #FDD55C
+Secondary #ecf1f7
+Tertiary #403f3d
+Quaternary #1f1e1c
+
+
+- Things you need to replace -
+Primary #FDD55C
+*/
+
+/*
+
+#header.header-floating-icons .header-nav-main nav > ul > li > a:after {
+	background: #FDD55C !important;
+}
+
+.custom-text-color-3{
+    color: black !important;
+}
+
+.custom-nav-sort.nav > li.active > a, .custom-nav-sort.nav > li:hover > a {
+    background: #FDD55C !important;
+    border-color: #FDD55C !important;
+}
+
+.custom-bg-color-1 {
+	background: #f4f9ff !important;
+}
+/*
+
