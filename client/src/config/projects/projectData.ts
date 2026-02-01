@@ -167,7 +167,7 @@ export const projects: Project[] = [
         ],
         links: [
             {label: 'DevSocial (wait 30s)', url: 'https://devsocial.herokuapp.com/'},
-            {label: 'Github', url: 'https://github.com/kyledvrich/DevSocial'}
+            {label: 'Github', url: 'https://github.com/kylexrich/DevSocial'}
         ],
         cover: '/assets/images/projects/devsocial/cover.png',
         media: [
@@ -215,7 +215,7 @@ export const projects: Project[] = [
             'Tasks save to JSON (optional auto-save) and play subtle audio cues when you add, complete, or delete items.'
         ],
         links: [
-            {label: 'Github', url: 'https://github.com/kyledvrich/Dark-Mode-Todo-App'}
+            {label: 'Github', url: 'https://github.com/kylexrich/Dark-Mode-Todo-App'}
         ],
         cover: '/assets/images/projects/dark-mode-todo/cover.jpg',
         media: [
